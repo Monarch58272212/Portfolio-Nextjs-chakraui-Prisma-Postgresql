@@ -152,5 +152,5 @@ export async function updatePost(formData: FormData) {
   });
 
   revalidatePath("/");
-  return redirect("/Experiment");
+  return redirect("/");
 }

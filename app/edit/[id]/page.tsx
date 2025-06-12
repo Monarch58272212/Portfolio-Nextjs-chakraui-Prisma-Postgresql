@@ -1,6 +1,7 @@
 import { prisma } from "@/app/lib/prisma";
 import { UpdateButton } from "@/app/Components/Toggle";
 import { updatePost } from "@/app/api/action";
+
 import {
   Box,
   Divider,
@@ -8,23 +9,18 @@ import {
   FormLabel,
   Heading,
   HStack,
+  Image,
   Input,
   Stack,
 } from "@chakra-ui/react";
 
 export const dynamicParams = true;
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function EditPage({ params }: PageProps) {
+export default async function EditPage({ params }: { params: { id: string } }) {
   const { id } = params;
 
   const post = await prisma.post.findUnique({
-    where: { id: String(id) },
+    where: { id },
   });
 
   if (!post) {
@@ -62,39 +58,62 @@ export default async function EditPage({ params }: PageProps) {
               />
             </FormControl>
             <FormControl>
-              <FormLabel>Image URL</FormLabel>
+              <FormLabel>Description</FormLabel>
               <Input
                 type="text"
-                defaultValue={post.image}
-                name="image"
-                placeholder="Image URL"
+                defaultValue={post.description}
+                name="description"
+                placeholder="Description"
               />
             </FormControl>
           </HStack>
 
           <FormControl>
-            <FormLabel>Description</FormLabel>
+            <FormLabel>Language</FormLabel>
             <Input
               type="text"
-              defaultValue={post.description}
-              name="description"
-              placeholder="Description"
+              defaultValue={post.language}
+              name="language"
+              placeholder="Language"
             />
           </FormControl>
 
           <FormControl>
-            <FormLabel>Link</FormLabel>
+            <FormLabel>URL</FormLabel>
             <Input
               type="text"
               defaultValue={post.url}
-              name="link"
-              placeholder="Link"
+              name="url"
+              placeholder="Project URL"
             />
           </FormControl>
 
-          <Input type="hidden" name="id" value={post.id} />
+          <Divider my={4} />
 
-          <Divider />
+          <FormControl
+            w="full"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+          >
+            <FormLabel>Current Image</FormLabel>
+            <Image
+              src={post.image}
+              alt="Current Image"
+              borderRadius="md"
+              boxSize="200px"
+              objectFit="cover"
+              mb={2}
+            />
+          </FormControl>
+
+          <FormControl>
+            <FormLabel>Change Image</FormLabel>
+            <Input type="file" name="imageFile" accept="image/*" />
+            <Input type="hidden" name="image" defaultValue={post.image} />
+          </FormControl>
+
+          <Input type="hidden" name="id" defaultValue={post.id} />
 
           <UpdateButton />
         </Stack>
