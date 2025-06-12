@@ -16,12 +16,14 @@ import {
 
 export const dynamicParams = true;
 
-type Props = {
-  params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-};
+interface PageProps {
+  params: {
+    id: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
 
-export default async function EditPage({ params }: Props) {
+export default async function EditPage({ params }: PageProps) {
   const { id } = params;
 
   const post = await prisma.post.findUnique({
