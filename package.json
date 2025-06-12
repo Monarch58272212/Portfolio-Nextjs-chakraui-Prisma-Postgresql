@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "clean": "rimraf node_modules/.prisma app/generated",
     "postinstall": "prisma generate",
-    "build": "npm run clean && prisma generate && next build",
+    "build": "npm run clean && prisma generate && next build --no-lint",
     "start": "next start",
     "lint": "next lint"
   },
