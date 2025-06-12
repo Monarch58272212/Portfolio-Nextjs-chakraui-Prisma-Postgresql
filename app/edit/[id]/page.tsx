@@ -25,7 +25,7 @@ export default async function EditPage({ params }: Props) {
   const { id } = params;
 
   const post = await prisma.post.findUnique({
-    where: { id },
+    where: { id: String(id) },
   });
 
   if (!post) {
