@@ -13,23 +13,22 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
+import { notFound } from "next/navigation";
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 
-export default async function EditPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function EditPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
 
   const post = await prisma.post.findUnique({
     where: { id },
   });
 
-  if (!post) {
-    return (
-      <Box p={4}>
-        <Heading>Post not found</Heading>
-      </Box>
-    );
-  }
+  if (!post) return notFound();
 
   return (
     <Box
