@@ -5,6 +5,15 @@ import { prisma } from "../lib/prisma";
 import { redirect } from "next/navigation";
 import cloudinary from "../lib/cloudinary";
 
+interface Post {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+  language: string;
+}
+
 export async function handleSubmission(formData: FormData) {
   const file = formData.get("image") as File;
   const url = formData.get("url") as string;
@@ -83,7 +92,7 @@ export async function getPosts() {
   // Ensure posts is an array, fallback to empty array if null/undefined
   const postsArray = posts || [];
   // Pwede mo rin i-map dito kung gusto mo i-transform yung data
-  return postsArray.map((post) => ({
+  return postsArray.map((post: Post) => ({
     id: post.id,
     title: post.title,
     description: post.description,
