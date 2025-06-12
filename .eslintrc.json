@@ -2,7 +2,17 @@
   "extends": "next/core-web-vitals",
   "rules": {
     "@typescript-eslint/no-unused-vars": "warn",
-    "@typescript-eslint/no-require-imports": "warn"
+    "@typescript-eslint/no-require-imports": "warn",
+    "@typescript-eslint/no-unused-expressions": "off",
+    "@typescript-eslint/no-this-alias": "off"
   },
-  "ignorePatterns": ["app/lib/prisma/wasm.js", "app/lib/prisma/*.js"]
+  "ignorePatterns": [
+    "app/lib/prisma/wasm.js",
+    "app/lib/prisma/*.js",
+    ".next/**/*",
+    "out/**/*",
+    "node_modules/**/*",
+    "**/*.min.js",
+    "**/*.bundle.js"
+  ]
 }
