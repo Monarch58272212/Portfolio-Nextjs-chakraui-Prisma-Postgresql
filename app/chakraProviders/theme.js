@@ -6,13 +6,24 @@ import { extendTheme } from "@chakra-ui/react";
 const config = {
   initialColorMode: "dark",
   useSystemColorMode: false,
+  disableTransitionOnChange: false,
 };
 
 const fonts = {
-  heading: `  Fira Code`,
-  body: ` Fira Code`,
+  heading: `Fira Code`,
+  body: `Fira Code`,
 };
 
-const theme = extendTheme({ config, fonts });
+const theme = extendTheme({
+  config,
+  fonts,
+  styles: {
+    global: {
+      body: {
+        transition: "background-color 0.2s",
+      },
+    },
+  },
+});
 
 export default theme;
