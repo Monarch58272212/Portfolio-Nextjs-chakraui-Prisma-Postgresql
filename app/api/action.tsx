@@ -109,7 +109,7 @@ export async function deletePost(id: string) {
   });
 
   // Revalidate the path to refresh the data
-  revalidatePath("/");
+  revalidatePath("/Projects");
 
   return { success: true, message: "Post deleted successfully" };
 }
@@ -163,5 +163,5 @@ export async function updatePost(formData: FormData) {
   });
 
   revalidatePath("/");
-  return redirect("/");
+  return redirect("/Projects");
 }

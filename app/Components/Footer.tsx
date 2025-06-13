@@ -1,10 +1,19 @@
-import { Box, Divider, Flex, HStack, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Divider,
+  Flex,
+  HStack,
+  Text,
+  useColorModeValue,
+  VStack,
+} from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { FaGithub } from "react-icons/fa";
 
 export default function Footer() {
+  const borderColor = useColorModeValue("black", "teal.300");
   return (
     <Box w="95%" mt={10} mb={2}>
       <Divider borderColor="teal.300" flex="1" />
@@ -22,18 +31,23 @@ export default function Footer() {
             flexDirection={"row"}
             justifyItems={"center"}
             alignItems={"center"}
+            gap={2}
+            position={"relative"}
           >
             <Link href="/">
               <Image src="/always.png" alt="My Logo" width={80} height={80} />
             </Link>
             <Link href="https://gusoaxcell@gmail.com">
-              <Text fontSize={12} color="teal.300">
+              <Text
+                fontSize={12}
+                color={borderColor}
+                position={"absolute"}
+                bottom={5}
+              >
                 gusoaxcell@gmail.com
               </Text>
             </Link>
           </Box>
-
-          <Text>Web designer and front-end developer</Text>
         </Box>
 
         <VStack

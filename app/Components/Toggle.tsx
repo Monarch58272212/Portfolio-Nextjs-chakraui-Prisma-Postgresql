@@ -10,7 +10,7 @@ import { useFormStatus } from "react-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
 
 import { useTransition } from "react";
-import { deletePost } from "../api/action";
+import { deletePost } from "@/app/api/action";
 
 type SubmitbuttonProps = {
   isLoading?: boolean;

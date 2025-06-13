@@ -32,7 +32,7 @@ export default function Skills() {
       aria-label="Skills Section"
     >
       <Flex align="center" mb={6}>
-        <Heading size="lg" color="teal.300" mr={4}>
+        <Heading size="lg" color="violet" mr={4}>
           # Skills
         </Heading>
         <Divider borderColor="teal.300" flex="1" />

@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { DeleteButton } from "./Toggle";
+import { TimeIcon } from "@chakra-ui/icons";
 
 interface Post {
   id: string;
@@ -27,6 +28,8 @@ interface Post {
   image: string;
   url: string;
   language: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export default function Projects({
@@ -82,7 +85,7 @@ export default function Projects({
               fontFamily="Fira Code, monospace"
               fontSize={{ base: "2xl", md: "3xl" }}
               mb={0}
-              color="violet.500"
+              color="violet"
             >
               # My Projects
             </Heading>
@@ -141,6 +144,21 @@ export default function Projects({
                   </Text>
                   <Text fontSize="sm">{post.description}</Text>
                 </Stack>
+                <Text
+                  fontSize="xs"
+                  color="gray.400"
+                  display="flex"
+                  alignItems="center"
+                  gap={1}
+                  pt={2}
+                >
+                  <TimeIcon />
+                  {new Intl.DateTimeFormat("en-us", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  }).format(new Date(post.createdAt))}
+                </Text>
               </CardBody>
 
               <Divider />
