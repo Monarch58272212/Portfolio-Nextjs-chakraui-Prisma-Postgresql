@@ -123,7 +123,7 @@ export default function FirstPage() {
             border={`1px solid ${border}`}
             px={10}
           >
-            Currently working on Portfolio
+            Currently working on Portfolio!
           </Text>
         </VStack>
       </Flex>
