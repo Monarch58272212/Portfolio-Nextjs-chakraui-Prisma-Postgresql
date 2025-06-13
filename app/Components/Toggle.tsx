@@ -61,12 +61,21 @@ export function Submitbutton({ isLoading = false }: SubmitbuttonProps) {
 export function DeleteButton({ id }: { id: string }) {
   const [isPending, startTransition] = useTransition();
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     const confirmDelete = confirm("Are you sure you want to delete this post?");
     if (!confirmDelete) return;
 
-    startTransition(() => {
-      deletePost(id);
+    startTransition(async () => {
+      try {
+        const result = await deletePost(id);
+        if (result.success) {
+          // Optional: Add a success message or toast notification here
+          window.location.reload(); // Force refresh to show updated list
+        }
+      } catch (error) {
+        console.error("Error deleting post:", error);
+        alert("Failed to delete post. Please try again.");
+      }
     });
   };
 

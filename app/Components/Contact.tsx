@@ -18,15 +18,12 @@ export default function Contact() {
   return (
     <Box w="95%" mx="auto">
       <VStack align="center" mb={6}>
-        {/* Heading Section */}
         <Flex w="100%" justify="center" align="center">
           <Heading size="lg" color="teal.300" mr={4}>
             # Contact Me
           </Heading>
           <Divider borderColor="teal.300" flex="1" />
         </Flex>
-
-        {/* Text + Image Section */}
         <Stack
           direction={{ base: "column", md: "row" }}
           spacing={8}
@@ -34,13 +31,11 @@ export default function Contact() {
           justify="center"
           w="100%"
         >
-          {/* Text Section */}
           <Text w={{ base: "100%", md: "65%" }} textAlign="justify">
             Im interested in freelance opportunities. However, if you have other
             request or question, dont hesitate to contact me
           </Text>
 
-          {/* Image Section */}
           <Flex
             w={{ base: "100%", md: "35%" }}
             position="relative"

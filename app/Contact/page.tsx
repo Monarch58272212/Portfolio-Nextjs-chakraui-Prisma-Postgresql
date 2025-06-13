@@ -15,6 +15,7 @@ import Link from "next/link";
 
 import { BiLogoFacebookSquare } from "react-icons/bi";
 import { CiMobile1 } from "react-icons/ci";
+
 export default function Contact() {
   const borderColor = useColorModeValue("gray", "white");
   const bgColor = useColorModeValue("gray.50", "gray.650");

@@ -31,17 +31,17 @@ export default function About() {
         >
           {/* Text Section */}
           <Text w={{ base: "100%", md: "65%" }} textAlign="justify">
-            I’m a passionate Front-End Developer with a strong eye for design
-            and a deep understanding of user experience. I specialize in
-            building responsive, user-friendly web interfaces using modern
-            technologies like HTML, CSS, JavaScript, React, and Tailwind CSS.
-            With a background in both design and development, I enjoy turning
-            complex ideas into smooth, interactive, and accessible digital
-            experiences. <br />
+            Im a passionate Front-End Developer with a strong eye for design and
+            a deep understanding of user experience. I specialize in building
+            responsive, user-friendly web interfaces using modern technologies
+            like HTML, CSS, JavaScript, React, and Tailwind CSS. With a
+            background in both design and development, I enjoy turning complex
+            ideas into smooth, interactive, and accessible digital experiences.{" "}
+            <br />
             <br />I thrive in fast-paced environments where I can collaborate
-            with teams to bring ideas to life. Whether it’s creating reusable
+            with teams to bring ideas to life. Whether its creating reusable
             components, optimizing performance, or ensuring pixel-perfect
-            designs, I always aim for clean and efficient code. I’m also
+            designs, I always aim for clean and efficient code. Im also
             continuously learning — staying up-to-date with the latest trends
             and best practices in web development to deliver modern, reliable
             solutions.

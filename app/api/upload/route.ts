@@ -1,42 +1,60 @@
-// app/api/upload/route.ts
-import { NextRequest, NextResponse } from "next/server";
-import { handleSubmission } from "@/app/api/action";
+import { NextResponse } from "next/server";
+import { prisma } from "@/app/lib/prisma";
+import cloudinary from "@/app/lib/cloudinary";
 
-export async function POST(req: NextRequest) {
+export async function POST(request: Request) {
   try {
-    const formData = await req.formData();
+    const formData = await request.formData();
+    const file = formData.get("image") as File;
+    const url = formData.get("url") as string;
+    const language = formData.get("language") as string;
+    const title = formData.get("title") as string;
+    const description = formData.get("description") as string;
 
-    // Validate required fields
-    const file = formData.get("image");
-    if (!file) {
-      return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
-    }
-
-    // Validate file type
-    if (!(file instanceof File)) {
-      return NextResponse.json({ error: "Invalid file type" }, { status: 400 });
-    }
-
-    // Validate file size (e.g., 5MB limit)
-    if (file.size > 5 * 1024 * 1024) {
+    if (!file || !url || !language || !title || !description) {
       return NextResponse.json(
-        { error: "File size too large. Maximum size is 5MB" },
+        { error: "Missing required fields" },
         { status: 400 }
       );
     }
 
-    const result = await handleSubmission(formData);
-    return NextResponse.json(result, { status: 201 });
+    // Convert File to buffer
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    // Upload to Cloudinary
+    const imageUpload = await new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { resource_type: "image" },
+        (error, result) => {
+          if (error || !result) {
+            return reject(error);
+          }
+          resolve(result);
+        }
+      );
+
+      stream.end(buffer);
+    });
+
+    const image = (imageUpload as { secure_url: string }).secure_url;
+
+    // Save to database
+    const post = await prisma.post.create({
+      data: {
+        title,
+        description,
+        language,
+        image,
+        url,
+      },
+    });
+
+    return NextResponse.json({ success: true, post });
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json(
-      {
-        error: (error as Error).message || "Something went wrong",
-        details:
-          process.env.NODE_ENV === "development"
-            ? (error as Error).stack
-            : undefined,
-      },
+      { error: error instanceof Error ? error.message : "Upload failed" },
       { status: 500 }
     );
   }

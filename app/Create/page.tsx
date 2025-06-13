@@ -67,7 +67,12 @@ export default function Create() {
             />
           </FormControl>
 
-          <Button type="submit" colorScheme="blue" isLoading={isSubmitting}>
+          <Button
+            type="submit"
+            colorScheme="blue"
+            isDisabled={isSubmitting}
+            isLoading={isSubmitting}
+          >
             Submit
           </Button>
         </Stack>
