@@ -6,12 +6,11 @@ import { prisma } from "@/app/lib/prisma"; // siguraduhing tama ang path
 export async function GET() {
   try {
     const posts = await prisma.post.findMany();
-    return NextResponse.json(posts);
+    // Always return an array, even if empty
+    return NextResponse.json({ posts: posts || [] });
   } catch (error) {
     console.error("Error fetching posts:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch posts" },
-      { status: 500 }
-    );
+    // Return empty array in case of error
+    return NextResponse.json({ posts: [] }, { status: 500 });
   }
 }

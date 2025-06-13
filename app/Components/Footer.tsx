@@ -28,22 +28,16 @@ export default function Footer() {
         <Box>
           <Box
             display="flex"
-            flexDirection={"row"}
+            flexDirection={{ base: "column", md: "row" }}
             justifyItems={"center"}
             alignItems={"center"}
             gap={2}
-            position={"relative"}
           >
             <Link href="/">
               <Image src="/always.png" alt="My Logo" width={80} height={80} />
             </Link>
             <Link href="https://gusoaxcell@gmail.com">
-              <Text
-                fontSize={12}
-                color={borderColor}
-                position={"absolute"}
-                bottom={5}
-              >
+              <Text fontSize={12} color={borderColor} textAlign={"end"}>
                 gusoaxcell@gmail.com
               </Text>
             </Link>

@@ -47,13 +47,9 @@ export default function Projects({
       try {
         const response = await fetch("/api/posts");
         const data = await response.json();
-        console.log("Fetched data:", data);
 
-        // Flexible format handling
-        const fetchedPosts = Array.isArray(data) ? data : data.posts;
-
-        if (Array.isArray(fetchedPosts)) {
-          setPosts(fetchedPosts);
+        if (data && data.posts) {
+          setPosts(data.posts);
         } else {
           console.error("Invalid posts format:", data);
           setPosts([]);

@@ -20,6 +20,7 @@
     "@emotion/styled": "^11.14.0",
     "@fontsource/open-sans": "^5.2.5",
     "@fontsource/raleway": "^5.2.5",
+    "@kinde-oss/kinde-auth-nextjs": "^2.7.0",
     "@prisma/client": "^6.9.0",
     "cloudinary": "^2.6.1",
     "framer-motion": "^12.15.0",

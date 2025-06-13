@@ -105,7 +105,7 @@ export default function FirstPage() {
             />
 
             <Image
-              src="/Profile.png"
+              src="/monarch.png"
               alt="My Logo"
               fill
               style={{
