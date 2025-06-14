@@ -61,31 +61,6 @@ export async function handleSubmission(formData: FormData) {
   return { success: true, message: "Post created successfully" };
 }
 
-export async function handleSubmission2(formData: FormData) {
-  const file = formData.get("image") as string;
-  const url = formData.get("url") as string;
-  const language = formData.get("language") as string;
-  const title = formData.get("title") as string;
-  const description = formData.get("description") as string;
-
-  if (!url || !language || !title || !description || !file) {
-    throw new Error("Missing fields");
-  }
-
-  await prisma.post.create({
-    data: {
-      image: file, // Assuming file is a URL or base64 string
-      url,
-      language,
-      title,
-      description,
-    },
-  });
-  revalidatePath("/");
-
-  return redirect("/");
-}
-
 export async function getPosts() {
   // Kunin lahat ng posts mula sa database
   const posts = await prisma.post.findMany();

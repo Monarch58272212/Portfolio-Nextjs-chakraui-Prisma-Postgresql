@@ -7,6 +7,7 @@ import {
   Input,
   Stack,
   Button,
+  Flex,
 } from "@chakra-ui/react";
 
 export default function Create() {
@@ -35,18 +36,32 @@ export default function Create() {
   };
 
   return (
-    <Box maxW="md" mx="auto" mt={10} p={6} borderWidth="1px" borderRadius="lg">
+    <Box
+      maxW="md"
+      m={"auto"}
+      mt={10}
+      p={6}
+      boxShadow="lg"
+      border={"1px"}
+      borderRadius="lg"
+    >
       <form onSubmit={handleSubmit}>
         <Stack spacing={4}>
-          <FormControl>
-            <FormLabel>Upload Image</FormLabel>
-            <Input type="file" accept="image/*" name="image" required />
-          </FormControl>
+          <Flex flexDirection={{ base: "column", md: "row" }} gap={4}>
+            <FormControl>
+              <FormLabel>Upload Image</FormLabel>
+              <Input type="file" accept="image/*" name="image" required />
+            </FormControl>
 
-          <FormControl>
-            <FormLabel>Project Link</FormLabel>
-            <Input name="url" placeholder="Enter your Project Link" required />
-          </FormControl>
+            <FormControl>
+              <FormLabel>Project Link</FormLabel>
+              <Input
+                name="url"
+                placeholder="Enter your Project Link"
+                required
+              />
+            </FormControl>
+          </Flex>
 
           <FormControl>
             <FormLabel>Language</FormLabel>

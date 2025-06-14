@@ -1,26 +1,19 @@
 "use client";
 
-import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import ThemeToggleButton from "../Components/Toggle";
-import {
-  Box,
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  Flex,
-  Heading,
-  HStack,
-  IconButton,
-  useDisclosure,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, HStack, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
+import MobileView from "../Components/MobileView";
+import {
+  RegisterLink,
+  LoginLink,
+  LogoutLink,
+  useKindeBrowserClient,
+} from "@kinde-oss/kinde-auth-nextjs";
 
-function Navigation() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export function Navigation() {
+  const { user, isLoading } = useKindeBrowserClient();
 
   return (
     <Flex
@@ -36,10 +29,34 @@ function Navigation() {
       mx={{ base: 1, md: 3, lg: 10 }}
       backdropFilter="blur(10px)"
     >
-      <Box>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
         <Link href="/">
           <Image src="/always.png" alt="My Logo" width={80} height={80} />
         </Link>
+
+        {!isLoading && user ? (
+          <Box>
+            <Text>{user.given_name}</Text>
+            <Box>
+              <Image
+                src={user.picture || ""}
+                alt="User Picture"
+                width={32}
+                height={32}
+              />
+            </Box>
+            <LogoutLink> LogOut </LogoutLink>
+          </Box>
+        ) : (
+          <Box display="flex" gap={2}>
+            <Button colorScheme="blue">
+              <LoginLink>Sign in</LoginLink>
+            </Button>
+            <Button colorScheme="teal" variant="outline">
+              <RegisterLink>Sign up</RegisterLink>
+            </Button>
+          </Box>
+        )}
       </Box>
 
       {/* Desktop Menu */}
@@ -52,7 +69,6 @@ function Navigation() {
               fontFamily="poppins"
               _hover={{
                 color: "green.600",
-
                 cursor: "pointer",
               }}
             >
@@ -66,14 +82,12 @@ function Navigation() {
               fontFamily="poppins"
               _hover={{
                 color: "green.600",
-
                 cursor: "pointer",
               }}
             >
               Create
             </Heading>
           </Link>
-
           <Link href="/Projects">
             <Heading
               as="h1"
@@ -81,83 +95,20 @@ function Navigation() {
               fontFamily="poppins"
               _hover={{
                 color: "green.600",
-
                 cursor: "pointer",
               }}
             >
               Projects
             </Heading>
           </Link>
-
           <ThemeToggleButton />
         </HStack>
       </Box>
 
       {/* Mobile Menu Icon */}
       <Box display={{ base: "block", sm: "none", md: "none" }}>
-        <IconButton
-          aria-label="Open menu"
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          onClick={isOpen ? onClose : onOpen}
-        />
-        <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
-          <DrawerOverlay />
-          <DrawerContent>
-            <DrawerHeader borderBottomWidth="1px">
-              <Heading size="md">
-                <IconButton
-                  aria-label="Open menu"
-                  icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-                  onClick={isOpen ? onClose : onOpen}
-                />
-              </Heading>
-            </DrawerHeader>
-            <DrawerBody>
-              <VStack align="start" spacing={4}>
-                <Link href="/">
-                  <Box
-                    _hover={{
-                      color: "green.600",
-                      cursor: "pointer",
-                      bg: "gray.100",
-                    }}
-                  >
-                    Home
-                  </Box>
-                </Link>
-
-                <Link href="/Create">
-                  <Box
-                    _hover={{
-                      color: "green.600",
-                      cursor: "pointer",
-                      bg: "gray.100",
-                    }}
-                  >
-                    Create
-                  </Box>
-                </Link>
-
-                <Link href="/Projects">
-                  <Box
-                    _hover={{
-                      color: "green.600",
-                      cursor: "pointer",
-                      bg: "gray.100",
-                    }}
-                  >
-                    Projects
-                  </Box>
-                </Link>
-
-                <ThemeToggleButton />
-              </VStack>
-            </DrawerBody>
-          </DrawerContent>
-        </Drawer>
+        <MobileView />
       </Box>
     </Flex>
   );
 }
-
-export default Navigation;
