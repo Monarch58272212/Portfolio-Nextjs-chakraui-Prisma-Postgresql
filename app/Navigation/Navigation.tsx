@@ -1,7 +1,15 @@
 "use client";
 
 import ThemeToggleButton from "../Components/Toggle";
-import { Box, Button, Flex, Heading, HStack, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Text,
+} from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
 import MobileView from "../Components/MobileView";
@@ -35,17 +43,24 @@ export function Navigation() {
         </Link>
 
         {!isLoading && user ? (
-          <Box>
-            <Text>{user.given_name}</Text>
-            <Box>
-              <Image
-                src={user.picture || ""}
-                alt="User Picture"
-                width={32}
-                height={32}
+          <Box display="flex" alignItems="center" gap={2}>
+            <Text fontWeight="bold" fontSize="sm">
+              {user.given_name}
+            </Text>
+
+            <Box w="32px" h="32px" overflow="hidden" borderRadius="full">
+              <Avatar
+                src={user.picture ?? "/default-avatar.png"}
+                name={user.email ?? "User"}
+                size="sm"
               />
             </Box>
-            <LogoutLink> LogOut </LogoutLink>
+
+            <LogoutLink>
+              <Button variant="outline" size="sm">
+                LogOut
+              </Button>
+            </LogoutLink>
           </Box>
         ) : (
           <Box display="flex" gap={2}>
