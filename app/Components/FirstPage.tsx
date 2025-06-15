@@ -29,7 +29,7 @@ export default function FirstPage() {
         flexDirection={"column"}
         gap={4}
       >
-        <Divider orientation="vertical" border={`1px dotted ${border}`} />
+        <Divider orientation="vertical" border={`1px dashed ${border}`} />
         <Box fontSize={{ base: "15", md: "15", lg: "20" }}>
           <FaGithub />
         </Box>
