@@ -2,6 +2,7 @@
 import {
   Box,
   Button,
+  Divider,
   Flex,
   Heading,
   Text,
@@ -10,11 +11,35 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
+import { FaFacebookMessenger, FaGithub } from "react-icons/fa";
+import { TfiEmail } from "react-icons/tfi";
 
 export default function FirstPage() {
   const border = useColorModeValue("violet", "white");
   return (
-    <VStack w="100%">
+    <VStack w="100%" position={"relative"}>
+      <Box
+        position={"absolute"}
+        height={"30%"}
+        w={0}
+        left={{ base: 13, md: 13, lg: 20 }}
+        alignItems={"center"}
+        justifyContent={"center"}
+        display={"flex"}
+        flexDirection={"column"}
+        gap={4}
+      >
+        <Divider orientation="vertical" border={`1px dashed ${border}`} />
+        <Box fontSize={{ base: "15", md: "15", lg: "20" }}>
+          <FaGithub />
+        </Box>
+        <Box fontSize={{ base: "15", md: "15", lg: "20" }}>
+          <FaFacebookMessenger />
+        </Box>
+        <Box fontSize={{ base: "15", md: "15", lg: "20" }}>
+          <TfiEmail />
+        </Box>
+      </Box>
       <Flex
         direction={{ base: "column", md: "row" }}
         align="center"
