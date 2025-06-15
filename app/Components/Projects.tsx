@@ -13,13 +13,15 @@ import {
   Divider,
   Button,
   ButtonGroup,
-  Link,
   HStack,
   Flex,
+  LinkBox,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { DeleteButton } from "./Toggle";
 import { TimeIcon } from "@chakra-ui/icons";
+import Link from "next/link";
+import ModernSkeleton from "./ModernSkeleton";
 
 interface Post {
   id: string;
@@ -35,9 +37,11 @@ interface Post {
 export default function Projects({
   ShowActions = true,
   ShowText = false,
+  ShowSkeleton = true,
 }: {
   ShowActions?: boolean;
   ShowText?: boolean;
+  ShowSkeleton?: boolean;
 }) {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -65,16 +69,16 @@ export default function Projects({
     fetchPosts();
   }, []);
 
-  if (isLoading) return null;
+  if (isLoading) return ShowSkeleton ? <ModernSkeleton /> : null;
 
   return (
-    <Stack spacing={8} px={{ base: 4, md: 8 }} py={10}>
+    <Stack w={"100%"} spacing={8} px={{ base: 4, md: 8 }} py={10}>
       <Flex
         justifyContent="space-between"
         alignItems="center"
         flexDirection={"column"}
       >
-        {ShowText && (
+        {ShowText ? (
           <HStack justifyContent={"space-between"} w={"95%"}>
             <Heading
               as="h2"
@@ -93,6 +97,21 @@ export default function Projects({
                 View all projects →
               </Button>
             </Link>
+          </HStack>
+        ) : (
+          <HStack justifyContent={"space-between"} w={"95%"}>
+            <Heading fontSize={{ base: "md", md: "xl" }}>
+              Monarch&apos;s Projects
+            </Heading>
+            <LinkBox as={Link} href="/Create">
+              <Button
+                colorScheme="purple"
+                size="md"
+                _hover={{ bg: "purple.600" }}
+              >
+                Create projects →
+              </Button>
+            </LinkBox>
           </HStack>
         )}
         <SimpleGrid

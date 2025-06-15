@@ -37,15 +37,20 @@ export function Navigation() {
       mx={{ base: 1, md: 3, lg: 10 }}
       backdropFilter="blur(10px)"
     >
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        gap={{ base: 1, md: 4, lg: 5 }}
+        alignItems="center"
+      >
         <Link href="/">
           <Image src="/always.png" alt="My Logo" width={80} height={80} />
         </Link>
 
         {!isLoading && user ? (
           <Box display="flex" alignItems="center" gap={2}>
-            <Text fontWeight="bold" fontSize="sm">
-              {user.given_name}
+            <Text fontWeight="bold" fontSize={{ base: "xs", md: "xm" }}>
+              {user.given_name?.split(" ")[0]}
             </Text>
 
             <Box w="32px" h="32px" overflow="hidden" borderRadius="full">
@@ -57,17 +62,23 @@ export function Navigation() {
             </Box>
 
             <LogoutLink>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" py={1.5}>
                 LogOut
               </Button>
             </LogoutLink>
+
+            <Link href="/Projects">
+              <Button colorScheme="purple" size="sm" variant="outline">
+                Projects
+              </Button>
+            </Link>
           </Box>
         ) : (
           <Box display="flex" gap={2}>
-            <Button colorScheme="blue">
+            <Button colorScheme="blue" size="sm" py={1.5}>
               <LoginLink>Sign in</LoginLink>
             </Button>
-            <Button colorScheme="teal" variant="outline">
+            <Button colorScheme="teal" variant="outline" size="sm" py={1.5}>
               <RegisterLink>Sign up</RegisterLink>
             </Button>
           </Box>
@@ -90,19 +101,7 @@ export function Navigation() {
               Home
             </Heading>
           </Link>
-          <Link href="/Create">
-            <Heading
-              as="h1"
-              size="sm"
-              fontFamily="poppins"
-              _hover={{
-                color: "green.600",
-                cursor: "pointer",
-              }}
-            >
-              Create
-            </Heading>
-          </Link>
+
           <Link href="/Projects">
             <Heading
               as="h1"

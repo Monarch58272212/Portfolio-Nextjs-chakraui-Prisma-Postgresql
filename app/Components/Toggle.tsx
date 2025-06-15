@@ -47,7 +47,7 @@ export function Submitbutton({ isLoading = false }: SubmitbuttonProps) {
   const { pending } = useFormStatus();
   return (
     <Button
-      className="w-fit"
+      size="sm"
       type="submit"
       colorScheme="teal"
       isLoading={isLoading}
@@ -95,7 +95,7 @@ export function UpdateButton() {
   const { pending } = useFormStatus();
   return (
     <Button
-      className="w-fit"
+      size="sm"
       type="submit"
       colorScheme="teal"
       isLoading={pending}
