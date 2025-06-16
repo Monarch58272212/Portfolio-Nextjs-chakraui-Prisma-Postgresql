@@ -16,6 +16,7 @@ import {
   HStack,
   Flex,
   LinkBox,
+  Avatar,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { DeleteButton } from "./Toggle";
@@ -32,6 +33,9 @@ interface Post {
   language: string;
   createdAt: string;
   updatedAt: string;
+  given_name: string;
+  picture: string;
+  email: string;
 }
 
 export default function Projects({
@@ -159,21 +163,32 @@ export default function Projects({
                   </Text>
                   <Text fontSize="sm">{post.description}</Text>
                 </Stack>
-                <Text
-                  fontSize="xs"
-                  color="gray.400"
-                  display="flex"
-                  alignItems="center"
-                  gap={1}
-                  pt={2}
-                >
-                  <TimeIcon />
-                  {new Intl.DateTimeFormat("en-us", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  }).format(new Date(post.createdAt))}
-                </Text>
+
+                <HStack justifyContent="space-between" mt={2}>
+                  <HStack spacing={2} alignItems="center">
+                    <Text fontWeight="bold" fontSize="xs">
+                      {post.given_name?.split(" ")[0]}
+                    </Text>
+                    <Avatar
+                      src={post.picture ?? "/default-avatar.png"}
+                      name={post.email ?? "User"}
+                      size="sm"
+                    />
+                  </HStack>
+                  {/* Date with icon */}
+                  <HStack spacing={1} color="gray.400" fontSize="xs" pt={2}>
+                    <TimeIcon />
+                    <Text>
+                      {new Intl.DateTimeFormat("en-us", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      }).format(new Date(post.createdAt))}
+                    </Text>
+                  </HStack>
+
+                  {/* Author info */}
+                </HStack>
               </CardBody>
 
               <Divider />

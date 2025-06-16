@@ -1,27 +1,50 @@
 "use client";
 
+import { useEffect } from "react";
+import { useBreakpointValue } from "@chakra-ui/react";
+
 import ThemeToggleButton from "../Components/Toggle";
 import {
   Avatar,
   Box,
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
   Flex,
   Heading,
   HStack,
+  IconButton,
   Text,
+  useDisclosure,
+  VStack,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import MobileView from "../Components/MobileView";
+
 import {
   RegisterLink,
   LoginLink,
   LogoutLink,
   useKindeBrowserClient,
 } from "@kinde-oss/kinde-auth-nextjs";
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 export function Navigation() {
   const { user, isLoading } = useKindeBrowserClient();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const currentScreen = useBreakpointValue({
+    base: "mobile",
+    md: "desktop",
+  });
+
+  useEffect(() => {
+    if (currentScreen === "desktop" && isOpen) {
+      onClose(); // Close the drawer if we go to desktop
+    }
+  }, [currentScreen, isOpen, onClose]);
 
   return (
     <Flex
@@ -44,11 +67,21 @@ export function Navigation() {
         alignItems="center"
       >
         <Link href="/">
-          <Image src="/always.png" alt="My Logo" width={80} height={80} />
+          <Image
+            src="/always.png"
+            alt="My Logo"
+            width={80}
+            height={80}
+            priority
+          />
         </Link>
 
         {!isLoading && user ? (
-          <Box display="flex" alignItems="center" gap={2}>
+          <Box
+            display={{ base: "none", sm: "none", md: "flex", lg: "flex" }}
+            alignItems="center"
+            gap={2}
+          >
             <Text fontWeight="bold" fontSize={{ base: "xs", md: "xm" }}>
               {user.given_name?.split(" ")[0]}
             </Text>
@@ -74,7 +107,10 @@ export function Navigation() {
             </Link>
           </Box>
         ) : (
-          <Box display="flex" gap={2}>
+          <Box
+            display={{ base: "none", sm: "none", md: "flex", lg: "flex" }}
+            gap={2}
+          >
             <Button colorScheme="blue" size="sm" py={1.5}>
               <LoginLink>Sign in</LoginLink>
             </Button>
@@ -86,7 +122,7 @@ export function Navigation() {
       </Box>
 
       {/* Desktop Menu */}
-      <Box display={{ base: "none", sm: "block", md: "block" }}>
+      <Box display={{ base: "none", sm: "none", md: "block" }}>
         <HStack spacing={6} gap={10} align="center">
           <Link href="/">
             <Heading
@@ -120,8 +156,130 @@ export function Navigation() {
       </Box>
 
       {/* Mobile Menu Icon */}
-      <Box display={{ base: "block", sm: "none", md: "none" }}>
-        <MobileView />
+      <Box display={{ base: "block", sm: "block", md: "none", lg: "none" }}>
+        {" "}
+        <IconButton
+          aria-label="Open menu"
+          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+          onClick={isOpen ? onClose : onOpen}
+        />
+        <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader borderBottomWidth="1px">
+              <Heading size="md" display="flex" justifyContent="space-between">
+                <IconButton
+                  aria-label="Open menu"
+                  icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+                  onClick={isOpen ? onClose : onOpen}
+                />
+                {!isLoading && user ? (
+                  <Box
+                    gap={2}
+                    display={{
+                      base: "flex",
+                      sm: "flex",
+                      md: "flex",
+                      lg: "none",
+                    }}
+                  >
+                    <Text fontWeight="bold" fontSize={{ base: "xs", md: "xm" }}>
+                      {user.given_name?.split(" ")[0]}
+                    </Text>
+
+                    <Box
+                      w="32px"
+                      h="32px"
+                      overflow="hidden"
+                      borderRadius="full"
+                    >
+                      <Avatar
+                        src={user.picture ?? "/default-avatar.png"}
+                        name={user.email ?? "User"}
+                        size="sm"
+                      />
+                    </Box>
+
+                    <LogoutLink>
+                      <Button variant="outline" size="sm" py={1.5}>
+                        LogOut
+                      </Button>
+                    </LogoutLink>
+
+                    <Link href="/Projects">
+                      <Button colorScheme="purple" size="sm" variant="outline">
+                        Projects
+                      </Button>
+                    </Link>
+                  </Box>
+                ) : (
+                  <Box
+                    display={{
+                      base: "flex",
+                      sm: "flex",
+                      md: "flex",
+                      lg: "none",
+                    }}
+                    gap={2}
+                  >
+                    <Button colorScheme="blue" size="sm" py={1.5}>
+                      <LoginLink>Sign in</LoginLink>
+                    </Button>
+                    <Button
+                      colorScheme="teal"
+                      variant="outline"
+                      size="sm"
+                      py={1.5}
+                    >
+                      <RegisterLink>Sign up</RegisterLink>
+                    </Button>
+                  </Box>
+                )}
+              </Heading>
+            </DrawerHeader>
+            <DrawerBody>
+              <VStack align="start" spacing={4}>
+                <Link href="/">
+                  <Box
+                    _hover={{
+                      color: "green.600",
+                      cursor: "pointer",
+                      bg: "gray.100",
+                    }}
+                  >
+                    Home
+                  </Box>
+                </Link>
+
+                <Link href="/Create">
+                  <Box
+                    _hover={{
+                      color: "green.600",
+                      cursor: "pointer",
+                      bg: "gray.100",
+                    }}
+                  >
+                    Create
+                  </Box>
+                </Link>
+
+                <Link href="/Projects">
+                  <Box
+                    _hover={{
+                      color: "green.600",
+                      cursor: "pointer",
+                      bg: "gray.100",
+                    }}
+                  >
+                    Projects
+                  </Box>
+                </Link>
+
+                <ThemeToggleButton />
+              </VStack>
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
       </Box>
     </Flex>
   );
