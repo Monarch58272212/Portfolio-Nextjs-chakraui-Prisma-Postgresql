@@ -171,18 +171,12 @@ export default function Projects({
                 <HStack justifyContent="space-between" mt={2}>
                   {user && (
                     <HStack spacing={2} alignItems="center">
-                      <Box>
-                        <Text fontWeight="bold">Hi, {user.given_name}!</Text>
-                        <Text fontSize="sm" color="gray.500">
-                          {user.email}
-                        </Text>
-                      </Box>
                       <Text fontWeight="bold" fontSize="xs">
-                        {post.given_name?.split(" ")[0]}
+                        {user.given_name?.split(" ")[0]}
                       </Text>
                       <Avatar
-                        src={post.picture ?? "/default-avatar.png"}
-                        name={post.email ?? "User"}
+                        src={user.picture ?? "/default-avatar.png"}
+                        name={user.email ?? "User"}
                         size="sm"
                       />
                     </HStack>
