@@ -23,6 +23,7 @@ import { DeleteButton } from "./Toggle";
 import { TimeIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import ModernSkeleton from "./ModernSkeleton";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 
 interface Post {
   id: string;
@@ -49,6 +50,9 @@ export default function Projects({
 }) {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { getUser } = useKindeAuth();
+  const user = getUser();
+  console.log(user);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -165,16 +169,24 @@ export default function Projects({
                 </Stack>
 
                 <HStack justifyContent="space-between" mt={2}>
-                  <HStack spacing={2} alignItems="center">
-                    <Text fontWeight="bold" fontSize="xs">
-                      {post.given_name?.split(" ")[0]}
-                    </Text>
-                    <Avatar
-                      src={post.picture ?? "/default-avatar.png"}
-                      name={post.email ?? "User"}
-                      size="sm"
-                    />
-                  </HStack>
+                  {user && (
+                    <HStack spacing={2} alignItems="center">
+                      <Box>
+                        <Text fontWeight="bold">Hi, {user.given_name}!</Text>
+                        <Text fontSize="sm" color="gray.500">
+                          {user.email}
+                        </Text>
+                      </Box>
+                      <Text fontWeight="bold" fontSize="xs">
+                        {post.given_name?.split(" ")[0]}
+                      </Text>
+                      <Avatar
+                        src={post.picture ?? "/default-avatar.png"}
+                        name={post.email ?? "User"}
+                        size="sm"
+                      />
+                    </HStack>
+                  )}
                   {/* Date with icon */}
                   <HStack spacing={1} color="gray.400" fontSize="xs" pt={2}>
                     <TimeIcon />
