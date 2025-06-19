@@ -34,6 +34,7 @@ import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 export function Navigation() {
   const { user, isLoading } = useKindeBrowserClient();
+  console.log(user);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const currentScreen = useBreakpointValue({
     base: "mobile",
@@ -138,6 +139,20 @@ export function Navigation() {
             </Heading>
           </Link>
 
+          <Link href="/Create">
+            <Heading
+              as="h1"
+              size="sm"
+              fontFamily="poppins"
+              _hover={{
+                color: "green.600",
+                cursor: "pointer",
+              }}
+            >
+              Create
+            </Heading>
+          </Link>
+
           <Link href="/Projects">
             <Heading
               as="h1"
@@ -175,6 +190,7 @@ export function Navigation() {
                 />
                 {!isLoading && user ? (
                   <Box
+                    alignItems="center"
                     gap={2}
                     display={{
                       base: "flex",
@@ -201,13 +217,24 @@ export function Navigation() {
                     </Box>
 
                     <LogoutLink>
-                      <Button variant="outline" size="sm" py={1.5}>
+                      <Button
+                        variant="outline"
+                        size="xs"
+                        p={0.5}
+                        fontSize={{ base: "xs", md: "xm" }}
+                      >
                         LogOut
                       </Button>
                     </LogoutLink>
 
                     <Link href="/Projects">
-                      <Button colorScheme="purple" size="sm" variant="outline">
+                      <Button
+                        colorScheme="purple"
+                        variant="outline"
+                        fontSize={{ base: "xs", md: "xm" }}
+                        size="xs"
+                        p={0.5}
+                      >
                         Projects
                       </Button>
                     </Link>
@@ -222,14 +249,18 @@ export function Navigation() {
                     }}
                     gap={2}
                   >
-                    <Button colorScheme="blue" size="sm" py={1.5}>
+                    <Button
+                      colorScheme="blue"
+                      size="sm"
+                      fontSize={{ base: "xs", md: "xm" }}
+                    >
                       <LoginLink>Sign in</LoginLink>
                     </Button>
                     <Button
                       colorScheme="teal"
                       variant="outline"
                       size="sm"
-                      py={1.5}
+                      fontSize={{ base: "xs", md: "xm" }}
                     >
                       <RegisterLink>Sign up</RegisterLink>
                     </Button>

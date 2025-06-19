@@ -21,9 +21,9 @@ model post {
   title     String
   description   String
   published Boolean  @default(false)
-  authorId  String?
-  authorName String?
-  authorPicture String?
+  authorId  String
+  authorName String
+  authorImage String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
