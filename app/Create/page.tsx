@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import {
   Box,
   FormControl,
@@ -9,9 +11,32 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { handleSubmission } from "../api/action";
 
 export default function Create() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (res.ok) {
+      alert("Upload successful!");
+      window.location.href = "/";
+    } else {
+      const data = await res.json();
+      alert("Upload failed: " + data.error);
+    }
+
+    setIsSubmitting(false);
+  };
+
   return (
     <>
       <Flex
@@ -43,7 +68,7 @@ export default function Create() {
         border={"1px"}
         borderRadius={"lg"}
       >
-        <form action={handleSubmission}>
+        <form onSubmit={handleSubmit}>
           <Stack spacing={4}>
             <Flex flexDirection={{ base: "column", md: "row" }} gap={4}>
               <FormControl>
@@ -80,7 +105,12 @@ export default function Create() {
               />
             </FormControl>
 
-            <Button type="submit" colorScheme="blue">
+            <Button
+              type="submit"
+              colorScheme="blue"
+              isDisabled={isSubmitting}
+              isLoading={isSubmitting}
+            >
               Submit
             </Button>
           </Stack>

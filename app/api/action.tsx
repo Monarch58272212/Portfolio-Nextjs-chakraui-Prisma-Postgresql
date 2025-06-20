@@ -1,17 +1,20 @@
 "use server";
 
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "../lib/prisma";
+import { redirect } from "next/navigation";
 import cloudinary from "../lib/cloudinary";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+
+interface Post {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  url: string;
+  language: string;
+}
 
 export async function handleSubmission(formData: FormData) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user) return redirect("/api/auth/register");
-
   const file = formData.get("image") as File;
   const url = formData.get("url") as string;
   const language = formData.get("language") as string;
@@ -19,24 +22,31 @@ export async function handleSubmission(formData: FormData) {
   const description = formData.get("description") as string;
 
   if (!file || !url || !language || !title || !description) {
-    throw new Error("Incomplete data submitted.");
+    throw new Error("Missing fields");
   }
 
-  const buffer = Buffer.from(await file.arrayBuffer());
+  // Convert File to buffer
+  const arrayBuffer = await file.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
 
+  // Cloudinary upload via stream
   const imageUpload = await new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       { resource_type: "image" },
       (error, result) => {
-        if (error || !result) return reject(error);
+        if (error || !result) {
+          return reject(error);
+        }
         resolve(result);
       }
     );
+
     stream.end(buffer);
   });
 
   const image = (imageUpload as { secure_url: string }).secure_url;
 
+  // Save to DB
   await prisma.post.create({
     data: {
       title,
@@ -44,31 +54,42 @@ export async function handleSubmission(formData: FormData) {
       language,
       image,
       url,
-      authorId: user.id,
-      authorName: user?.given_name as string,
-      authorImage: user?.picture as string,
     },
   });
 
   revalidatePath("/");
-  return redirect("/");
+  return { success: true, message: "Post created successfully" };
 }
 
-export async function deletePost(formData: FormData) {
-  const id = formData.get("id") as string;
-  if (!id) throw new Error("Missing post ID");
+export async function getPosts() {
+  // Kunin lahat ng posts mula sa database
+  const posts = await prisma.post.findMany();
+  // Ensure posts is an array, fallback to empty array if null/undefined
+  const postsArray = posts || [];
+  // Pwede mo rin i-map dito kung gusto mo i-transform yung data
+  return postsArray.map((post: Post) => ({
+    id: post.id,
+    title: post.title,
+    description: post.description,
+    image: post.image,
+    url: post.url,
+    language: post.language,
+  }));
+}
 
-  await prisma.post.delete({ where: { id } });
-  revalidatePath("/");
-  return redirect("/");
+export async function deletePost(id: string) {
+  // I-delete ang post mula sa database
+  await prisma.post.delete({
+    where: { id },
+  });
+
+  // Revalidate the path to refresh the data
+  revalidatePath("/Projects");
+
+  return { success: true, message: "Post deleted successfully" };
 }
 
 export async function updatePost(formData: FormData) {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user) return redirect("/api/auth/register");
-
   const id = formData.get("id") as string;
   const imageFile = formData.get("imageFile") as File;
   const currentImage = formData.get("image") as string;
@@ -83,17 +104,22 @@ export async function updatePost(formData: FormData) {
 
   let image = currentImage;
 
+  // If a new image file is provided, upload it to Cloudinary
   if (imageFile && imageFile.size > 0) {
-    const buffer = Buffer.from(await imageFile.arrayBuffer());
+    const arrayBuffer = await imageFile.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
     const imageUpload = await new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
         { resource_type: "image" },
         (error, result) => {
-          if (error || !result) return reject(error);
+          if (error || !result) {
+            return reject(error);
+          }
           resolve(result);
         }
       );
+
       stream.end(buffer);
     });
 

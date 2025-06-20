@@ -34,7 +34,6 @@ import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 export function Navigation() {
   const { user, isLoading } = useKindeBrowserClient();
-  console.log(user);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const currentScreen = useBreakpointValue({
     base: "mobile",
@@ -139,20 +138,6 @@ export function Navigation() {
             </Heading>
           </Link>
 
-          <Link href="/Create">
-            <Heading
-              as="h1"
-              size="sm"
-              fontFamily="poppins"
-              _hover={{
-                color: "green.600",
-                cursor: "pointer",
-              }}
-            >
-              Christine
-            </Heading>
-          </Link>
-
           <Link href="/Projects">
             <Heading
               as="h1"
@@ -190,7 +175,6 @@ export function Navigation() {
                 />
                 {!isLoading && user ? (
                   <Box
-                    alignItems="center"
                     gap={2}
                     display={{
                       base: "flex",
@@ -251,7 +235,7 @@ export function Navigation() {
                   >
                     <Button
                       colorScheme="blue"
-                      size="sm"
+                      size="xs"
                       fontSize={{ base: "xs", md: "xm" }}
                     >
                       <LoginLink>Sign in</LoginLink>
@@ -259,7 +243,8 @@ export function Navigation() {
                     <Button
                       colorScheme="teal"
                       variant="outline"
-                      size="sm"
+                      size="xs"
+                      p={0.5}
                       fontSize={{ base: "xs", md: "xm" }}
                     >
                       <RegisterLink>Sign up</RegisterLink>

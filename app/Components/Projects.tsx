@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import {
   SimpleGrid,
   Card,
@@ -13,127 +14,227 @@ import {
   Button,
   ButtonGroup,
   HStack,
+  Flex,
+  LinkBox,
   Avatar,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import Link from "next/link";
 import { DeleteButton } from "./Toggle";
-import { deletePost } from "../api/action";
 import { TimeIcon } from "@chakra-ui/icons";
+import Link from "next/link";
+import ModernSkeleton from "./ModernSkeleton";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 
-export interface Post {
+interface Post {
   id: string;
   title: string;
   description: string;
   image: string;
   url: string;
   language: string;
-  createdAt: Date;
-  updatedAt: Date;
-  authorImage: string;
-  authorName: string;
+  createdAt: string;
+  updatedAt: string;
+  given_name: string;
+  picture: string;
+  email: string;
 }
 
-type BlogpostCardProps = {
-  data: Post | null;
+export default function Projects({
+  ShowActions = true,
+  ShowText = false,
+  ShowSkeleton = true,
+}: {
   ShowActions?: boolean;
-};
+  ShowText?: boolean;
+  ShowSkeleton?: boolean;
+}) {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { getUser } = useKindeAuth();
+  const user = getUser();
+  console.log(user);
 
-export function Projects({ data, ShowActions = true }: BlogpostCardProps) {
-  if (!data) return null;
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch("/api/posts");
+        const data = await response.json();
+
+        if (data && data.posts) {
+          setPosts(data.posts);
+        } else {
+          console.error("Invalid posts format:", data);
+          setPosts([]);
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        setPosts([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  if (isLoading) return ShowSkeleton ? <ModernSkeleton /> : null;
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} px={4} py={8}>
-      <Card
-        key={data.id}
-        maxW="md"
-        mx="auto"
-        borderRadius="xl"
-        boxShadow="lg"
-        overflow="hidden"
-        _hover={{ shadow: "xl", transform: "scale(1.02)" }}
-        transition="all 0.3s ease-in-out"
+    <Stack w={"100%"} spacing={8} px={{ base: 4, md: 8 }} py={10}>
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        flexDirection={"column"}
       >
-        <CardBody p={4}>
-          <Box borderRadius="md" overflow="hidden">
-            <Image
-              src={data.image || "/default-image.jpg"}
-              alt={data.title}
-              width={400}
-              height={250}
-              style={{
-                objectFit: "cover",
-                width: "100%",
-                height: "200px",
-              }}
-            />
-          </Box>
-
-          <Stack mt={4} spacing={2}>
-            <Heading size="sm">{data.language}</Heading>
-            <Text fontWeight="semibold" color="purple.600">
-              {data.title}
-            </Text>
-            <Text fontSize="sm">{data.description}</Text>
-          </Stack>
-
-          <HStack justifyContent="space-between" mt={2}>
-            <HStack spacing={2} alignItems="center">
-              <Text fontWeight="bold" fontSize="xs">
-                {data.authorName?.split(" ")[0]}
-              </Text>
-              <Avatar
-                src={data.authorImage ?? "/default-avatar.png"}
-                name={data.authorName ?? "User"}
-                size="sm"
-              />
-            </HStack>
-
-            <HStack spacing={1} color="gray.400" fontSize="xs" pt={2}>
-              <TimeIcon />
-              <Text>
-                {new Intl.DateTimeFormat("en-us", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                }).format(new Date(data.createdAt))}
-              </Text>
-            </HStack>
-          </HStack>
-        </CardBody>
-
-        <Divider />
-
-        <CardFooter>
-          <ButtonGroup justifyContent="space-between" spacing={2} w="full">
-            <Button
-              as={Link}
-              href={data.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              colorScheme="blue"
-              size="sm"
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(data.url, "_blank", "noopener,noreferrer");
-              }}
+        {ShowText ? (
+          <HStack justifyContent={"space-between"} w={"95%"}>
+            <Heading
+              as="h2"
+              fontFamily="Fira Code, monospace"
+              fontSize={{ base: "2xl", md: "3xl" }}
+              mb={0}
+              color="violet"
             >
-              Visit Project ↗
-            </Button>
-            {ShowActions && (
-              <HStack>
-                <form action={deletePost}>
-                  <input type="hidden" name="id" value={data.id} />
-                  <DeleteButton />
-                </form>
-                <Link href={`/edit/${data.id}`}>
-                  <Button>Edit</Button>
-                </Link>
-              </HStack>
-            )}
-          </ButtonGroup>
-        </CardFooter>
-      </Card>
-    </SimpleGrid>
+              # My Projects
+            </Heading>
+            <Box width={{ base: "50px", md: "100px" }}>
+              <Divider />
+            </Box>
+            <Link href="/Projects">
+              <Button colorScheme="blue" size="md" _hover={{ bg: "blue.600" }}>
+                View all projects →
+              </Button>
+            </Link>
+          </HStack>
+        ) : (
+          <HStack justifyContent={"space-between"} w={"95%"}>
+            <Heading fontSize={{ base: "md", md: "xl" }}>
+              Monarch&apos;s Projects
+            </Heading>
+            <LinkBox as={Link} href="/Create">
+              <Button
+                colorScheme="purple"
+                size="md"
+                _hover={{ bg: "purple.600" }}
+              >
+                Create projects →
+              </Button>
+            </LinkBox>
+          </HStack>
+        )}
+        <SimpleGrid
+          columns={{ base: 1, md: 2, lg: 3 }}
+          spacing={8}
+          px={4}
+          py={8}
+        >
+          {posts.map((post) => (
+            <Card
+              key={post.id}
+              maxW="md"
+              mx="auto"
+              borderRadius="xl"
+              boxShadow="lg"
+              overflow="hidden"
+              _hover={{ shadow: "xl", transform: "scale(1.02)" }}
+              transition="all 0.3s ease-in-out"
+            >
+              <CardBody p={4}>
+                <Box borderRadius="md" overflow="hidden">
+                  <Image
+                    src={
+                      post.image &&
+                      (post.image.startsWith("http") ||
+                        post.image.startsWith("/"))
+                        ? post.image
+                        : "/default-image.jpg"
+                    }
+                    alt={post.title}
+                    width={400}
+                    height={250}
+                    style={{
+                      objectFit: "cover",
+                      width: "100%",
+                      height: "200px",
+                    }}
+                  />
+                </Box>
+
+                <Stack mt={4} spacing={2}>
+                  <Heading size="sm">{post.language}</Heading>
+                  <Text fontWeight="semibold" color="purple.600">
+                    {post.title}
+                  </Text>
+                  <Text fontSize="sm">{post.description}</Text>
+                </Stack>
+
+                <HStack justifyContent="space-between" mt={2}>
+                  {user && (
+                    <HStack spacing={2} alignItems="center">
+                      <Text fontWeight="bold" fontSize="xs">
+                        {user.given_name?.split(" ")[0]}
+                      </Text>
+                      <Avatar
+                        src={user.picture ?? "/default-avatar.png"}
+                        name={user.email ?? "User"}
+                        size="sm"
+                      />
+                    </HStack>
+                  )}
+                  {/* Date with icon */}
+                  <HStack spacing={1} color="gray.400" fontSize="xs" pt={2}>
+                    <TimeIcon />
+                    <Text>
+                      {new Intl.DateTimeFormat("en-us", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      }).format(new Date(post.createdAt))}
+                    </Text>
+                  </HStack>
+
+                  {/* Author info */}
+                </HStack>
+              </CardBody>
+
+              <Divider />
+
+              <CardFooter>
+                <ButtonGroup
+                  justifyContent="space-between"
+                  spacing={2}
+                  w="full"
+                >
+                  <Button
+                    as={Link}
+                    href={post.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    colorScheme="blue"
+                    size="sm"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.open(post.url, "_blank", "noopener,noreferrer");
+                    }}
+                  >
+                    Visit Project ↗
+                  </Button>
+                  <HStack>
+                    {ShowActions && (
+                      <>
+                        <DeleteButton id={post.id} />
+                        <Link href={`/edit/${post.id}`}>
+                          <Button>Edit</Button>
+                        </Link>
+                      </>
+                    )}
+                  </HStack>
+                </ButtonGroup>
+              </CardFooter>
+            </Card>
+          ))}
+        </SimpleGrid>
+      </Flex>
+    </Stack>
   );
 }

@@ -14,14 +14,14 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
       {
-        protocol: "http", // 👈 FIXED: localhost uses HTTP
-        hostname: "localhost",
-        port: "3000", // 👈 optional, but good to be explicit
+        protocol: "https",
+        hostname: "images.unsplash.com",
         pathname: "/**",
       },
       {
-        protocol: "https",
-        hostname: "media.istockphoto.com",
+        protocol: "http",
+        hostname: "localhost",
+        port: "3000",
         pathname: "/**",
       },
     ],
