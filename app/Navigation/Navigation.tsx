@@ -149,7 +149,7 @@ export function Navigation() {
                 cursor: "pointer",
               }}
             >
-              Create
+              Christine
             </Heading>
           </Link>
 
