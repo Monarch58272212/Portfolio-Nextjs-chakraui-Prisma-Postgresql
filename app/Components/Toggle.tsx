@@ -9,9 +9,6 @@ import {
 import { useFormStatus } from "react-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
 
-import { useTransition } from "react";
-import { deletePost } from "../api/action";
-
 type SubmitbuttonProps = {
   isLoading?: boolean;
 };
@@ -58,35 +55,12 @@ export function Submitbutton({ isLoading = false }: SubmitbuttonProps) {
   );
 }
 
-export function DeleteButton({ id }: { id: string }) {
-  const [isPending, startTransition] = useTransition();
-
-  const handleDelete = async () => {
-    const confirmDelete = confirm("Are you sure you want to delete this post?");
-    if (!confirmDelete) return;
-
-    startTransition(async () => {
-      try {
-        const result = await deletePost(id);
-        if (result.success) {
-          // Optional: Add a success message or toast notification here
-          window.location.reload(); // Force refresh to show updated list
-        }
-      } catch (error) {
-        console.error("Error deleting post:", error);
-        alert("Failed to delete post. Please try again.");
-      }
-    });
-  };
+export function DeleteButton() {
+  const { pending } = useFormStatus();
 
   return (
-    <Button
-      onClick={handleDelete}
-      colorScheme="red"
-      size="sm"
-      isLoading={isPending}
-    >
-      Delete
+    <Button variant="destructive" type="submit" disabled={pending}>
+      {pending ? "Deleting..." : "Delete"}
     </Button>
   );
 }

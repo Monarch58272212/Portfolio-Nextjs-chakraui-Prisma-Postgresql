@@ -124,7 +124,7 @@ export function Projects({ data, ShowActions = true }: BlogpostCardProps) {
               <HStack>
                 <form action={deletePost}>
                   <input type="hidden" name="id" value={data.id} />
-                  <DeleteButton id={data.id} />
+                  <DeleteButton />
                 </form>
                 <Link href={`/edit/${data.id}`}>
                   <Button>Edit</Button>

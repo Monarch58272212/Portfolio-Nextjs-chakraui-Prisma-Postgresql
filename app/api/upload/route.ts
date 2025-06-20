@@ -1,45 +1,18 @@
-import { NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma";
-import cloudinary from "@/app/lib/cloudinary";
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const formData = await request.formData();
-    const file = formData.get("image") as File;
-    const url = formData.get("url") as string;
-    const language = formData.get("language") as string;
-    const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
+    const { title, description, language, image, url } = await request.json();
 
-    if (!file || !url || !language || !title || !description) {
+    // Validate required fields
+    if (!title || !description || !language || !image || !url) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
     }
 
-    // Convert File to buffer
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
-    // Upload to Cloudinary
-    const imageUpload = await new Promise((resolve, reject) => {
-      const stream = cloudinary.uploader.upload_stream(
-        { resource_type: "image" },
-        (error, result) => {
-          if (error || !result) {
-            return reject(error);
-          }
-          resolve(result);
-        }
-      );
-
-      stream.end(buffer);
-    });
-
-    const image = (imageUpload as { secure_url: string }).secure_url;
-
-    // Save to database
     const post = await prisma.post.create({
       data: {
         title,
@@ -47,14 +20,18 @@ export async function POST(request: Request) {
         language,
         image,
         url,
+        // TODO: Replace these with actual values from your auth system
+        authorId: "default-author-id",
+        authorName: "Default Author",
+        authorImage: "/default-avatar.png",
       },
     });
 
-    return NextResponse.json({ success: true, post });
+    return NextResponse.json(post, { status: 201 });
   } catch (error) {
-    console.error("Upload error:", error);
+    console.error("Error creating post:", error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Upload failed" },
+      { error: "Failed to create post" },
       { status: 500 }
     );
   }
