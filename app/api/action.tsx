@@ -45,8 +45,8 @@ export async function handleSubmission(formData: FormData) {
       image,
       url,
       authorId: user.id,
-      authorName: user.given_name || "Anonymous",
-      authorImage: user.picture || "",
+      authorName: user?.given_name as string,
+      authorImage: user?.picture as string,
     },
   });
 
