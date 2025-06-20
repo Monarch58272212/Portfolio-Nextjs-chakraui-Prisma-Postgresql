@@ -182,8 +182,13 @@ export function Navigation() {
                       md: "flex",
                       lg: "none",
                     }}
+                    alignItems="center"
                   >
-                    <Text fontWeight="bold" fontSize={{ base: "xs", md: "xm" }}>
+                    <Text
+                      fontWeight="bold"
+                      fontSize={{ base: "xs", md: "xm" }}
+                      alignItems="center"
+                    >
                       {user.given_name?.split(" ")[0]}
                     </Text>
 
