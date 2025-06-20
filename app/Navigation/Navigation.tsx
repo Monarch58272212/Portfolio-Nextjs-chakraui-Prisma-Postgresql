@@ -238,20 +238,10 @@ export function Navigation() {
                     }}
                     gap={2}
                   >
-                    <Button
-                      colorScheme="blue"
-                      size="xs"
-                      fontSize={{ base: "xs", md: "xm" }}
-                    >
+                    <Button colorScheme="blue" size="sm" py={1.5}>
                       <LoginLink>Sign in</LoginLink>
                     </Button>
-                    <Button
-                      colorScheme="teal"
-                      variant="outline"
-                      size="xs"
-                      p={0.5}
-                      fontSize={{ base: "xs", md: "xm" }}
-                    >
+                    <Button colorScheme="blue" size="sm" py={1.5}>
                       <RegisterLink>Sign up</RegisterLink>
                     </Button>
                   </Box>
