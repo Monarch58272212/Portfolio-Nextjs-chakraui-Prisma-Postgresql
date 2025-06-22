@@ -1,7 +1,8 @@
+// app/edit/[id]/page.tsx
+
 import { prisma } from "@/app/lib/prisma";
 import { UpdateButton } from "@/app/Components/Toggle";
 import { updatePost } from "@/app/api/action";
-
 import {
   Box,
   Divider,

@@ -5,6 +5,7 @@ import {
   useColorModeValue,
   chakra,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { useFormStatus } from "react-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
@@ -62,6 +63,7 @@ export function Submitbutton({ isLoading = false }: SubmitbuttonProps) {
 export function DeleteButton({ id }: { id: string }) {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+  const toast = useToast();
 
   const handleDelete = async (): Promise<void> => {
     const confirmDelete = confirm("Are you sure you want to delete this post?");
@@ -71,13 +73,33 @@ export function DeleteButton({ id }: { id: string }) {
       try {
         const result = await deletePost(id);
         if (result.success) {
+          toast({
+            title: "Post deleted.",
+            description: "Your post has been successfully deleted.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
           router.refresh(); // Refresh the current route
         } else {
-          alert("Failed to delete post. Please try again.");
+          toast({
+            title: "Deletion failed.",
+            description:
+              "There was an error deleting the post. Please try again.",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
         }
       } catch (error) {
-        console.error("Error deleting post:", error);
-        alert("Failed to delete post. Please try again.");
+        console.error("Delete error:", error);
+        toast({
+          title: "Error",
+          description: "An unexpected error occurred while deleting the post.",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
       }
     });
   };
