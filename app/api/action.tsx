@@ -112,8 +112,7 @@ export async function updatePost(formData: FormData) {
     },
   });
 
-  // ✅ Clear cache and redirect
-  revalidatePath("/Projects");
+  revalidatePath("/");
   return redirect("/Projects");
 }
 
@@ -122,7 +121,7 @@ export async function deletePost(id: string) {
     await prisma.post.delete({
       where: { id },
     });
-    revalidatePath("/Projects");
+    revalidatePath("/");
     return { success: true }; // ✅ return success property
   } catch (error) {
     console.error("Failed to delete post:", error);

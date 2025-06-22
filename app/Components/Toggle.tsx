@@ -80,7 +80,7 @@ export function DeleteButton({ id }: { id: string }) {
             duration: 5000,
             isClosable: true,
           });
-          router.refresh(); // Refresh the current route
+          router.refresh();
         } else {
           toast({
             title: "Deletion failed.",
