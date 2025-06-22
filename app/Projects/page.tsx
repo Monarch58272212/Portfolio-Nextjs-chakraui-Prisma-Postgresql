@@ -13,6 +13,7 @@ async function getUserPosts() {
   const user = await getUser();
 
   if (!user) return [];
+  console.log("User posts:", user);
 
   const data = await prisma.post.findMany({
     where: {
@@ -23,5 +24,9 @@ async function getUserPosts() {
     },
   });
 
-  return data;
+  return data.map((post) => ({
+    ...post,
+    createdAt: post.createdAt.toISOString(),
+    updatedAt: post.updatedAt.toISOString(),
+  }));
 }
