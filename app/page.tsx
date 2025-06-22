@@ -42,7 +42,6 @@ async function getData() {
       updatedAt: true,
       authorName: true,
       authorPicture: true,
-      authorEmail: true,
     },
   });
 

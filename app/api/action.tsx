@@ -6,15 +6,6 @@ import { redirect } from "next/navigation";
 import cloudinary from "../lib/cloudinary";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-interface Post {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  url: string;
-  language: string;
-}
-
 export async function handleSubmission(formData: FormData) {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
@@ -63,9 +54,8 @@ export async function handleSubmission(formData: FormData) {
       image,
       url,
       authorId: user.id,
-      authorEmail: user.email || "",
-      authorPicture: user.picture || "",
-      authorName: user.given_name || "",
+      authorPicture: user.picture || "/default-avatar.png",
+      authorName: user.given_name || "Anonymous",
     },
   });
 

@@ -33,7 +33,6 @@ interface Post {
   updatedAt: Date | string;
   authorName: string | null;
   authorPicture: string | null;
-  authorEmail: string;
 }
 
 export default function Projects({
@@ -128,7 +127,6 @@ export default function Projects({
                         src={post.authorPicture ?? "/default-avatar.png"}
                         size="sm"
                       />
-                      <Text fontSize="xs">{post.authorEmail}</Text>
                     </HStack>
                   )}
                   <HStack spacing={1} color="gray.400" fontSize="xs" pt={2}>
