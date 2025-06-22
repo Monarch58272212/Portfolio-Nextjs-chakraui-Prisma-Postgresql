@@ -133,6 +133,7 @@ export default function FirstPage() {
               src="/monarch.png"
               alt="My Logo"
               fill
+              priority
               style={{
                 objectFit: "cover",
                 borderBottom: "1px solid violet",

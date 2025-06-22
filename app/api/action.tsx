@@ -5,6 +5,7 @@ import { prisma } from "../lib/prisma";
 import { redirect } from "next/navigation";
 import cloudinary from "../lib/cloudinary";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { error } from "console";
 
 export async function handleSubmission(formData: FormData) {
   const { getUser } = getKindeServerSession();
@@ -63,22 +64,6 @@ export async function handleSubmission(formData: FormData) {
   return redirect("/Projects");
 }
 
-export async function deletePost(id: string) {
-  try {
-    // Delete the post from the database
-    await prisma.post.delete({
-      where: { id },
-    });
-
-    // Revalidate the path to refresh the data
-    revalidatePath("/Projects");
-
-    return { success: true };
-  } catch (error) {
-    return { success: false, error };
-  }
-}
-
 export async function updatePost(formData: FormData) {
   const id = formData.get("id") as string;
   const imageFile = formData.get("imageFile") as File;
@@ -116,17 +101,38 @@ export async function updatePost(formData: FormData) {
     image = (imageUpload as { secure_url: string }).secure_url;
   }
 
-  await prisma.post.update({
-    where: { id },
-    data: {
-      title,
-      description,
-      language,
-      image,
-      url,
-    },
-  });
+  try {
+    await prisma.post.update({
+      where: { id },
+      data: {
+        title,
+        description,
+        language,
+        image,
+        url,
+      },
+    });
 
-  revalidatePath("/");
-  return redirect("/Projects");
+    // ✅ Clear cache and redirect
+    revalidatePath("/Projects");
+    return redirect("/Projects");
+  } catch (error) {
+    console.error("Update error:", error);
+    throw new Error("Failed to update post.");
+  }
+}
+
+export async function deletePost(id: string) {
+  try {
+    await prisma.post.delete({
+      where: { id },
+    });
+
+    revalidatePath("/Projects");
+
+    return { success: true }; // ✅ return success property
+  } catch (error) {
+    console.error("Failed to delete post:", error);
+    return { success: false }; // optional fallback
+  }
 }

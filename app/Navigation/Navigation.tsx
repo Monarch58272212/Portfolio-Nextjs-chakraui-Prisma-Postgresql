@@ -138,19 +138,6 @@ export function Navigation() {
             </Heading>
           </Link>
 
-          <Link href="/Projects">
-            <Heading
-              as="h1"
-              size="sm"
-              fontFamily="poppins"
-              _hover={{
-                color: "green.600",
-                cursor: "pointer",
-              }}
-            >
-              Projects
-            </Heading>
-          </Link>
           <ThemeToggleButton />
         </HStack>
       </Box>
