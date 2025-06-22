@@ -63,35 +63,12 @@ export async function handleSubmission(formData: FormData) {
       image,
       url,
       authorEmail: user?.email || "test@test.com",
-      authorName: user?.given_name || "test",
       authorPicture: user?.picture || "https://via.placeholder.com/150",
     },
   });
 
   revalidatePath("/");
   return redirect("/Projects");
-}
-
-export async function getUserPosts() {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user) return [];
-
-  const data = await prisma.post.findMany({
-    where: {
-      authorEmail: user.email || "test@test.com",
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  return data.map((post) => ({
-    ...post,
-    createdAt: post.createdAt.toISOString(),
-    updatedAt: post.updatedAt.toISOString(),
-  }));
 }
 
 export async function deletePost(id: string) {
