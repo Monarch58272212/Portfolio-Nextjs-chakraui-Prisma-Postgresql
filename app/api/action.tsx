@@ -62,8 +62,10 @@ export async function handleSubmission(formData: FormData) {
       language,
       image,
       url,
-      authorEmail: user?.email || "test@test.com",
-      authorPicture: user?.picture || "https://via.placeholder.com/150",
+      authorId: user.id,
+      authorEmail: user.email || "",
+      authorPicture: user.picture || "",
+      authorName: user.given_name || "",
     },
   });
 

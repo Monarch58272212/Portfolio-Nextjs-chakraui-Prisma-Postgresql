@@ -17,7 +17,7 @@ async function getUserPosts() {
 
   const data = await prisma.post.findMany({
     where: {
-      authorEmail: user.email || "",
+      authorId: user.id,
     },
     orderBy: {
       createdAt: "desc",

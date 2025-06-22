@@ -68,6 +68,7 @@ export default function Projects({
             </LinkBox>
           </HStack>
         )}
+        {posts.length === 0 && <Text color="red.500">No projects found</Text>}
 
         <SimpleGrid
           columns={{ base: 1, sm: 2, md: 2, lg: 3 }}
@@ -127,6 +128,7 @@ export default function Projects({
                         src={post.authorPicture ?? "/default-avatar.png"}
                         size="sm"
                       />
+                      <Text fontSize="xs">{post.authorEmail}</Text>
                     </HStack>
                   )}
                   <HStack spacing={1} color="gray.400" fontSize="xs" pt={2}>
