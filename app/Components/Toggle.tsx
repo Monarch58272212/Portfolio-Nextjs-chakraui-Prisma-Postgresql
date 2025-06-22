@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { useFormStatus } from "react-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 import { useTransition } from "react";
 import { deletePost } from "../api/action";
@@ -60,8 +61,9 @@ export function Submitbutton({ isLoading = false }: SubmitbuttonProps) {
 
 export function DeleteButton({ id }: { id: string }) {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
-  const handleDelete = async () => {
+  const handleDelete = async (): Promise<void> => {
     const confirmDelete = confirm("Are you sure you want to delete this post?");
     if (!confirmDelete) return;
 
@@ -69,8 +71,9 @@ export function DeleteButton({ id }: { id: string }) {
       try {
         const result = await deletePost(id);
         if (result.success) {
-          // Optional: Add a success message or toast notification here
-          window.location.reload(); // Force refresh to show updated list
+          router.refresh(); // Refresh the current route
+        } else {
+          alert("Failed to delete post. Please try again.");
         }
       } catch (error) {
         console.error("Error deleting post:", error);

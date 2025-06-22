@@ -241,7 +241,12 @@ export function Navigation() {
                     <Button colorScheme="blue" size="sm" py={1.5}>
                       <LoginLink>Sign in</LoginLink>
                     </Button>
-                    <Button colorScheme="blue" size="sm" py={1.5}>
+                    <Button
+                      colorScheme="teal"
+                      variant="outline"
+                      size="sm"
+                      py={1.5}
+                    >
                       <RegisterLink>Sign up</RegisterLink>
                     </Button>
                   </Box>

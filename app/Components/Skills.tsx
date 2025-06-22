@@ -1,4 +1,5 @@
-// src/components/Skills.tsx
+"use client";
+
 import {
   Box,
   Divider,

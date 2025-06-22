@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "../lib/prisma";
 import { redirect } from "next/navigation";
 import cloudinary from "../lib/cloudinary";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 interface Post {
   id: string;
@@ -15,13 +16,20 @@ interface Post {
 }
 
 export async function handleSubmission(formData: FormData) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) {
+    throw new Error("Please login to create a post");
+  }
+
   const file = formData.get("image") as File;
   const url = formData.get("url") as string;
   const language = formData.get("language") as string;
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
 
-  if (!file || !url || !language || !title || !description) {
+  if (!file || !url || !language || !title || !description || !user) {
     throw new Error("Missing fields");
   }
 
@@ -54,39 +62,52 @@ export async function handleSubmission(formData: FormData) {
       language,
       image,
       url,
+      authorEmail: user?.email || "test@test.com",
+      authorName: user?.given_name || "test",
+      authorPicture: user?.picture || "https://via.placeholder.com/150",
     },
   });
 
   revalidatePath("/");
-  return { success: true, message: "Post created successfully" };
+  return redirect("/Projects");
 }
 
-export async function getPosts() {
-  // Kunin lahat ng posts mula sa database
-  const posts = await prisma.post.findMany();
-  // Ensure posts is an array, fallback to empty array if null/undefined
-  const postsArray = posts || [];
-  // Pwede mo rin i-map dito kung gusto mo i-transform yung data
-  return postsArray.map((post: Post) => ({
-    id: post.id,
-    title: post.title,
-    description: post.description,
-    image: post.image,
-    url: post.url,
-    language: post.language,
+export async function getUserPosts() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) return [];
+
+  const data = await prisma.post.findMany({
+    where: {
+      authorEmail: user.email || "test@test.com",
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return data.map((post) => ({
+    ...post,
+    createdAt: post.createdAt.toISOString(),
+    updatedAt: post.updatedAt.toISOString(),
   }));
 }
 
 export async function deletePost(id: string) {
-  // I-delete ang post mula sa database
-  await prisma.post.delete({
-    where: { id },
-  });
+  try {
+    // Delete the post from the database
+    await prisma.post.delete({
+      where: { id },
+    });
 
-  // Revalidate the path to refresh the data
-  revalidatePath("/Projects");
+    // Revalidate the path to refresh the data
+    revalidatePath("/Projects");
 
-  return { success: true, message: "Post deleted successfully" };
+    return { success: true };
+  } catch (error) {
+    return { success: false, error };
+  }
 }
 
 export async function updatePost(formData: FormData) {
