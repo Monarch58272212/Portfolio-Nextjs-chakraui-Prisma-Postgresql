@@ -16,12 +16,16 @@ import {
   Flex,
   LinkBox,
   Avatar,
+  Tooltip,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { DeleteButton } from "./Toggle";
 import { TimeIcon } from "@chakra-ui/icons";
 import { motion } from "framer-motion";
+
+// ✅ Wrap Chakra UI's Card with motion
+const MotionCard = motion(Card);
 
 interface Post {
   id: string;
@@ -48,52 +52,51 @@ export default function Projects({
   return (
     <Stack w="100%" spacing={8} px={{ base: 4, md: 8 }} py={10}>
       <Flex direction="column" align="center" justify="center">
-        {/* Your heading and create buttons here (same code) */}
-        {ShowText ? (
-          <HStack justify="space-between" w="95%">
-            <Heading fontSize={{ base: "md", md: "xl" }} color="violet">
-              # Monarch&apos;s Projects
-            </Heading>
-            <LinkBox as={Link} href="/Create">
-              <Button colorScheme="purple">Create projects →</Button>
-            </LinkBox>
-          </HStack>
-        ) : (
-          <HStack justify="space-between" w="95%">
-            <Heading fontSize={{ base: "md", md: "xl" }} color="violet">
-              # Monarch&apos;s Projects
-            </Heading>
-            <LinkBox as={Link} href="/Projects">
-              <Button colorScheme="purple">Projects →</Button>
-            </LinkBox>
-          </HStack>
-        )}
+        {/* Header */}
+        <HStack justify="space-between" w="95%">
+          <Heading fontSize={{ base: "md", md: "xl" }} color="violet">
+            # Monarch&apos;s Projects
+          </Heading>
+          <LinkBox as={Link} href={ShowText ? "/Create" : "/Projects"}>
+            <Button colorScheme="purple">
+              {ShowText ? "Create projects →" : "Projects →"}
+            </Button>
+          </LinkBox>
+        </HStack>
+
+        {/* No posts text */}
         {posts.length === 0 && <Text color="red.500">No projects found</Text>}
 
+        {/* Cards Grid */}
         <SimpleGrid
-          columns={{ base: 1, sm: 2, md: 2, lg: 3 }}
+          columns={{ base: 1, sm: 1, md: 2, lg: 3 }}
           spacing={8}
           px={4}
           py={8}
+          w="100vw"
+          overflowX="hidden"
         >
-          {posts.map((post) => (
-            <Card
-              as={motion.div}
+          {posts.map((post, index) => (
+            <MotionCard
               key={post.id}
               borderRadius="xl"
               boxShadow="lg"
               height="100%"
               display="flex"
               flexDirection="column"
-              w="100%" // Responsive width
-              maxW="full" // Prevents overflow
+              w="100%"
+              maxW="full"
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 0.6,
+                delay: index * 0.1,
+                ease: "easeOut",
+              }}
+              viewport={{ once: false, amount: 0.2 }}
             >
               <CardBody flex="1" display="flex" flexDirection="column">
-                <Box
-                  borderRadius="md"
-                  overflow="hidden"
-                  h="200px" // consistent image height
-                >
+                <Box borderRadius="md" overflow="hidden" h="200px" w="100%">
                   <Image
                     src={
                       post.image.startsWith("http")
@@ -116,7 +119,18 @@ export default function Projects({
                   <Text fontWeight="semibold" color="purple.600">
                     {post.title}
                   </Text>
-                  <Text fontSize="sm">{post.description}</Text>
+                  <Tooltip
+                    label={post.description}
+                    hasArrow
+                    placement="top"
+                    bg="gray.700"
+                    color="white"
+                    border={"1px solid green"}
+                  >
+                    <Text fontSize="sm" noOfLines={2}>
+                      {post.description}
+                    </Text>
+                  </Tooltip>
                 </Stack>
 
                 <HStack justify="space-between" mt={2}>
@@ -166,7 +180,7 @@ export default function Projects({
                   )}
                 </ButtonGroup>
               </CardFooter>
-            </Card>
+            </MotionCard>
           ))}
         </SimpleGrid>
       </Flex>
