@@ -8,17 +8,39 @@ import {
   Text,
   useColorModeValue,
   VStack,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookMessenger, FaGithub } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
+import { motion } from "framer-motion";
 
 export default function FirstPage() {
   const border = useColorModeValue("violet", "white");
+  const initialX = useBreakpointValue({
+    base: 90,
+    md: 120,
+    lg: 150,
+  });
+
+  const initialOpacity = useBreakpointValue({
+    base: 0,
+    md: 0,
+    lg: 1,
+  });
+
   return (
     <VStack w="100%" position={"relative"}>
       <Box
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        as={motion.div}
+        animate={{ y: [0, -30, 0] }}
+        style={{
+          scale: 1.2,
+          transition: "all 0.3s ease",
+        }}
         position={"absolute"}
         height={"30%"}
         w={0}
@@ -53,7 +75,19 @@ export default function FirstPage() {
         p={4}
       >
         {/* TEXT SECTION */}
-        <Box gap={4} w={{ base: "100%", md: "45%" }}>
+        <Box
+          as={motion.div}
+          initial={{
+            x: initialX,
+            opacity: initialOpacity,
+          }}
+          whileInView={{ x: 0, opacity: 1 }}
+          style={{
+            transition: "all 0.5s linear",
+          }}
+          gap={4}
+          w={{ base: "100%", md: "45%" }}
+        >
           <Heading
             as="h4"
             fontFamily={"fira Code"}
@@ -92,6 +126,13 @@ export default function FirstPage() {
 
         {/* IMAGE SECTION */}
         <VStack
+          as={motion.div}
+          initial={{ opacity: 0, y: 50, scale: 1.2 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          style={{
+            transition: "all 0.5s ease",
+          }}
+          viewport={{ once: false, amount: 0.5 }}
           h="auto"
           w={{ base: "100%", md: "45%" }}
           align="center"
