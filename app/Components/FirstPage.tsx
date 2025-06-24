@@ -23,7 +23,7 @@ export default function FirstPage() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
         as={motion.div}
-        animate={{ y: [0, -30, 0] }}
+        animate={{ y: [0, -100, 0] }}
         style={{
           scale: 1.2,
           transition: "all 0.3s ease",
@@ -62,7 +62,14 @@ export default function FirstPage() {
         p={4}
       >
         {/* TEXT SECTION */}
-        <Box gap={4} w={{ base: "100%", md: "45%" }}>
+        <Box
+          w={{ base: "100%", md: "45%" }}
+          display={"flex"}
+          flexDirection="column"
+          justifyContent="center"
+          alignItems={"left"}
+          textAlign={{ base: "center", md: "left" }}
+        >
           <Heading
             as="h4"
             fontFamily={"fira Code"}

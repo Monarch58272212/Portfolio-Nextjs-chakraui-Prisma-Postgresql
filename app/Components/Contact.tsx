@@ -20,7 +20,7 @@ export default function Contact() {
   return (
     <Box w="95%" mx="auto">
       <VStack align="center" mb={6}>
-        <Flex w="100%" justify="center" align="center">
+        <Flex w="95%" justify="center" align="center">
           <Heading size="lg" color="violet" mr={4}>
             # Contact Me
           </Heading>

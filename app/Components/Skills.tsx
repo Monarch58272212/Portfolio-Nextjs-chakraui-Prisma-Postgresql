@@ -25,10 +25,9 @@ export default function Skills() {
       as="section"
       w="95%"
       mx="auto"
-      mt={{ base: "20px", lg: "10px" }}
       borderRadius="lg"
       boxShadow="lg"
-      p={6}
+      px={6}
       bg={bgColor}
       aria-label="Skills Section"
     >

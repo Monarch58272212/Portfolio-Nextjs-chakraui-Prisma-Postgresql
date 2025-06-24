@@ -254,30 +254,6 @@ export function Navigation() {
                   </Box>
                 </Link>
 
-                <Link href="/Create">
-                  <Box
-                    _hover={{
-                      color: "green.600",
-                      cursor: "pointer",
-                      bg: "gray.100",
-                    }}
-                  >
-                    Create
-                  </Box>
-                </Link>
-
-                <Link href="/Projects">
-                  <Box
-                    _hover={{
-                      color: "green.600",
-                      cursor: "pointer",
-                      bg: "gray.100",
-                    }}
-                  >
-                    Projects
-                  </Box>
-                </Link>
-
                 <ThemeToggleButton />
               </VStack>
             </DrawerBody>

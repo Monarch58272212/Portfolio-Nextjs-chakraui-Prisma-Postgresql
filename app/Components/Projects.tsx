@@ -54,7 +54,7 @@ export default function Projects({
       <Flex direction="column" align="center" justify="center">
         {/* Header */}
         <HStack justify="space-between" w="95%">
-          <Heading fontSize={{ base: "md", md: "xl" }} color="violet">
+          <Heading size="lg" color="violet">
             # Monarch&apos;s Projects
           </Heading>
           <LinkBox as={Link} href={ShowText ? "/Create" : "/Projects"}>
@@ -72,8 +72,7 @@ export default function Projects({
           columns={{ base: 1, sm: 1, md: 2, lg: 3 }}
           spacing={8}
           px={4}
-          py={8}
-          w="100vw"
+          pt={8}
           overflowX="hidden"
         >
           {posts.map((post, index) => (

@@ -14,7 +14,7 @@ export default function About() {
     <Box w="95%" mx="auto">
       <VStack align="center" mb={6}>
         {/* Heading Section */}
-        <Flex w="100%" justify="center" align="center">
+        <Flex w="100%" justify="center" align="center" width={"95%"}>
           <Heading size="lg" color="violet" mr={4}>
             # About Me
           </Heading>
