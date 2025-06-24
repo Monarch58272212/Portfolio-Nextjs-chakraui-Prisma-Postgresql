@@ -17,12 +17,20 @@ import {
   LinkBox,
   Avatar,
   Tooltip,
+  useBreakpointValue,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverBody,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { DeleteButton } from "./Toggle";
 import { TimeIcon } from "@chakra-ui/icons";
 import { motion } from "framer-motion";
+import Lottie from "lottie-react";
+import emptyAnimation from "@/public/animations/NoData.json";
 
 // ✅ Wrap Chakra UI's Card with motion
 const MotionCard = motion(Card);
@@ -49,6 +57,8 @@ export default function Projects({
   ShowActions?: boolean;
   ShowText?: boolean;
 }) {
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   return (
     <Stack w="100%" spacing={8} px={{ base: 4, md: 8 }} py={10}>
       <Flex direction="column" align="center" justify="center">
@@ -65,7 +75,26 @@ export default function Projects({
         </HStack>
 
         {/* No posts text */}
-        {posts.length === 0 && <Text color="red.500">No projects found</Text>}
+        {posts.length === 0 && (
+          <Box
+            textAlign="center"
+            display={"flex"}
+            justifyContent={"center"}
+            flexDirection={"column"}
+            alignItems={"center"}
+            w={"100%"}
+            justifyItems={"center"}
+          >
+            <Lottie
+              animationData={emptyAnimation}
+              loop
+              style={{ width: 250, height: 250, margin: "0 auto" }}
+            />
+            <Text mt={4} fontSize="lg" color="gray.500">
+              No projects found
+            </Text>
+          </Box>
+        )}
 
         {/* Cards Grid */}
         <SimpleGrid
@@ -118,18 +147,36 @@ export default function Projects({
                   <Text fontWeight="semibold" color="purple.600">
                     {post.title}
                   </Text>
-                  <Tooltip
-                    label={post.description}
-                    hasArrow
-                    placement="top"
-                    bg="gray.700"
-                    color="white"
-                    border={"1px solid green"}
-                  >
-                    <Text fontSize="sm" noOfLines={2}>
-                      {post.description}
-                    </Text>
-                  </Tooltip>
+                  {isMobile ? (
+                    <Popover>
+                      <PopoverTrigger>
+                        <Text fontSize="sm" noOfLines={2} cursor="pointer">
+                          {post.description}
+                        </Text>
+                      </PopoverTrigger>
+                      <PopoverContent
+                        bg="gray.700"
+                        color="white"
+                        border="1px solid green"
+                      >
+                        <PopoverArrow />
+                        <PopoverBody>{post.description}</PopoverBody>
+                      </PopoverContent>
+                    </Popover>
+                  ) : (
+                    <Tooltip
+                      label={post.description}
+                      hasArrow
+                      placement="top"
+                      bg="gray.700"
+                      color="white"
+                      border="1px solid green"
+                    >
+                      <Text fontSize="sm" noOfLines={2}>
+                        {post.description}
+                      </Text>
+                    </Tooltip>
+                  )}
                 </Stack>
 
                 <HStack justify="space-between" mt={2}>

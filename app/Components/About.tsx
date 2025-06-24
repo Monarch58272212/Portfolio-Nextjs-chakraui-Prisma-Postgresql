@@ -1,13 +1,16 @@
+"use client";
+
 import {
   Box,
   Divider,
   Flex,
   Heading,
-  Image,
   Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
+import Lottie from "lottie-react";
+import AboutMe from "@/public/animations/AboutMe.json";
 
 export default function About() {
   return (
@@ -16,7 +19,7 @@ export default function About() {
         {/* Heading Section */}
         <Flex w="100%" justify="center" align="center" width={"95%"}>
           <Heading size="lg" color="violet" mr={4}>
-            # About Me
+            # About Me & My Goals
           </Heading>
           <Divider borderColor="teal.300" flex="1" />
         </Flex>
@@ -28,59 +31,40 @@ export default function About() {
           align="center"
           justify="center"
           w="100%"
+          px={{ base: 4, md: 8 }}
+          boxShadow={"lg"}
         >
           {/* Text Section */}
           <Text w={{ base: "100%", md: "65%" }} textAlign="justify">
-            Im a passionate Front-End Developer with a strong eye for design and
-            a deep understanding of user experience. I specialize in building
-            responsive, user-friendly web interfaces using modern technologies
-            like HTML, CSS, JavaScript, React, and Tailwind CSS. With a
-            background in both design and development, I enjoy turning complex
-            ideas into smooth, interactive, and accessible digital experiences.{" "}
+            Hi! Im Monarch, a passionate Front-End Developer who loves turning
+            designs into real, functional websites. I enjoy working with
+            technologies like React, Chakra UI, and Next.js. I started my
+            journey in web development in 2023 and have since been building
+            clean and responsive interfaces. My goal is to create user-friendly
+            web applications and constantly grow as a developer. When Im not
+            coding, I enjoy reading tech blogs and improving my design skills.{" "}
             <br />
-            <br />I thrive in fast-paced environments where I can collaborate
-            with teams to bring ideas to life. Whether its creating reusable
-            components, optimizing performance, or ensuring pixel-perfect
-            designs, I always aim for clean and efficient code. Im also
-            continuously learning — staying up-to-date with the latest trends
-            and best practices in web development to deliver modern, reliable
-            solutions.
+            <br />
+            My short-term goal is to deepen my knowledge in React and
+            TypeScript, and to build more complex UI projects using Chakra UI.
+            In the long run, I aim to become a full-stack developer and
+            contribute to open-source projects. I also dream of working with a
+            collaborative tech team where I can grow, share ideas, and build
+            real-world applications that make a difference.
           </Text>
 
           {/* Image Section */}
           <Flex
-            w={{ base: "100%", md: "35%" }}
+            w={{ base: "100%", md: "55%" }}
             position="relative"
             justify="center"
             align="center"
           >
-            <Box
-              borderRadius="full"
-              p="3px"
-              bgGradient="linear(to-r, red.400, orange.400, yellow.300)"
-              animation="fireGlow 2s infinite"
-              sx={{
-                "@keyframes fireGlow": {
-                  "0%": {
-                    boxShadow: "0 0 10px red",
-                  },
-                  "50%": {
-                    boxShadow: "0 0 25px orange",
-                  },
-                  "100%": {
-                    boxShadow: "0 0 10px yellow",
-                  },
-                },
-              }}
-            >
-              <Image
-                src="/Profile.png"
-                alt="About"
-                boxSize={{ base: "200px", md: "250px" }}
-                borderRadius="full"
-                objectFit="cover"
-              />
-            </Box>
+            <Lottie
+              animationData={AboutMe}
+              loop
+              style={{ width: "auto", height: "auto", margin: "0 auto" }}
+            />
           </Flex>
         </Stack>
       </VStack>
