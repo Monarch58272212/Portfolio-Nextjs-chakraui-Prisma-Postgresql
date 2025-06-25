@@ -1,19 +1,18 @@
+"use server";
 import { VStack } from "@chakra-ui/react";
-
 import Skills from "./Components/Skills";
 import About from "./Components/About";
 import FirstPage from "./Components/FirstPage";
-import Projects from "./Components/Projects";
 import Contact from "./Components/Contact";
 import Footer from "./Components/Footer";
 import { prisma } from "./lib/prisma";
-
+import ProjectsWrapper from "./Components/ProjectWrapper";
 export default async function Home() {
   const data = await getData();
   return (
     <VStack>
       <FirstPage />
-      <Projects posts={data} ShowText={false} ShowActions={false} />
+      <ProjectsWrapper posts={data} ShowText={false} ShowActions={false} />
       <Skills />
       <About />
       <Contact />
