@@ -6,7 +6,7 @@ import FirstPage from "./Components/FirstPage";
 import Contact from "./Components/Contact";
 import Footer from "./Components/Footer";
 import { prisma } from "./lib/prisma";
-import ProjectsWrapper from "./Components/ProjectWrapper";
+import ProjectsWrapper from "./Components/DynamicWrapper";
 export default async function Home() {
   const data = await getData();
   return (

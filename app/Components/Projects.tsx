@@ -114,12 +114,12 @@ export default function Projects({
               flexDirection="column"
               w="100%"
               maxW="full"
-              initial={{ opacity: 0, x: 100 }}
+              initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{
                 duration: 0.6,
                 delay: index * 0.1,
-                ease: "easeOut",
+                ease: "easeInOut",
               }}
               viewport={{ once: false, amount: 0.2 }}
             >

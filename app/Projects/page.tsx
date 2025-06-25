@@ -1,6 +1,6 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { prisma } from "../lib/prisma";
-import Projects from "../Components/ProjectWrapper";
+import Projects from "../Components/DynamicWrapper";
 
 export default async function ProjectsPage() {
   const posts = await getUserPosts();
