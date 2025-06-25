@@ -15,3 +15,6 @@ export const Projects = dynamic(() => import("./Projects"), {
 });
 
 export const About = dynamic(() => import("./About"), { ssr: false });
+export const Skills = dynamic(() => import("./Skills"), { ssr: false });
+export const Footer = dynamic(() => import("./Footer"), { ssr: false });
+export const Contact = dynamic(() => import("./Contact"), { ssr: false });

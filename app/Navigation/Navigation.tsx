@@ -124,7 +124,7 @@ export function Navigation() {
       {/* Desktop Menu */}
       <Box display={{ base: "none", sm: "none", md: "block" }}>
         <HStack spacing={6} gap={10} align="center">
-          <Link href="/">
+          <Link href="/" prefetch={true}>
             <Heading
               as="h1"
               size="sm"
@@ -242,7 +242,7 @@ export function Navigation() {
             </DrawerHeader>
             <DrawerBody>
               <VStack align="start" spacing={4}>
-                <Link href="/">
+                <Link href="/" prefetch={true}>
                   <Box
                     _hover={{
                       color: "green.600",

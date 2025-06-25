@@ -1,11 +1,16 @@
 "use server";
 import { VStack } from "@chakra-ui/react";
-import Skills from "./Components/Skills";
 import FirstPage from "./Components/FirstPage";
-import Contact from "./Components/Contact";
-import Footer from "./Components/Footer";
 import { prisma } from "./lib/prisma";
-import { Projects, About } from "./Components/DynamicWrapper";
+import {
+  Projects,
+  About,
+  Contact,
+  Skills,
+  Footer,
+} from "./Components/DynamicWrapper";
+
+export const revalidate = 60;
 
 export default async function Home() {
   const data = await getData();
