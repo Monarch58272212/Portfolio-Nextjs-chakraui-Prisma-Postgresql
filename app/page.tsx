@@ -1,4 +1,3 @@
-"use server";
 import { VStack } from "@chakra-ui/react";
 import FirstPage from "./Components/FirstPage";
 import { prisma } from "./lib/prisma";
