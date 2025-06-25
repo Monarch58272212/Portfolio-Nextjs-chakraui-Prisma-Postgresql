@@ -122,7 +122,7 @@ export default function Projects({
                   delay: index * 0.05,
                   ease: "easeOut",
                 }}
-                viewport={{ once: true, amount: 0.2 }}
+                viewport={{ once: false, amount: 0.2 }}
                 style={{ willChange: "opacity, transform" }}
               >
                 <CardBody flex="1" display="flex" flexDirection="column">
