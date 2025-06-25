@@ -34,7 +34,7 @@ import emptyAnimation from "@/public/animations/NoData.json";
 
 // ✅ Wrap Chakra UI's Card with motion
 const MotionCard = motion(Card);
-
+const MotionImage = motion(Box);
 interface Post {
   id: string;
   title: string;
@@ -125,21 +125,27 @@ export default function Projects({
             >
               <CardBody flex="1" display="flex" flexDirection="column">
                 <Box borderRadius="md" overflow="hidden" h="200px" w="100%">
-                  <Image
-                    src={
-                      post.image.startsWith("http")
-                        ? post.image
-                        : "/default-image.jpg"
-                    }
-                    alt={post.title}
-                    width={400}
-                    height={250}
-                    style={{
-                      objectFit: "cover",
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  />
+                  <MotionImage
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ width: "100%", height: "100%" }}
+                  >
+                    <Image
+                      src={
+                        post.image.startsWith("http")
+                          ? post.image
+                          : "/default-image.jpg"
+                      }
+                      alt={post.title}
+                      width={400}
+                      height={250}
+                      style={{
+                        objectFit: "cover",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    />
+                  </MotionImage>
                 </Box>
 
                 <Stack mt={4} spacing={2} flex="1">

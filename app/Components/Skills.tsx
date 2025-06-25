@@ -28,6 +28,7 @@ export default function Skills() {
       borderRadius="lg"
       boxShadow="lg"
       px={6}
+      py={10}
       bg={bgColor}
       aria-label="Skills Section"
     >

@@ -10,10 +10,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import Lottie from "lottie-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookMessenger, FaGithub } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
+import backgroundprofile from "@/public/animations/backgroundprofile.json";
 
 export default function FirstPage() {
   const border = useColorModeValue("violet", "white");
@@ -122,27 +124,15 @@ export default function FirstPage() {
             w={{ base: "200px", md: "350px" }}
             h={{ base: "200px", md: "350px" }}
           >
-            <Box
-              position="absolute"
-              bottom="10"
-              left="20"
-              border="1px solid purple"
-              boxSize={{ base: "100px", md: "180px", lg: "200px" }}
+            <Lottie
+              animationData={backgroundprofile}
+              loop
+              style={{ width: "auto", height: "auto", margin: "0 auto" }}
             />
-
-            <Box
-              position="absolute"
-              bottom="18"
-              left="38"
-              border="1px solid aqua"
-              boxSize={{ base: "100px", md: "180px", lg: "200px" }}
-            />
-            <Box
-              position="absolute"
-              bottom="28"
-              left="68"
-              border="1px solid green"
-              boxSize={{ base: "100px", md: "180px", lg: "200px" }}
+            <Lottie
+              animationData={backgroundprofile}
+              loop
+              style={{ width: "auto", height: "auto", margin: "0 auto" }}
             />
 
             <Image
