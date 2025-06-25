@@ -1,29 +1,19 @@
 "use server";
-import { Box, VStack } from "@chakra-ui/react";
+import { VStack } from "@chakra-ui/react";
 import Skills from "./Components/Skills";
 import About from "./Components/About";
 import FirstPage from "./Components/FirstPage";
 import Contact from "./Components/Contact";
 import Footer from "./Components/Footer";
 import { prisma } from "./lib/prisma";
-import { Suspense } from "react";
-import ModernSkeleton from "./Components/ModernSkeleton";
 import Projects from "./Components/Projects";
+
 export default async function Home() {
   const data = await getData();
   return (
     <VStack>
       <FirstPage />
-      <Suspense
-        fallback={
-          <Box w="full" mx="auto" p={4}>
-            <ModernSkeleton />
-          </Box>
-        }
-      >
-        <Projects posts={data} ShowText={true} ShowActions={true} />
-      </Suspense>
-
+      <Projects posts={data} ShowText={false} ShowActions={false} />
       <Skills />
       <About />
       <Contact />
