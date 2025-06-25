@@ -9,11 +9,10 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-
-import Lottie from "lottie-react";
-import AboutMe from "@/public/animations/AboutMe.json";
+import { motion } from "framer-motion";
 
 export default function About() {
+  const MotionBox = motion(Box);
   return (
     <Box w="95%" mx="auto">
       <VStack align="center" mb={6}>
@@ -61,11 +60,89 @@ export default function About() {
             justify="center"
             align="center"
           >
-            <Lottie
-              animationData={AboutMe}
-              loop
-              style={{ width: "auto", height: "auto", margin: "0 auto" }}
-            />
+            <Box
+              position="relative"
+              w={{ base: "200px", md: "350px" }}
+              h={{ base: "200px", md: "350px" }}
+            >
+              {/* Purple Bubble */}
+              <MotionBox
+                position="absolute"
+                bottom="10"
+                left="20"
+                borderRadius="full"
+                bgGradient="linear(to-r, #8e2de2, #4a00e0)"
+                boxSize={{ base: "100px", md: "180px", lg: "200px" }}
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                zIndex={0}
+              />
+
+              {/* Aqua Bubble */}
+              <MotionBox
+                position="absolute"
+                bottom="18"
+                left="38"
+                borderRadius="full"
+                bg="cyan.300"
+                boxSize={{ base: "50px", md: "70px", lg: "70px" }}
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                zIndex={0}
+              />
+
+              {/* Violet Gradient Bubble */}
+              <MotionBox
+                position="absolute"
+                bottom={{ base: "20", md: "58", lg: "48" }}
+                left={{ base: "10", md: "10", lg: "8" }}
+                borderRadius="full"
+                border={"1px solid violet"}
+                boxSize={{ base: "20px", md: "20px", lg: "30px" }}
+                animate={{ y: [0, -30, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                zIndex={0}
+              />
+
+              {/* Green Gradient Bubble */}
+              <MotionBox
+                position="absolute"
+                top="18"
+                right="38"
+                borderRadius="full"
+                bgGradient="linear(to-r, green.300, green.700)"
+                boxSize={{ base: "10px", md: "20px", lg: "30px" }}
+                animate={{ y: [0, -30, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                zIndex={0}
+              />
+
+              {/* Green Bubble (Large) */}
+              <MotionBox
+                position="absolute"
+                bottom={{ base: "20", md: "30", lg: "40" }}
+                left="68"
+                borderRadius="full"
+                bgGradient="linear(to-r, violet, purple)"
+                boxSize={{ base: "100px", md: "180px", lg: "160px" }}
+                animate={{ y: [0, -30, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                zIndex={0}
+              />
+
+              {/* Peach Gradient Bubble */}
+              <MotionBox
+                position="absolute"
+                bottom="38"
+                right="38"
+                borderRadius="full"
+                border={"1px solid peachpuff"}
+                boxSize={{ base: "40px", md: "60px", lg: "80px" }}
+                animate={{ y: [0, -30, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                zIndex={0}
+              />
+            </Box>
           </Flex>
         </Stack>
       </VStack>

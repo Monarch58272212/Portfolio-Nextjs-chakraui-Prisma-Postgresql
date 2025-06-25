@@ -66,7 +66,7 @@ export function Navigation() {
         gap={{ base: 1, md: 4, lg: 5 }}
         alignItems="center"
       >
-        <Link href="/">
+        <Link href="/" prefetch={true}>
           <Image
             src="/always.png"
             alt="My Logo"
@@ -203,7 +203,7 @@ export function Navigation() {
                       </Button>
                     </LogoutLink>
 
-                    <Link href="/Projects">
+                    <Link href="/Projects" prefetch={true}>
                       <Button
                         colorScheme="purple"
                         variant="outline"

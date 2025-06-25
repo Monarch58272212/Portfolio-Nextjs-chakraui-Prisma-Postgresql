@@ -67,7 +67,11 @@ export default function Projects({
           <Heading size="lg" color="violet">
             # Monarch&apos;s Projects
           </Heading>
-          <LinkBox as={Link} href={ShowText ? "/Create" : "/Projects"}>
+          <LinkBox
+            as={Link}
+            prefetch={true}
+            href={ShowText ? "/Create" : "/Projects"}
+          >
             <Button colorScheme="purple">
               {ShowText ? "Create projects →" : "Projects →"}
             </Button>
