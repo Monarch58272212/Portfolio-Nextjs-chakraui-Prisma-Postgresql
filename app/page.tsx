@@ -1,12 +1,11 @@
 "use server";
 import { VStack } from "@chakra-ui/react";
 import Skills from "./Components/Skills";
-import About from "./Components/About";
 import FirstPage from "./Components/FirstPage";
 import Contact from "./Components/Contact";
 import Footer from "./Components/Footer";
 import { prisma } from "./lib/prisma";
-import Projects from "./Components/Projects";
+import { Projects, About } from "./Components/DynamicWrapper";
 
 export default async function Home() {
   const data = await getData();

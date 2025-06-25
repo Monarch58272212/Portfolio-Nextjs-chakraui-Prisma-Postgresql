@@ -28,7 +28,7 @@ export default function FirstPage() {
         animate={{ y: [0, -100, 0] }}
         style={{
           scale: 1.2,
-          transition: "all 0.3s ease",
+          transition: "all 0.3s ease-in-out",
         }}
         position={"absolute"}
         height={"30%"}
