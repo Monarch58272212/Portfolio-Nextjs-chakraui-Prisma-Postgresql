@@ -1,3 +1,4 @@
+"use server";
 import { VStack } from "@chakra-ui/react";
 import FirstPage from "./Components/FirstPage";
 import { prisma } from "./lib/prisma";
@@ -8,8 +9,6 @@ import {
   Skills,
   Footer,
 } from "./Components/DynamicWrapper";
-
-export const revalidate = 60;
 
 export default async function Home() {
   const data = await getData();
@@ -26,7 +25,6 @@ export default async function Home() {
 }
 
 async function getData() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   const data = await prisma.post.findMany({
     orderBy: {
       createdAt: "desc", // ayusin ayon sa date mula pinakabago

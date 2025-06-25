@@ -10,12 +10,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import Lottie from "lottie-react";
+//import Lottie from "lottie-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookMessenger, FaGithub } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
-import backgroundprofile from "@/public/animations/backgroundprofile.json";
+//import backgroundprofile from "@/public/animations/backgroundprofile.json";
 
 export default function FirstPage() {
   const border = useColorModeValue("violet", "white");
@@ -124,16 +124,13 @@ export default function FirstPage() {
             w={{ base: "200px", md: "350px" }}
             h={{ base: "200px", md: "350px" }}
           >
-            <Lottie
-              animationData={backgroundprofile}
-              loop
-              style={{ width: "auto", height: "auto", margin: "0 auto" }}
-            />
-            <Lottie
-              animationData={backgroundprofile}
-              loop
-              style={{ width: "auto", height: "auto", margin: "0 auto" }}
-            />
+            {/* 
+<Lottie
+  animationData={emptyAnimation}
+  loop
+  style={{ width: 250, height: 250, margin: "0 auto" }}
+/> 
+*/}
 
             <Image
               src="/monarch.png"

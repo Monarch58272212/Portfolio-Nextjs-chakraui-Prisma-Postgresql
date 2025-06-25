@@ -9,8 +9,8 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import Lottie from "lottie-react";
-import AboutMe from "@/public/animations/AboutMe.json";
+//import Lottie from "lottie-react";
+//import AboutMe from "@/public/animations/AboutMe.json";
 
 export default function About() {
   return (
@@ -60,11 +60,11 @@ export default function About() {
             justify="center"
             align="center"
           >
-            <Lottie
+            {/*  <Lottie
               animationData={AboutMe}
               loop
               style={{ width: "auto", height: "auto", margin: "0 auto" }}
-            />
+            /> */}
           </Flex>
         </Stack>
       </VStack>
