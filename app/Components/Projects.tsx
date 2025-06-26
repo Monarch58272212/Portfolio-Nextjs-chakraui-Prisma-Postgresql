@@ -11,7 +11,6 @@ import {
   Text,
   Divider,
   Button,
-  ButtonGroup,
   HStack,
   Flex,
   LinkBox,
@@ -24,6 +23,9 @@ import {
   PopoverArrow,
   PopoverBody,
 } from "@chakra-ui/react";
+import { FaCode, FaExternalLinkAlt } from "react-icons/fa";
+import { EditIcon } from "@chakra-ui/icons";
+
 import Image from "next/image";
 import Link from "next/link";
 import { DeleteButton } from "./Toggle";
@@ -64,7 +66,7 @@ export default function Projects({
     <Stack w="100%" spacing={8} px={{ base: 4, md: 8 }} py={10}>
       <Flex direction="column" align="center" justify="center">
         {/* Header */}
-        <HStack justify="space-between" w="100%">
+        <HStack justify="space-between" w="100%" id="projects" scrollMarginTop="80px">
           <Heading color="violet" size="lg">
             # Monarch&apos;s Projects
           </Heading>
@@ -213,40 +215,66 @@ export default function Projects({
               <Divider />
 
               <CardFooter>
-                <ButtonGroup
-                  justifyContent="space-between"
-                  spacing={1}
+                <Flex
+                  justify="space-between"
+                  align="center"
+                  wrap="wrap"
+                  gap={2}
+                  flexDirection={"column"}
                   w="full"
+                  mt={2}
                 >
-                  <Button
-                    as={Link}
-                    href={post.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    colorScheme="blue"
-                    size="sm"
-                  >
-                    Visit Project ↗
-                  </Button>
-                  <Button
-                    as={Link}
-                    href={post.codeUrl || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    colorScheme="blue"
-                    size="sm"
-                  >
-                    Code
-                  </Button>
+                  <HStack spacing={2} w={"full"} justify="space-between">
+                    <Button
+                      as={Link}
+                      href={post.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      colorScheme="blue"
+                      size="sm"
+                      variant="outline"
+                      leftIcon={<FaExternalLinkAlt />}
+                      _hover={{ transform: "scale(1.05)", shadow: "md" }}
+                      transition="all 0.2s"
+                    >
+                      Visit Project
+                    </Button>
+
+                    <Button
+                      as={Link}
+                      href={post.codeUrl || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      colorScheme="purple"
+                      size="sm"
+                      variant="outline"
+                      leftIcon={<FaCode />}
+                      _hover={{ transform: "scale(1.05)", shadow: "md" }}
+                      transition="all 0.2s"
+                    >
+                      Code
+                    </Button>
+                  </HStack>
+
                   {ShowActions && (
-                    <HStack>
-                      <DeleteButton id={post.id} />
+                    <HStack spacing={2} w="full" justify="space-between">
                       <Link href={`/edit/${post.id}`}>
-                        <Button>Edit</Button>
+                        <Button
+                          size="sm"
+                          colorScheme="yellow"
+                          leftIcon={<EditIcon />}
+                          variant="ghost"
+                          _hover={{ transform: "scale(1.05)", shadow: "md" }}
+                          transition="all 0.2s"
+                        >
+                          Edit
+                        </Button>
                       </Link>
+
+                      <DeleteButton id={post.id} />
                     </HStack>
                   )}
-                </ButtonGroup>
+                </Flex>
               </CardFooter>
             </MotionCard>
           ))}

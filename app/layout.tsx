@@ -1,5 +1,6 @@
 "use client";
 
+import "app/globals.css";
 import ChakraProviderWrapper from "./chakraProviders/providers";
 import { Navigation } from "./Navigation/Navigation";
 import { ColorModeScript } from "@chakra-ui/react";

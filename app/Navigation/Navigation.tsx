@@ -123,19 +123,36 @@ export function Navigation() {
 
       {/* Desktop Menu */}
       <Box display={{ base: "none", sm: "none", md: "block" }}>
-        <HStack spacing={6} gap={10} align="center">
+        <HStack spacing={3} gap={5} align="center">
           <Link href="/" prefetch={true}>
-            <Heading
-              as="h1"
-              size="sm"
-              fontFamily="poppins"
-              _hover={{
-                color: "green.600",
-                cursor: "pointer",
-              }}
-            >
+            <Button variant="ghost" fontSize="sm">
               Home
-            </Heading>
+            </Button>
+          </Link>
+
+          <Link href="#projects">
+            <Button variant="ghost" fontSize="sm">
+              Projects
+            </Button>{" "}
+            {/* 👈 */}
+          </Link>
+
+          <Link href="#skills">
+            <Button variant="ghost" fontSize="sm">
+              Skills
+            </Button>
+          </Link>
+
+          <Link href="#about">
+            <Button variant="ghost" fontSize="sm">
+              About
+            </Button>
+          </Link>
+
+          <Link href="#contact">
+            <Button variant="ghost" fontSize="sm">
+              Contact
+            </Button>
           </Link>
 
           <ThemeToggleButton />
@@ -243,15 +260,33 @@ export function Navigation() {
             <DrawerBody>
               <VStack align="start" spacing={4}>
                 <Link href="/" prefetch={true}>
-                  <Box
-                    _hover={{
-                      color: "green.600",
-                      cursor: "pointer",
-                      bg: "gray.100",
-                    }}
-                  >
+                  <Button variant="ghost" fontSize="sm">
                     Home
-                  </Box>
+                  </Button>
+                </Link>
+
+                <Link href="#projects">
+                  <Button variant="ghost" fontSize="sm">
+                    Projects
+                  </Button>
+                </Link>
+
+                <Link href="#skills">
+                  <Button variant="ghost" fontSize="sm">
+                    Skills
+                  </Button>
+                </Link>
+
+                <Link href="#about">
+                  <Button variant="ghost" fontSize="sm">
+                    About
+                  </Button>
+                </Link>
+
+                <Link href="#contact">
+                  <Button variant="ghost" fontSize="sm">
+                    Contact
+                  </Button>
                 </Link>
 
                 <ThemeToggleButton />

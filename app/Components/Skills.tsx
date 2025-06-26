@@ -26,8 +26,8 @@ import {
   SiChakraui,
   SiGit,
   SiGithub,
+  SiPrisma,
 } from "react-icons/si";
-import { IoPrism } from "react-icons/io5";
 
 const MotionBox = motion(Box);
 
@@ -41,18 +41,18 @@ export default function SkillsSection() {
       { name: "JavaScript", icon: SiJavascript, color: "#f7df1e" },
       { name: "TypeScript", icon: SiTypescript, color: "#3178c6" },
       { name: "React", icon: SiReact, color: "#61dafb" },
-      { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
+      { name: "Next.js", icon: SiNextdotjs, color: "" },
       { name: "Chakra UI", icon: SiChakraui, color: "#319795" },
     ],
     Backend: [
       { name: "Firebase", icon: SiFirebase, color: "#ffca28" },
-      { name: "Prisma", icon: IoPrism, color: "#2d3748" },
+      { name: "Prisma", icon: SiPrisma, color: "" },
       { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
       { name: "Firebase DB", icon: SiFirebase, color: "#ffca28" },
     ],
     Others: [
       { name: "Git", icon: SiGit, color: "#f05032" },
-      { name: "GitHub", icon: SiGithub, color: "#333333" },
+      { name: "GitHub", icon: SiGithub, color: "" },
     ],
   };
 
@@ -60,7 +60,13 @@ export default function SkillsSection() {
     <Box w="95%" mx="auto" pb={10}>
       <VStack spacing={6} align="start">
         <Flex w="100%" justify="center" align="center">
-          <Heading size="lg" color="violet" mr={4}>
+          <Heading
+            size="lg"
+            color="violet"
+            mr={4}
+            id="skills"
+            scrollMarginTop="80px"
+          >
             # Skills
           </Heading>
           <Divider borderColor="teal.300" flex="1" />

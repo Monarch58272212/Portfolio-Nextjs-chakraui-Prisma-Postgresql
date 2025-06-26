@@ -26,7 +26,6 @@ export default function FirstPage() {
         as={motion.div}
         animate={{ y: [0, -100, 0] }}
         style={{
-          scale: 1.2,
           transition: "all 0.3s ease-in-out",
         }}
         position={"absolute"}
@@ -159,7 +158,7 @@ export default function FirstPage() {
               boxSize={{ base: "10px", md: "20px", lg: "30px" }}
               animate={{ y: [0, -30, 0] }}
               transition={{ duration: 4, repeat: Infinity }}
-              background={"linear-gradient(to right, green, darkgreen)"}
+              background={"linear-gradient(to right, darkgreen, green)"}
             />
 
             <MotionBox
@@ -176,8 +175,8 @@ export default function FirstPage() {
               bottom="38"
               right="38"
               boxSize={{ base: "40px", md: "60px", lg: "80px" }}
-              animate={{ y: [0, -30, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
+              animate={{ y: [0, -54, 0] }}
+              transition={{ duration: 3, repeat: Infinity }}
               background={"linear-gradient(to right, #ff7e5f, #feb47b)"}
             />
             <Image

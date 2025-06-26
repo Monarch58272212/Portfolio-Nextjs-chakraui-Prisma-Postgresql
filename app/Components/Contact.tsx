@@ -26,7 +26,13 @@ export default function Contact() {
       <VStack align="center" spacing={8}>
         {/* Section Header */}
         <Flex w="100%" justify="center" align="center">
-          <Heading size="lg" color="violet" mr={4}>
+          <Heading
+            size="lg"
+            color="violet"
+            mr={4}
+            id="contact"
+            scrollMarginTop="80px"
+          >
             # Contact Me
           </Heading>
           <Divider borderColor="teal.300" flex="1" />

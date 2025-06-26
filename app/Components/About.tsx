@@ -18,7 +18,7 @@ export default function About() {
       <VStack align="center" mb={6}>
         {/* Heading Section */}
         <Flex justify="center" align="center" width={"100%"}>
-          <Heading size="lg" color="violet">
+          <Heading size="lg" color="violet" id="about" scrollMarginTop="80px">
             # About Me & My Goals
           </Heading>
           <Divider borderColor="teal.300" flex="1" />
