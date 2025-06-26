@@ -56,7 +56,7 @@ export function Navigation() {
       borderColor="gray.200"
       justify="space-between"
       align="center"
-      px={{ base: 4, md: 20 }}
+      px={{ base: 4, md: 5 }}
       mx={{ base: 1, md: 3, lg: 10 }}
       backdropFilter="blur(10px)"
     >

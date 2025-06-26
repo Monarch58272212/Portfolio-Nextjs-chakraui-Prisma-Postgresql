@@ -7,20 +7,18 @@ import {
   Flex,
   HStack,
   Input,
-  Text,
   Textarea,
   useColorModeValue,
   useToast,
-  VStack,
 } from "@chakra-ui/react";
-import Link from "next/link";
-import { BiLogoFacebookSquare } from "react-icons/bi";
-import { CiMobile1 } from "react-icons/ci";
+
 import { Submitbutton } from "../Components/Toggle";
+import Lottie from "lottie-react";
+import CONTACT from "@/public/animations/Contact.json";
 
 export default function Contact() {
   const toast = useToast();
-  const borderColor = useColorModeValue("gray", "white");
+
   const bgColor = useColorModeValue("gray.50", "gray.650");
 
   const [form, setForm] = useState({
@@ -77,15 +75,33 @@ export default function Contact() {
   };
   return (
     <Box
-      w={{ base: "90%", md: "70%", lg: "50%" }}
-      m="auto"
-      p={4}
-      mt={50}
-      borderRadius="md"
+      display="flex"
+      flexDirection={{ base: "column", md: "row" }}
+      justifyContent="center"
+      alignItems="center"
+      px={{ base: 4, md: 10 }}
+      py={{ base: 10, md: 16 }}
+      gap={10}
     >
-      <Box bg={bgColor} p={4} border={`1px solid ${borderColor}`}>
+      <Box maxW={350}>
+        <Lottie animationData={CONTACT} loop style={{ width: "100%" }} />
+      </Box>
+
+      <Box
+        bg={bgColor}
+        p={{ base: 6, md: 10 }}
+        rounded="2xl"
+        shadow="2xl"
+        w="full"
+        maxW="lg"
+      >
         <form onSubmit={handleSend}>
-          <HStack spacing={4} mb={4}>
+          <HStack
+            spacing={4}
+            mb={4}
+            display={"flex"}
+            flexDirection={{ base: "column", md: "row" }}
+          >
             <Input
               name="name"
               placeholder="Your Name"
@@ -119,30 +135,10 @@ export default function Contact() {
             required
           />
           <Flex mt={4} justifyContent="flex-start">
-           <Submitbutton />
+            <Submitbutton />
           </Flex>
         </form>
       </Box>
-      <VStack
-        border={`1px solid ${borderColor}`}
-        p={4}
-        mt={10}
-        w={{ base: "90%", md: "70%", lg: "50%" }}
-        align="start"
-      >
-        <Text>Support me here</Text>
-        <Link href="https://web.facebook.com/monarch.pagcas">
-          <HStack>
-            <BiLogoFacebookSquare size={24} color="#1877F2" />
-            <Text>Monarch Pagcas</Text>
-          </HStack>
-        </Link>
-        <HStack>
-          {" "}
-          <CiMobile1 size={24} color="#1877F2" />
-          <Text>09916390527</Text>
-        </HStack>
-      </VStack>
     </Box>
   );
 }

@@ -94,7 +94,11 @@ export default function FirstPage() {
           >
             He crafts responsive websites where technologies meet creativity
           </Text>
-          <Link href="/Contact" style={{ textDecoration: "none" }}>
+          <Link
+            href="/Contact"
+            style={{ textDecoration: "none" }}
+            prefetch={true}
+          >
             <Button
               border="1px solid violet"
               mt={4}

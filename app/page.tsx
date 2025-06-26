@@ -9,6 +9,7 @@ import {
   Skills,
   Footer,
 } from "./Components/DynamicWrapper";
+import Experience from "./Components/Experience";
 
 export default async function Home() {
   const data = await getData();
@@ -17,6 +18,7 @@ export default async function Home() {
       <FirstPage />
       <Projects posts={data} ShowText={false} ShowActions={false} />
       <Skills />
+      <Experience />
       <About />
       <Contact />
       <Footer />
