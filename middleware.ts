@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export default function middleware(request: NextRequest) {
-  const publicRoutes = ["/", "/Projects"];
+  const publicRoutes = ["/", "/Projects", "/Contact"];
   const path = request.nextUrl.pathname;
 
   if (publicRoutes.includes(path)) {
