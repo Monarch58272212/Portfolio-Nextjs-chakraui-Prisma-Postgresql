@@ -63,14 +63,15 @@ export default function Projects({
     <Stack w="100%" spacing={8} px={{ base: 4, md: 8 }} py={10}>
       <Flex direction="column" align="center" justify="center">
         {/* Header */}
-        <HStack justify="space-between" w="95%">
-          <Heading size="lg" color="violet">
+        <HStack justify="space-between" w="100%">
+          <Heading color="violet" size="lg">
             # Monarch&apos;s Projects
           </Heading>
+          <Divider borderColor="teal.300" flex="1" />
           <LinkBox
             as={Link}
             prefetch={true}
-            href={ShowText ? "/Create" : "/Projects"}
+            href={ShowText ? "/Create" : "./Projects"}
           >
             <Button colorScheme="purple">
               {ShowText ? "Create projects →" : "Projects →"}
@@ -105,7 +106,7 @@ export default function Projects({
           columns={{ base: 1, sm: 1, md: 2, lg: 3 }}
           spacing={8}
           px={4}
-          pt={8}
+          py={4}
           overflowX="hidden"
         >
           {posts.map((post, index) => (

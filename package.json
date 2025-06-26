@@ -14,6 +14,7 @@
     "@chakra-ui/icons": "^2.2.4",
     "@chakra-ui/next-js": "^2.4.2",
     "@chakra-ui/react": "^2.10.9",
+    "@chakra-ui/transition": "^2.1.0",
     "@cloudinary/react": "^1.14.3",
     "@cloudinary/url-gen": "^1.21.0",
     "@emotion/react": "^11.14.0",

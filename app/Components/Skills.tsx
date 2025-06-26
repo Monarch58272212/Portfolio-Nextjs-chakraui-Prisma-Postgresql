@@ -2,90 +2,109 @@
 
 import {
   Box,
-  Divider,
-  Flex,
   Heading,
-  HStack,
-  SimpleGrid,
-  Text,
-  useColorModeValue,
   VStack,
-  ScaleFade,
+  Divider,
+  Text,
+  SimpleGrid,
+  useColorModeValue,
+  List,
+  ListItem,
+  HStack,
   Icon,
+  Flex,
 } from "@chakra-ui/react";
-import { skills } from "../data/skills";
+import { motion } from "framer-motion";
 
-export default function Skills() {
-  const color = useColorModeValue("black", "white");
-  const bgColor = useColorModeValue("white", "gray.800");
-  const borderColor = useColorModeValue("gray.200", "gray.700");
+import {
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiNextdotjs,
+  SiFirebase,
+  SiPostgresql,
+  SiChakraui,
+  SiGit,
+  SiGithub,
+} from "react-icons/si";
+import { IoPrism } from "react-icons/io5";
+
+const MotionBox = motion(Box);
+
+export default function SkillsSection() {
+  const borderColor = useColorModeValue("gray.300", "gray.600");
+  const bgColor = useColorModeValue("white", "gray.700");
+  const textHoverColor = useColorModeValue("teal.600", "teal.300");
+
+  const skills = {
+    Frontend: [
+      { name: "JavaScript", icon: SiJavascript, color: "#f7df1e" },
+      { name: "TypeScript", icon: SiTypescript, color: "#3178c6" },
+      { name: "React", icon: SiReact, color: "#61dafb" },
+      { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
+      { name: "Chakra UI", icon: SiChakraui, color: "#319795" },
+    ],
+    Backend: [
+      { name: "Firebase", icon: SiFirebase, color: "#ffca28" },
+      { name: "Prisma", icon: IoPrism, color: "#2d3748" },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
+      { name: "Firebase DB", icon: SiFirebase, color: "#ffca28" },
+    ],
+    Others: [
+      { name: "Git", icon: SiGit, color: "#f05032" },
+      { name: "GitHub", icon: SiGithub, color: "#333333" },
+    ],
+  };
 
   return (
-    <Box
-      as="section"
-      w="95%"
-      mx="auto"
-      borderRadius="lg"
-      boxShadow="lg"
-      px={6}
-      py={10}
-      bg={bgColor}
-      aria-label="Skills Section"
-    >
-      <Flex align="center" mb={6}>
-        <Heading size="lg" color="violet" mr={4}>
-          # Skills
-        </Heading>
-        <Divider borderColor="teal.300" flex="1" />
-      </Flex>
+    <Box w="95%" mx="auto" pb={10}>
+      <VStack spacing={6} align="start">
+        <Flex w="100%" justify="center" align="center">
+          <Heading size="lg" color="violet" mr={4}>
+            # Skills
+          </Heading>
+          <Divider borderColor="teal.300" flex="1" />
+        </Flex>
 
-      <HStack w="100%" justify="center" spacing={10}>
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={30}>
-          {skills.map((skill, index) => (
-            <ScaleFade
-              key={skill.title}
-              initialScale={0.9}
-              in={true}
-              delay={index * 0.1}
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} w="100%">
+          {Object.entries(skills).map(([category, items], index) => (
+            <MotionBox
+              key={category}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: false, amount: 0.5 }}
+              border={`1px solid ${borderColor}`}
+              borderRadius="lg"
+              p={5}
+              boxShadow="md"
+              w="full"
+              bg={bgColor}
+              textAlign="center"
             >
-              <Box
-                p={6}
-                borderRadius="sm"
-                border={`1px solid ${borderColor}`}
-                boxShadow="md"
-                transition="all 0.3s"
-                _hover={{
-                  transform: "translateY(-5px)",
-                  boxShadow: "xl",
-                  borderColor: "teal.300",
-                }}
-                role="group"
-                aria-label={`${skill.title} skills`}
-              >
-                <VStack align="start" spacing={3}>
-                  <Text fontSize="xl" fontWeight="bold" color="teal.300">
-                    {skill.title}
-                  </Text>
-                  <Divider borderColor={color} />
-                  <VStack align="start" spacing={2}>
-                    {skill.items.map((item) => (
-                      <HStack key={item.label} spacing={2}>
-                        <Icon as={item.icon} color="teal.300" boxSize={5} />
-                        <Text
-                          color="gray.500"
-                          _groupHover={{ color: "teal.200" }}
-                        >
-                          {item.label}
-                        </Text>
-                      </HStack>
-                    ))}
-                  </VStack>
-                </VStack>
-              </Box>
-            </ScaleFade>
+              <Heading size="md" mb={4} color="teal.400">
+                {category}
+              </Heading>
+              <List spacing={3} textAlign="center">
+                {items.map((item) => (
+                  <ListItem key={item.name}>
+                    <HStack spacing={3} justify="center">
+                      <Icon as={item.icon} boxSize={5} color={item.color} />
+                      <Text
+                        color="gray.500"
+                        _hover={{ color: textHoverColor }}
+                        transition="0.2s"
+                      >
+                        {item.name}
+                      </Text>
+                    </HStack>
+                  </ListItem>
+                ))}
+              </List>
+            </MotionBox>
           ))}
         </SimpleGrid>
-      </HStack>
+      </VStack>
     </Box>
   );
 }

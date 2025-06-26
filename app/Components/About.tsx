@@ -14,11 +14,11 @@ import { motion } from "framer-motion";
 export default function About() {
   const MotionBox = motion(Box);
   return (
-    <Box w="95%" mx="auto">
+    <Box w="95%" mx="auto" pb={10}>
       <VStack align="center" mb={6}>
         {/* Heading Section */}
-        <Flex w="100%" justify="center" align="center" width={"95%"}>
-          <Heading size="lg" color="violet" mr={4}>
+        <Flex justify="center" align="center" width={"100%"}>
+          <Heading size="lg" color="violet">
             # About Me & My Goals
           </Heading>
           <Divider borderColor="teal.300" flex="1" />
@@ -109,6 +109,7 @@ export default function About() {
                 position="absolute"
                 top="18"
                 right="38"
+                boxShadow="0 0 20px rgba(255, 126, 95, 0.6)"
                 borderRadius="full"
                 bgGradient="linear(to-r, green.300, green.700)"
                 boxSize={{ base: "10px", md: "20px", lg: "30px" }}
