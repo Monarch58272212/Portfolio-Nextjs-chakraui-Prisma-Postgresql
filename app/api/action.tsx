@@ -5,7 +5,6 @@ import { prisma } from "../lib/prisma";
 import { redirect } from "next/navigation";
 import cloudinary from "../lib/cloudinary";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { error } from "console";
 
 export async function handleSubmission(formData: FormData) {
   const { getUser } = getKindeServerSession();
@@ -20,8 +19,17 @@ export async function handleSubmission(formData: FormData) {
   const language = formData.get("language") as string;
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
+  const codeUrl = formData.get("codeUrl") as string;
 
-  if (!file || !url || !language || !title || !description || !user) {
+  if (
+    !file ||
+    !url ||
+    !language ||
+    !title ||
+    !description ||
+    !user ||
+    !codeUrl
+  ) {
     throw new Error("Missing fields");
   }
 
@@ -51,6 +59,7 @@ export async function handleSubmission(formData: FormData) {
     data: {
       title,
       description,
+      codeUrl,
       language,
       image,
       url,
@@ -72,8 +81,9 @@ export async function updatePost(formData: FormData) {
   const language = formData.get("language") as string;
   const title = formData.get("title") as string;
   const description = formData.get("description") as string;
+  const codeUrl = formData.get("codeUrl") as string;
 
-  if (!url || !language || !title || !description || !id) {
+  if (!url || !language || !title || !description || !id || !codeUrl) {
     throw new Error("Incomplete data submitted.");
   }
 
@@ -106,6 +116,7 @@ export async function updatePost(formData: FormData) {
     data: {
       title,
       description,
+      codeUrl,
       language,
       image,
       url,
@@ -122,7 +133,7 @@ export async function deletePost(id: string) {
       where: { id },
     });
     revalidatePath("/");
-    return { success: true }; // ✅ return success property
+    return { success: true };
   } catch (error) {
     console.error("Failed to delete post:", error);
     return { success: false }; // optional fallback

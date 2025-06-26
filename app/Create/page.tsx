@@ -70,6 +70,11 @@ export default function Create() {
             </FormControl>
 
             <FormControl>
+              <FormLabel>Code</FormLabel>
+              <Input name="codeUrl" placeholder="Enter Code URL" required />
+            </FormControl>
+
+            <FormControl>
               <FormLabel>Title</FormLabel>
               <Input name="title" placeholder="Enter Title" required />
             </FormControl>

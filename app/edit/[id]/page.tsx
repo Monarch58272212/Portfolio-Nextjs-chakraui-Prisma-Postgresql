@@ -79,6 +79,16 @@ export default async function EditPage({
           </FormControl>
 
           <FormControl>
+            <FormLabel>Code</FormLabel>
+            <Input
+              type="text"
+              defaultValue={post.codeUrl || ""}
+              name="codeUrl"
+              placeholder="Code URL"
+            />
+          </FormControl>
+
+          <FormControl>
             <FormLabel>URL</FormLabel>
             <Input
               type="text"

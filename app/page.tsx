@@ -34,6 +34,7 @@ async function getData() {
       id: true,
       title: true,
       description: true,
+      codeUrl: true,
       image: true,
       url: true,
       language: true,

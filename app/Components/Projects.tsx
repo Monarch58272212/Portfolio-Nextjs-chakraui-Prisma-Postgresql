@@ -39,6 +39,7 @@ interface Post {
   id: string;
   title: string;
   description: string;
+  codeUrl: string | null;
   image: string;
   url: string;
   language: string;
@@ -214,7 +215,7 @@ export default function Projects({
               <CardFooter>
                 <ButtonGroup
                   justifyContent="space-between"
-                  spacing={2}
+                  spacing={1}
                   w="full"
                 >
                   <Button
@@ -226,6 +227,16 @@ export default function Projects({
                     size="sm"
                   >
                     Visit Project ↗
+                  </Button>
+                  <Button
+                    as={Link}
+                    href={post.codeUrl || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    colorScheme="blue"
+                    size="sm"
+                  >
+                    Code
                   </Button>
                   {ShowActions && (
                     <HStack>
