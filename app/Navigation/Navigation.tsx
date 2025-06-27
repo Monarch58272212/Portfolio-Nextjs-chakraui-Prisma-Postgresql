@@ -1,9 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useBreakpointValue } from "@chakra-ui/react";
-
+import { FaHome } from "react-icons/fa";
+import { IoPersonCircleOutline } from "react-icons/io5";
+import { FaLaptopCode } from "react-icons/fa";
+import { IoMdCall } from "react-icons/io";
 import ThemeToggleButton from "../Components/Toggle";
+
 import {
   Avatar,
   Box,
@@ -23,7 +27,6 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-
 import {
   RegisterLink,
   LoginLink,
@@ -33,6 +36,7 @@ import {
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 export function Navigation() {
+  const [activeNav, setActiveNav] = useState("");
   const { user, isLoading } = useKindeBrowserClient();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const currentScreen = useBreakpointValue({
@@ -111,7 +115,11 @@ export function Navigation() {
             display={{ base: "none", sm: "none", md: "flex", lg: "flex" }}
             gap={2}
           >
-            <Button colorScheme="blue" size="sm" py={1.5}>
+            <Button
+              colorScheme="blue"
+              size={{ base: "sm", md: "md", lg: "sm" }}
+              py={1.5}
+            >
               <LoginLink>Sign in</LoginLink>
             </Button>
             <Button colorScheme="teal" variant="outline" size="sm" py={1.5}>
@@ -124,35 +132,84 @@ export function Navigation() {
       {/* Desktop Menu */}
       <Box display={{ base: "none", sm: "none", md: "block" }}>
         <HStack spacing={3} gap={5} align="center">
-          <Link href="/" prefetch={true}>
-            <Button variant="ghost" fontSize="sm">
-              Home
-            </Button>
-          </Link>
-
-          <Link href="#projects">
-            <Button variant="ghost" fontSize="sm">
-              Projects
-            </Button>{" "}
-            {/* 👈 */}
+          <Link href="#home" prefetch={true}>
+            <Box display="flex" alignItems="center">
+              <Button
+                onClick={() => setActiveNav("home")}
+                color={activeNav === "home" ? "aqua" : ""}
+                variant="ghost"
+                fontSize="sm"
+                gap={2}
+                _hover={{
+                  transform: "translateY(-6px)",
+                  transition: "all 0.3s ease-in-out",
+                  color: "purple.400",
+                }}
+              >
+                <FaHome />
+                Home
+              </Button>
+            </Box>
           </Link>
 
           <Link href="#skills">
-            <Button variant="ghost" fontSize="sm">
-              Skills
-            </Button>
+            <Box display="flex" alignItems="center">
+              <Button
+                onClick={() => setActiveNav("skills")}
+                color={activeNav === "skills" ? "aqua" : ""}
+                variant="ghost"
+                fontSize="sm"
+                gap={2}
+                _hover={{
+                  transform: "translateY(-6px)",
+                  transition: "all 0.3s ease-in-out",
+                  color: "purple.400",
+                }}
+              >
+                <FaLaptopCode />
+                Skills
+              </Button>
+            </Box>
           </Link>
 
           <Link href="#about">
-            <Button variant="ghost" fontSize="sm">
-              About
-            </Button>
+            <Box display="flex" alignItems="center">
+              <Button
+                onClick={() => setActiveNav("about")}
+                color={activeNav === "about" ? "aqua" : ""}
+                variant="ghost"
+                fontSize="sm"
+                gap={2}
+                _hover={{
+                  transform: "translateY(-6px)",
+                  transition: "all 0.3s ease-in-out",
+                  color: "purple.400",
+                }}
+              >
+                <IoPersonCircleOutline />
+                About
+              </Button>
+            </Box>
           </Link>
 
           <Link href="#contact">
-            <Button variant="ghost" fontSize="sm">
-              Contact
-            </Button>
+            <Box display="flex" alignItems="center">
+              <Button
+                onClick={() => setActiveNav("contact")}
+                color={activeNav === "contact" ? "aqua" : ""}
+                variant="ghost"
+                fontSize="sm"
+                _hover={{
+                  transform: "translateY(-6px)",
+                  transition: "all 0.3s ease-in-out",
+                  color: "purple.400",
+                }}
+                gap={2}
+              >
+                <IoMdCall />
+                Contact
+              </Button>
+            </Box>
           </Link>
 
           <ThemeToggleButton />
@@ -259,34 +316,80 @@ export function Navigation() {
             </DrawerHeader>
             <DrawerBody>
               <VStack align="start" spacing={4}>
-                <Link href="/" prefetch={true}>
-                  <Button variant="ghost" fontSize="sm">
-                    Home
-                  </Button>
-                </Link>
-
-                <Link href="#projects">
-                  <Button variant="ghost" fontSize="sm">
-                    Projects
-                  </Button>
+                <Link href="#home" prefetch={true}>
+                  <Box display="flex" alignItems="center">
+                    <Button
+                      onClick={() => setActiveNav("home")}
+                      color={activeNav === "home" ? "aqua" : ""}
+                      variant="ghost"
+                      fontSize="sm"
+                      gap={2}
+                      _hover={{
+                        transform: "translateY(-6px)",
+                        transition: "all 0.3s ease-in-out",
+                      }}
+                    >
+                      <FaHome />
+                      Home
+                    </Button>
+                  </Box>
                 </Link>
 
                 <Link href="#skills">
-                  <Button variant="ghost" fontSize="sm">
-                    Skills
-                  </Button>
+                  <Box display="flex" alignItems="center">
+                    <Button
+                      onClick={() => setActiveNav("skills")}
+                      color={activeNav === "skills" ? "aqua" : ""}
+                      variant="ghost"
+                      fontSize="sm"
+                      gap={2}
+                      _hover={{
+                        transform: "translateY(-6px)",
+                        transition: "all 0.3s ease-in-out",
+                      }}
+                    >
+                      <FaLaptopCode />
+                      Skills
+                    </Button>
+                  </Box>
                 </Link>
 
                 <Link href="#about">
-                  <Button variant="ghost" fontSize="sm">
-                    About
-                  </Button>
+                  <Box display="flex" alignItems="center">
+                    <Button
+                      onClick={() => setActiveNav("about")}
+                      color={activeNav === "about" ? "aqua" : ""}
+                      variant="ghost"
+                      fontSize="sm"
+                      gap={2}
+                      _hover={{
+                        transform: "translateY(-6px)",
+                        transition: "all 0.3s ease-in-out",
+                      }}
+                    >
+                      <IoPersonCircleOutline />
+                      About
+                    </Button>
+                  </Box>
                 </Link>
 
                 <Link href="#contact">
-                  <Button variant="ghost" fontSize="sm">
-                    Contact
-                  </Button>
+                  <Box display="flex" alignItems="center">
+                    <Button
+                      onClick={() => setActiveNav("contact")}
+                      color={activeNav === "contact" ? "aqua" : ""}
+                      variant="ghost"
+                      fontSize="sm"
+                      _hover={{
+                        transform: "translateY(-6px)",
+                        transition: "all 0.3s ease-in-out",
+                      }}
+                      gap={2}
+                    >
+                      <IoMdCall />
+                      Contact
+                    </Button>
+                  </Box>
                 </Link>
 
                 <ThemeToggleButton />

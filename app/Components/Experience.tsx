@@ -16,7 +16,7 @@ export default function Experience() {
   return (
     <Box w="100%" px={6} py={10} bg={bgColor} id="Experience">
       <Flex justify="center" align="center" mb={10}>
-        <Heading size="lg" color="teal.400" mr={4} scrollMarginTop="80px">
+        <Heading size="lg" color="violet" mr={4} scrollMarginTop="80px">
           # Experience
         </Heading>
         <Divider borderColor="teal.300" flex="1" />
@@ -27,7 +27,7 @@ export default function Experience() {
         align="center"
         gap={8}
         justify="center"
-        flexWrap="wrap"
+        justifyItems={"center"}
         px={{ base: 2, md: 8 }}
       >
         {/* 📄 Certificate Image with hover effect */}
@@ -49,6 +49,13 @@ export default function Experience() {
               width: "100%",
               height: "auto",
             }}
+          />
+        </Box>
+        <Box height="200px" w="1px" display={{ base: "none", md: "block" }}>
+          <Divider
+            orientation="vertical"
+            borderColor="teal.300"
+            height="100%"
           />
         </Box>
 

@@ -5,6 +5,7 @@ import {
   Divider,
   Flex,
   Heading,
+  HStack,
   Text,
   useColorModeValue,
   VStack,
@@ -21,6 +22,8 @@ export default function FirstPage() {
   return (
     <VStack w="100%" position={"relative"}>
       <Box
+        id="home"
+        scrollMarginTop="80px"
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
         as={motion.div}
@@ -67,7 +70,6 @@ export default function FirstPage() {
           display={"flex"}
           flexDirection="column"
           justifyContent="center"
-          alignItems={"left"}
           textAlign={{ base: "center", md: "left" }}
         >
           <Heading
@@ -94,20 +96,31 @@ export default function FirstPage() {
           >
             He crafts responsive websites where technologies meet creativity
           </Text>
-          <Link
-            href="/Contact"
-            style={{ textDecoration: "none" }}
-            prefetch={true}
-          >
-            <Button
-              border="1px solid violet"
-              mt={4}
-              colorScheme="purple"
-              variant="outline"
+          <HStack justifyContent={{ base: "center", md: "center", lg: "left" }}>
+            <Link
+              href="/Contact"
+              style={{ textDecoration: "none" }}
+              prefetch={true}
             >
-              Contact me!!
-            </Button>
-          </Link>
+              <Button
+                border="1px solid violet"
+                mt={4}
+                variant="solid"
+                size={{ base: "sm", md: "md", lg: "sm" }}
+              >
+                Contact me!
+              </Button>
+            </Link>
+            <Link href="#projects">
+              <Button
+                variant="outline"
+                mt={4}
+                size={{ base: "sm", md: "md", lg: "sm" }}
+              >
+                See my Projects
+              </Button>
+            </Link>
+          </HStack>
         </Box>
 
         {/* IMAGE SECTION */}
