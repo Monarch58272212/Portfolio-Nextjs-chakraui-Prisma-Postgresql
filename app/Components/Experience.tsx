@@ -14,9 +14,9 @@ export default function Experience() {
   const bgColor = useColorModeValue("gray.50", "gray.800");
 
   return (
-    <Box w="100%" px={6} py={10} bg={bgColor} id="Experience">
+    <Box w="95%" py={10} bg={bgColor} id="experience" scrollMarginTop="80px">
       <Flex justify="center" align="center" mb={10}>
-        <Heading size="lg" color="violet" mr={4} scrollMarginTop="80px">
+        <Heading size="lg" color="violet" mr={4}>
           # Experience
         </Heading>
         <Divider borderColor="teal.300" flex="1" />
@@ -28,7 +28,7 @@ export default function Experience() {
         gap={8}
         justify="center"
         justifyItems={"center"}
-        px={{ base: 2, md: 8 }}
+        px={{ base: 4, md: 8 }}
       >
         {/* 📄 Certificate Image with hover effect */}
         <Box
@@ -65,6 +65,7 @@ export default function Experience() {
             color={useColorModeValue("gray.700", "gray.200")}
             lineHeight="1.8"
             textAlign={"justify"}
+            w={{ base: "100%", md: "65%", lg: "100%" }}
           >
             As an OJT Intern at <b>XYZ Tech</b>, I worked as a frontend
             developer where I helped build components for a student management

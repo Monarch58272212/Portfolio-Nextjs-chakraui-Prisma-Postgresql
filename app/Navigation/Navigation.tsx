@@ -5,6 +5,7 @@ import { useBreakpointValue } from "@chakra-ui/react";
 import { FaHome } from "react-icons/fa";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { FaLaptopCode } from "react-icons/fa";
+import { MdWorkOutline } from "react-icons/md";
 import { IoMdCall } from "react-icons/io";
 import ThemeToggleButton from "../Components/Toggle";
 
@@ -36,7 +37,8 @@ import {
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 export function Navigation() {
-  const [activeNav, setActiveNav] = useState("");
+  const allowedEmail = process.env.NEXT_PUBLIC_ALLOWED_EMAIL;
+  const [activeNav, setActiveNav] = useState("home");
   const { user, isLoading } = useKindeBrowserClient();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const currentScreen = useBreakpointValue({
@@ -46,9 +48,60 @@ export function Navigation() {
 
   useEffect(() => {
     if (currentScreen === "desktop" && isOpen) {
-      onClose(); // Close the drawer if we go to desktop
+      onClose();
     }
   }, [currentScreen, isOpen, onClose]);
+
+  useEffect(() => {
+    const sections = ["home", "skills", "experience", "about", "contact"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            setActiveNav(sectionId);
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+        rootMargin: "0px 0px -30% 0px",
+      }
+    );
+
+    let frameId: number;
+    const waitUntilReady = () => {
+      const allLoaded = sections.every((id) => document.getElementById(id));
+      if (allLoaded) {
+        sections.forEach((id) => {
+          const section = document.getElementById(id);
+          if (section) observer.observe(section);
+        });
+      } else {
+        frameId = requestAnimationFrame(waitUntilReady);
+      }
+    };
+
+    frameId = requestAnimationFrame(waitUntilReady);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      sections.forEach((id) => {
+        const section = document.getElementById(id);
+        if (section) observer.unobserve(section);
+      });
+    };
+  }, []);
+
+  if (!isLoading && user && user.email !== allowedEmail) {
+    return (
+      <Flex p={5} justify="center" align="center" w="100%" h="100px">
+        <Text fontWeight="bold" color="red.400">
+          ❌ Access Denied: This account is not authorized.
+        </Text>
+      </Flex>
+    );
+  }
 
   return (
     <Flex
@@ -168,6 +221,26 @@ export function Navigation() {
               >
                 <FaLaptopCode />
                 Skills
+              </Button>
+            </Box>
+          </Link>
+
+          <Link href="#experience">
+            <Box display="flex" alignItems="center">
+              <Button
+                onClick={() => setActiveNav("experience")}
+                color={activeNav === "experience" ? "aqua" : ""}
+                variant="ghost"
+                fontSize="sm"
+                gap={2}
+                _hover={{
+                  transform: "translateY(-6px)",
+                  transition: "all 0.3s ease-in-out",
+                  color: "purple.400",
+                }}
+              >
+                <MdWorkOutline />
+                Experience
               </Button>
             </Box>
           </Link>
@@ -319,7 +392,10 @@ export function Navigation() {
                 <Link href="#home" prefetch={true}>
                   <Box display="flex" alignItems="center">
                     <Button
-                      onClick={() => setActiveNav("home")}
+                      onClick={() => {
+                        setActiveNav("home");
+                        onClose();
+                      }}
                       color={activeNav === "home" ? "aqua" : ""}
                       variant="ghost"
                       fontSize="sm"
@@ -338,7 +414,10 @@ export function Navigation() {
                 <Link href="#skills">
                   <Box display="flex" alignItems="center">
                     <Button
-                      onClick={() => setActiveNav("skills")}
+                      onClick={() => {
+                        setActiveNav("skills");
+                        onClose();
+                      }}
                       color={activeNav === "skills" ? "aqua" : ""}
                       variant="ghost"
                       fontSize="sm"
@@ -354,10 +433,36 @@ export function Navigation() {
                   </Box>
                 </Link>
 
+                <Link href="#experience">
+                  <Box display="flex" alignItems="center">
+                    <Button
+                      onClick={() => {
+                        setActiveNav("experience");
+                        onClose();
+                      }}
+                      color={activeNav === "experience" ? "aqua" : ""}
+                      variant="ghost"
+                      fontSize="sm"
+                      gap={2}
+                      _hover={{
+                        transform: "translateY(-6px)",
+                        transition: "all 0.3s ease-in-out",
+                        color: "purple.400",
+                      }}
+                    >
+                      <MdWorkOutline />
+                      Experience
+                    </Button>
+                  </Box>
+                </Link>
+
                 <Link href="#about">
                   <Box display="flex" alignItems="center">
                     <Button
-                      onClick={() => setActiveNav("about")}
+                      onClick={() => {
+                        setActiveNav("about");
+                        onClose();
+                      }}
                       color={activeNav === "about" ? "aqua" : ""}
                       variant="ghost"
                       fontSize="sm"
@@ -376,7 +481,10 @@ export function Navigation() {
                 <Link href="#contact">
                   <Box display="flex" alignItems="center">
                     <Button
-                      onClick={() => setActiveNav("contact")}
+                      onClick={() => {
+                        setActiveNav("contact");
+                        onClose();
+                      }}
                       color={activeNav === "contact" ? "aqua" : ""}
                       variant="ghost"
                       fontSize="sm"

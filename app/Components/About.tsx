@@ -14,11 +14,11 @@ import { motion } from "framer-motion";
 export default function About() {
   const MotionBox = motion(Box);
   return (
-    <Box w="95%" mx="auto" pb={10}>
+    <Box w="95%" mx="auto" pt={8} id="about" scrollMarginTop="80px">
       <VStack align="center" mb={6}>
         {/* Heading Section */}
         <Flex justify="center" align="center" width={"100%"}>
-          <Heading size="lg" color="violet" id="about" scrollMarginTop="80px">
+          <Heading size="lg" color="violet">
             # About Me & My Goals
           </Heading>
           <Divider borderColor="teal.300" flex="1" />

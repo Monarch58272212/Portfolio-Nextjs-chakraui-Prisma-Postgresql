@@ -57,16 +57,10 @@ export default function SkillsSection() {
   };
 
   return (
-    <Box w="95%" mx="auto" pb={10}>
+    <Box w="95%" mx="auto" id="skills" pt={8} scrollMarginTop="80px">
       <VStack spacing={6} align="start">
         <Flex w="100%" justify="center" align="center">
-          <Heading
-            size="lg"
-            color="violet"
-            mr={4}
-            id="skills"
-            scrollMarginTop="80px"
-          >
+          <Heading size="lg" color="violet" mr={4}>
             # Skills
           </Heading>
           <Divider borderColor="teal.300" flex="1" />

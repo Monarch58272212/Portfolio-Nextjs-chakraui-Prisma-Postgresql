@@ -8,8 +8,8 @@ import {
   Contact,
   Skills,
   Footer,
+  Experience,
 } from "./Components/DynamicWrapper";
-import Experience from "./Components/Experience";
 
 export default async function Home() {
   const data = await getData();

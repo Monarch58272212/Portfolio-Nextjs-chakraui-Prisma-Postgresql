@@ -11,7 +11,7 @@ import {
 
 export default function ModernSkeleton() {
   // Light/Dark mode colors
-  const cardBg = useColorModeValue("white", "gray.800");
+  //const cardBg = useColorModeValue("white", "gray.300");
   const cardShadow = useColorModeValue("md", "dark-lg");
 
   return (
@@ -26,7 +26,6 @@ export default function ModernSkeleton() {
           key={idx}
           padding={6}
           boxShadow={cardShadow}
-          bg={cardBg}
           borderRadius="2xl"
           display="flex"
           flexDirection="column"

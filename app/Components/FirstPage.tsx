@@ -18,6 +18,8 @@ import { TfiEmail } from "react-icons/tfi";
 
 export default function FirstPage() {
   const border = useColorModeValue("violet", "white");
+  const TextHeading = useColorModeValue("#EF88AD", "violet");
+  const textAccent = useColorModeValue("#7C3AED", "violet");
   const MotionBox = motion(Box);
   return (
     <VStack w="100%" position={"relative"}>
@@ -56,17 +58,16 @@ export default function FirstPage() {
         direction={{ base: "column", md: "row" }}
         align="center"
         justify="space-between"
-        w={{ base: "90%", md: "90%", lg: "80%" }}
+        w={{ base: "90%", md: "90%", lg: "70%" }}
         maxW="1200px"
         h={{ base: "auto", md: "423px" }}
         mt={10}
         mx="auto"
-        gap={6}
         p={4}
       >
         {/* TEXT SECTION */}
         <Box
-          w={{ base: "100%", md: "45%" }}
+          w={{ base: "100%", md: "45%, lg: 80%" }}
           display={"flex"}
           flexDirection="column"
           justifyContent="center"
@@ -79,7 +80,7 @@ export default function FirstPage() {
             w="full"
           >
             Monarch is a{" "}
-            <Text as="span" color="violet">
+            <Text as="span" color={TextHeading}>
               web designer
             </Text>{" "}
             and{" "}
@@ -96,26 +97,18 @@ export default function FirstPage() {
           >
             He crafts responsive websites where technologies meet creativity
           </Text>
-          <HStack justifyContent={{ base: "center", md: "center", lg: "left" }}>
-            <Link
-              href="/Contact"
-              style={{ textDecoration: "none" }}
-              prefetch={true}
-            >
-              <Button
-                border="1px solid violet"
-                mt={4}
-                variant="solid"
-                size={{ base: "sm", md: "md", lg: "sm" }}
-              >
+          <HStack justify={{ base: "center", md: "start" }} spacing={4} pt={4}>
+            <Link href="/Contact" passHref>
+              <Button colorScheme="purple" size="sm">
                 Contact me!
               </Button>
             </Link>
-            <Link href="#projects">
+            <Link href="#projects" passHref>
               <Button
                 variant="outline"
-                mt={4}
-                size={{ base: "sm", md: "md", lg: "sm" }}
+                borderColor={textAccent}
+                color={textAccent}
+                size="sm"
               >
                 See my Projects
               </Button>
@@ -126,7 +119,7 @@ export default function FirstPage() {
         {/* IMAGE SECTION */}
         <VStack
           h="auto"
-          w={{ base: "100%", md: "45%" }}
+          w={{ base: "100%", md: "45%", lg: "30%" }}
           align="center"
           justify="flex-start"
           px={4}

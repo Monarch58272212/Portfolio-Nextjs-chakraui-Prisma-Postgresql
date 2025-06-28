@@ -2,11 +2,10 @@
 
 import { extendTheme } from "@chakra-ui/react";
 
-// Example config
 const config = {
   initialColorMode: "dark",
   useSystemColorMode: false,
-  disableTransitionOnChange: false,
+  disableTransitionOnChange: true,
 };
 
 const fonts = {
@@ -18,11 +17,16 @@ const theme = extendTheme({
   config,
   fonts,
   styles: {
-    global: {
-      body: {
-        transition: "background-color 0.2s",
-      },
+    html: {
+      scrollBehavior: "smooth",
     },
+    global: (props) => ({
+      body: {
+        bg: props.colorMode === "dark" ? "#1A202C" : "#FFFFFF",
+        color: props.colorMode === "dark" ? "whiteAlpha.900" : "gray.800",
+        transition: "background-color 0.2s ease",
+      },
+    }),
   },
 });
 

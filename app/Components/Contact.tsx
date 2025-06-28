@@ -19,20 +19,14 @@ import { MdEmail } from "react-icons/md";
 export default function Contact() {
   const borderColor = useColorModeValue("gray.300", "gray.600");
   const textColor = useColorModeValue("gray.800", "gray.200");
-  const bgColor = useColorModeValue("white", "gray.800");
+  const bgColor = useColorModeValue("white", "gray.700");
 
   return (
-    <Box w="95%" mx="auto" pb={10}>
+    <Box w="95%" mx="auto" pt={8} id="contact" scrollMarginTop="80px">
       <VStack align="center" spacing={8}>
         {/* Section Header */}
         <Flex w="100%" justify="center" align="center">
-          <Heading
-            size="lg"
-            color="violet"
-            mr={4}
-            id="contact"
-            scrollMarginTop="80px"
-          >
+          <Heading size="lg" color="violet" mr={4}>
             # Contact Me
           </Heading>
           <Divider borderColor="teal.300" flex="1" />
@@ -41,14 +35,14 @@ export default function Contact() {
         {/* Content Layout */}
         <Stack
           direction={{ base: "column", md: "row" }}
-          spacing={10}
           align="flex-start"
           justify="center"
+          px={{ base: 4, md: 8 }}
           w="100%"
         >
           {/* Contact Message */}
           <Text
-            w={{ base: "100%", md: "60%" }}
+            w={{ base: "100%", md: "65%" }}
             textAlign="justify"
             fontSize="md"
             color={textColor}
@@ -59,13 +53,13 @@ export default function Contact() {
           </Text>
 
           {/* Contact Info Box */}
-          <Flex w={{ base: "100%", md: "35%" }} justify="center" align="center">
+          <Flex w={{ base: "100%", md: "55%" }} justify="center" align="center">
             <VStack
               spacing={4}
               p={5}
               mt={2}
               bg={bgColor}
-              w={{ base: "100%", sm: "80%", md: "100%" }}
+              w={{ base: "100%", sm: "80%", md: "60%" }}
               align="start"
               border={`1px solid ${borderColor}`}
               borderRadius="xl"
@@ -84,18 +78,18 @@ export default function Contact() {
                   transition="all 0.2s"
                 >
                   <BiLogoFacebookSquare size={24} color="#1877F2" />
-                  <Text>Monarch Pagcas</Text>
+                  <Text>Name: Monarch Pagcas</Text>
                 </HStack>
               </Link>
 
               <HStack>
                 <CiMobile1 size={24} color="#1877F2" />
-                <Text>0991 639 0527</Text>
+                <Text>Phone: 0991 639 0527</Text>
               </HStack>
 
               <HStack>
                 <MdEmail size={24} color="#DD4B39" />
-                <Text>monarchpagcas@gmail.com</Text>
+                <Text>Email: monarchpagcas@gmail.com</Text>
               </HStack>
             </VStack>
           </Flex>
