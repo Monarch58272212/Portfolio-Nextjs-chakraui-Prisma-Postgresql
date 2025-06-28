@@ -10,7 +10,7 @@ import {
 import { useFormStatus } from "react-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-
+import { MdDeleteOutline } from "react-icons/md";
 import { useTransition } from "react";
 import { deletePost } from "../api/action";
 
@@ -47,15 +47,17 @@ export default function ThemeToggleButton() {
 
 export function Submitbutton({ isLoading = false }: SubmitbuttonProps) {
   const { pending } = useFormStatus();
+
   return (
     <Button
-      size="sm"
       type="submit"
+      size="sm"
       colorScheme="teal"
-      isLoading={isLoading}
+      isLoading={pending || isLoading}
       loadingText="Submitting"
+      isDisabled={pending} // 🔒 Important: disables while submitting
     >
-      {pending ? "Submitting.." : "Submit"}
+      {pending ? "Submitting..." : "Submit"}
     </Button>
   );
 }
@@ -107,11 +109,15 @@ export function DeleteButton({ id }: { id: string }) {
   return (
     <Button
       onClick={handleDelete}
-      colorScheme="red"
-      size="sm"
       isLoading={isPending}
+      size="sm"
+      colorScheme="red"
+      leftIcon={<MdDeleteOutline />}
+      variant="ghost"
+      _hover={{ transform: "scale(1.05)", shadow: "md" }}
+      transition="all 0.2s"
     >
-      Delete
+      {isPending ? "Deleting..." : "Delete"}
     </Button>
   );
 }

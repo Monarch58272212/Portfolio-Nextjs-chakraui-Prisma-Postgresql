@@ -123,7 +123,7 @@ export default function FirstPage() {
           align="center"
           justify="flex-start"
           px={4}
-          pt={0}
+          pt={8}
           pb={4}
           position="relative"
         >

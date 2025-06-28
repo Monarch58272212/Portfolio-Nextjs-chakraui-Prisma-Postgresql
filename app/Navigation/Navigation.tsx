@@ -37,7 +37,6 @@ import {
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 export function Navigation() {
-  const allowedEmail = process.env.NEXT_PUBLIC_ALLOWED_EMAIL;
   const [activeNav, setActiveNav] = useState("home");
   const { user, isLoading } = useKindeBrowserClient();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -92,16 +91,6 @@ export function Navigation() {
       });
     };
   }, []);
-
-  if (!isLoading && user && user.email !== allowedEmail) {
-    return (
-      <Flex p={5} justify="center" align="center" w="100%" h="100px">
-        <Text fontWeight="bold" color="red.400">
-          ❌ Access Denied: This account is not authorized.
-        </Text>
-      </Flex>
-    );
-  }
 
   return (
     <Flex
