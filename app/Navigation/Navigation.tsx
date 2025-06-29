@@ -39,6 +39,7 @@ import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 export function Navigation() {
   const [activeNav, setActiveNav] = useState("home");
   const { user, isLoading } = useKindeBrowserClient();
+  console.log("👤 Logged in user:", user?.email);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const currentScreen = useBreakpointValue({
     base: "mobile",
