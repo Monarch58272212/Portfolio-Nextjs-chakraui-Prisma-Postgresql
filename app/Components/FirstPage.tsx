@@ -1,41 +1,40 @@
 "use client";
 import {
   Box,
-  Button,
   Divider,
   Flex,
-  Heading,
   HStack,
   Text,
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookMessenger, FaGithub } from "react-icons/fa";
 import { TfiEmail } from "react-icons/tfi";
+import {
+  MotionBox,
+  MotionHeading,
+  MotionText,
+  MotionButton,
+} from "../chakraProviders/Motion";
 
 export default function FirstPage() {
   const border = useColorModeValue("violet", "white");
   const TextHeading = useColorModeValue("#EF88AD", "violet");
   const textAccent = useColorModeValue("#7C3AED", "violet");
-  const MotionBox = motion(Box);
+
   return (
     <VStack w="100%" position={"relative"}>
-      <Box
+      <MotionBox
         id="home"
         scrollMarginTop="80px"
+        viewport={{ once: false, amount: 0.3 }}
+        initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.5 }}
-        as={motion.div}
-        animate={{ y: [0, -100, 0] }}
-        style={{
-          transition: "all 0.3s ease-in-out",
-        }}
+        transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
         position={"absolute"}
         height={"30%"}
-        w={0}
         left={{ base: 13, md: 13, lg: 20 }}
         alignItems={"center"}
         justifyContent={"center"}
@@ -53,7 +52,7 @@ export default function FirstPage() {
         <Box fontSize={{ base: "15", md: "15", lg: "20" }}>
           <TfiEmail />
         </Box>
-      </Box>
+      </MotionBox>
       <Flex
         direction={{ base: "column", md: "row" }}
         align="center"
@@ -73,9 +72,11 @@ export default function FirstPage() {
           justifyContent="center"
           textAlign={{ base: "center", md: "left" }}
         >
-          <Heading
-            as="h4"
-            fontFamily={"fira Code"}
+          <MotionHeading
+            viewport={{ once: false, amount: 0.3 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }}
             fontSize={{ base: "2xl", md: "3xl" }}
             w="full"
           >
@@ -87,31 +88,45 @@ export default function FirstPage() {
             <Text as="span" color="violet">
               front-end developer
             </Text>
-          </Heading>
+          </MotionHeading>
 
-          <Text
+          <MotionText
+            viewport={{ once: false, amount: 0.3 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
             fontFamily={"fira Code"}
-            mt={4}
             fontSize={{ base: "md", md: "lg" }}
             w="full"
           >
             He crafts responsive websites where technologies meet creativity
-          </Text>
+          </MotionText>
           <HStack justify={{ base: "center", md: "start" }} spacing={4} pt={4}>
             <Link href="/Contact" passHref>
-              <Button colorScheme="purple" size="sm">
+              <MotionButton
+                viewport={{ once: false, amount: 0.3 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
+                colorScheme="purple"
+                size="sm"
+              >
                 Contact me!
-              </Button>
+              </MotionButton>
             </Link>
             <Link href="#projects" passHref>
-              <Button
+              <MotionButton
+                viewport={{ once: false, amount: 0.3 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.2, ease: "easeInOut" }}
                 variant="outline"
                 borderColor={textAccent}
                 color={textAccent}
                 size="sm"
               >
                 See my Projects
-              </Button>
+              </MotionButton>
             </Link>
           </HStack>
         </Box>
@@ -133,62 +148,127 @@ export default function FirstPage() {
             h={{ base: "200px", md: "350px" }}
           >
             <MotionBox
+              viewport={{ once: false, amount: 0.3 }}
+              initial={{ opacity: 0, x: -200 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 0.6,
+                delay: 0.2,
+                ease: "easeInOut",
+              }}
               position="absolute"
               bottom="10"
               left="20"
-              border="1px solid purple"
-              boxSize={{ base: "100px", md: "180px", lg: "200px" }}
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-
+            >
+              <MotionBox
+                transition={{ duration: 3, repeat: Infinity }}
+                border="1px solid purple"
+                boxSize={{ base: "100px", md: "180px", lg: "200px" }}
+                animate={{ y: [0, -10, 0] }}
+              />
+            </MotionBox>
             <MotionBox
+              viewport={{ once: false, amount: 0.3 }}
+              initial={{ opacity: 0, x: 200 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 0.7,
+                delay: 0.2,
+                ease: "easeInOut",
+              }}
               position="absolute"
               bottom="18"
               left="38"
-              border="1px solid aqua"
-              boxSize={{ base: "50px", md: "70px", lg: "70px" }}
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            />
+            >
+              <MotionBox
+                transition={{ duration: 3, repeat: Infinity }}
+                border="1px solid aqua"
+                boxSize={{ base: "50px", md: "70px", lg: "70px" }}
+                animate={{ y: [0, -20, 0] }}
+              />
+            </MotionBox>
             <MotionBox
+              viewport={{ once: false, amount: 0.3 }}
+              initial={{ opacity: 0, y: -200 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.2,
+                ease: "easeInOut",
+              }}
               position="absolute"
-              bottom={{ base: "20", md: "58", lg: "48" }}
+              bottom={{ base: "20", md: "58", lg: "148" }}
               left={{ base: "10", md: "10", lg: "8" }}
-              boxSize={{ base: "20px", md: "20px", lg: "30px" }}
-              animate={{ y: [0, -30, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              background={"linear-gradient(to right, violet, purple)"}
-            />
-
+            >
+              <MotionBox
+                transition={{ duration: 3, repeat: Infinity }}
+                boxSize={{ base: "20px", md: "20px", lg: "30px" }}
+                animate={{ y: [0, 30, 0] }}
+                background={"linear-gradient(to right, violet, purple)"}
+              />
+            </MotionBox>
             <MotionBox
+              viewport={{ once: false, amount: 0.3 }}
+              initial={{ opacity: 0, x: 200 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 1,
+                delay: 0.2,
+                ease: "easeInOut",
+              }}
               position="absolute"
               top="18"
               right="38"
-              boxSize={{ base: "10px", md: "20px", lg: "30px" }}
-              animate={{ y: [0, -30, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              background={"linear-gradient(to right, darkgreen, green)"}
-            />
+            >
+              <MotionBox
+                transition={{ duration: 3, repeat: Infinity }}
+                boxSize={{ base: "10px", md: "20px", lg: "30px" }}
+                animate={{ y: [0, -30, 0] }}
+                background={"linear-gradient(to right, darkgreen, green)"}
+              />
+            </MotionBox>
 
             <MotionBox
+              viewport={{ once: false, amount: 0.3 }}
+              initial={{ opacity: 0, y: 200 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 1,
+                delay: 0.2,
+                ease: "easeInOut",
+              }}
               position="absolute"
               bottom={{ base: "20", md: "30", lg: "40" }}
               left="68"
-              border="1px solid green"
-              boxSize={{ base: "100px", md: "180px", lg: "160px" }}
-              animate={{ y: [0, -30, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            />
+            >
+              <MotionBox
+                transition={{ duration: 3, repeat: Infinity }}
+                border="1px solid green"
+                boxSize={{ base: "100px", md: "180px", lg: "160px" }}
+                animate={{ y: [0, -50, 0] }}
+              />
+            </MotionBox>
             <MotionBox
+              viewport={{ once: false, amount: 0.3 }}
+              initial={{ opacity: 0, x: 250 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 1,
+                delay: 0.2,
+                ease: "easeInOut",
+              }}
               position="absolute"
               bottom="38"
-              right="38"
-              boxSize={{ base: "40px", md: "60px", lg: "80px" }}
-              animate={{ y: [0, -54, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              background={"linear-gradient(to right, #ff7e5f, #feb47b)"}
-            />
+              right="18"
+            >
+              <MotionBox
+                boxSize={{ base: "40px", md: "60px", lg: "80px" }}
+                animate={{ y: [0, -34, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                background={"linear-gradient(to right, #ff7e5f, #feb47b)"}
+              />
+            </MotionBox>
+
             <Image
               src="/monarch.png"
               alt="My Logo"
