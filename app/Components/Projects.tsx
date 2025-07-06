@@ -114,10 +114,10 @@ export default function Projects({
 
         {/* Cards Grid */}
         <SimpleGrid
+          py={4}
           columns={{ base: 1, sm: 1, md: 2, lg: 3 }}
           spacing={8}
           px={4}
-          pt={8}
           overflowX="hidden"
         >
           {posts.map((post, index) => (
@@ -125,7 +125,6 @@ export default function Projects({
               key={post.id}
               borderRadius="xl"
               boxShadow="lg"
-              height="100%"
               display="flex"
               flexDirection="column"
               w="100%"
