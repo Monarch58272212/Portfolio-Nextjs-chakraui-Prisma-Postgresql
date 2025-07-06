@@ -43,7 +43,9 @@ export function Navigation() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const currentScreen = useBreakpointValue({
     base: "mobile",
-    md: "desktop",
+    sm: "mobile",
+    md: "tablet",
+    lg: "desktop",
   });
 
   useEffect(() => {
@@ -173,13 +175,13 @@ export function Navigation() {
       </Box>
 
       {/* Desktop Menu */}
-      <Box display={{ base: "none", sm: "none", md: "block" }}>
+      <Box display={{ base: "none", sm: "none", md: "none", lg: "block" }}>
         <HStack spacing={3} gap={5} align="center">
           <Link href="#home" prefetch={true}>
             <Box display="flex" alignItems="center">
               <Button
                 onClick={() => setActiveNav("home")}
-                color={activeNav === "home" ? "aqua" : ""}
+                color={activeNav === "home" ? "purple.500" : ""}
                 variant="ghost"
                 fontSize="sm"
                 gap={2}
@@ -199,7 +201,7 @@ export function Navigation() {
             <Box display="flex" alignItems="center">
               <Button
                 onClick={() => setActiveNav("skills")}
-                color={activeNav === "skills" ? "aqua" : ""}
+                color={activeNav === "skills" ? "purple.500" : ""}
                 variant="ghost"
                 fontSize="sm"
                 gap={2}
@@ -219,7 +221,7 @@ export function Navigation() {
             <Box display="flex" alignItems="center">
               <Button
                 onClick={() => setActiveNav("experience")}
-                color={activeNav === "experience" ? "aqua" : ""}
+                color={activeNav === "experience" ? "purple.500" : ""}
                 variant="ghost"
                 fontSize="sm"
                 gap={2}
@@ -239,7 +241,7 @@ export function Navigation() {
             <Box display="flex" alignItems="center">
               <Button
                 onClick={() => setActiveNav("about")}
-                color={activeNav === "about" ? "aqua" : ""}
+                color={activeNav === "about" ? "purple.500" : ""}
                 variant="ghost"
                 fontSize="sm"
                 gap={2}
@@ -259,7 +261,7 @@ export function Navigation() {
             <Box display="flex" alignItems="center">
               <Button
                 onClick={() => setActiveNav("contact")}
-                color={activeNav === "contact" ? "aqua" : ""}
+                color={activeNav === "contact" ? "purple.500" : ""}
                 variant="ghost"
                 fontSize="sm"
                 _hover={{
@@ -280,7 +282,7 @@ export function Navigation() {
       </Box>
 
       {/* Mobile Menu Icon */}
-      <Box display={{ base: "block", sm: "block", md: "none", lg: "none" }}>
+      <Box display={{ base: "block", sm: "block", md: "block", lg: "none" }}>
         {" "}
         <IconButton
           aria-label="Open menu"

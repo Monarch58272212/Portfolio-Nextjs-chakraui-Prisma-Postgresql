@@ -21,7 +21,7 @@ import {
 
 export default function FirstPage() {
   const border = useColorModeValue("violet", "white");
-  const TextHeading = useColorModeValue("#EF88AD", "violet");
+  const TextHeading = useColorModeValue("pink.600", "violet");
   const textAccent = useColorModeValue("#7C3AED", "violet");
 
   return (
@@ -101,7 +101,7 @@ export default function FirstPage() {
               web designer
             </Text>{" "}
             and{" "}
-            <Text as="span" color="violet">
+            <Text as="span" color={TextHeading}>
               front-end developer
             </Text>
           </MotionHeading>
@@ -158,7 +158,11 @@ export default function FirstPage() {
           pb={4}
           position="relative"
         >
-          <Box
+          <MotionBox
+            viewport={{ once: false, amount: 0.3 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
             position="relative"
             w={{ base: "200px", md: "350px" }}
             h={{ base: "200px", md: "350px" }}
@@ -211,6 +215,7 @@ export default function FirstPage() {
               animate={{ y: [0, -30, 0] }}
               transition={{ duration: 4, repeat: Infinity }}
             />
+
             <MotionBox
               position="absolute"
               bottom="38"
@@ -220,28 +225,34 @@ export default function FirstPage() {
               transition={{ duration: 3, repeat: Infinity }}
               background={"linear-gradient(to right, #ff7e5f, #feb47b)"}
             />
-            <Image
-              src="/monarch.png"
-              alt="My Logo"
-              fill
-              priority
-              style={{
-                objectFit: "cover",
-                borderBottom: "1px solid violet",
-                borderRadius: "12px",
-              }}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          </Box>
+            <MotionBox>
+              <Image
+                src="/monarch.png"
+                alt="My Logo"
+                fill
+                priority
+                style={{
+                  objectFit: "cover",
+                  borderBottom: "1px solid violet",
+                  borderRadius: "12px",
+                }}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </MotionBox>
+          </MotionBox>
 
-          <Text
+          <MotionText
+            viewport={{ once: false, amount: 0.3 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
             textAlign="center"
             fontFamily={"fira Code"}
             border={`1px solid ${border}`}
             px={10}
           >
             Currently working on Portfolio!{" "}
-          </Text>
+          </MotionText>
         </VStack>
       </Flex>
 
@@ -254,24 +265,24 @@ export default function FirstPage() {
       >
         <Box position={"relative"}>
           <Text
-            fontFamily={"Fira Code"}
+            fontFamily={"Poppins"}
             fontSize={"2xl"}
             border={`0.2px solid ${border}`}
             p={5}
           >
-            &quot; With great power comes great electricity bill &quot;
+            &quot; Your first 100 designs will suck. Just keep designing. &quot;
           </Text>
 
           {/* Right-aligned author */}
           <Flex justifyContent="flex-end">
             <Text
-              fontFamily={"Fira Code"}
+              fontFamily={"Poppins"}
               border={`1px solid ${border}`}
               px={6}
               mt={2}
               w="fit-content"
             >
-              – Dr. Who
+              – Monarch
             </Text>
           </Flex>
         </Box>

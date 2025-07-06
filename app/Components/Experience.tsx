@@ -14,8 +14,19 @@ export default function Experience() {
   const bgColor = useColorModeValue("gray.50", "gray.800");
 
   return (
-    <Box w="95%" py={10} bg={bgColor} id="experience" scrollMarginTop="80px">
-      <Flex justify="center" align="center" mb={10}>
+    <Box
+      w="95%"
+      py={{ base: 3, md: 5, lg: 6 }}
+      bg={bgColor}
+      id="experience"
+      scrollMarginTop="80px"
+    >
+      <Flex
+        w="100%"
+        justify="center"
+        align="center"
+        pb={{ base: 5, md: 6, lg: 10 }}
+      >
         <Heading size="lg" color="violet" mr={4}>
           # Experience
         </Heading>

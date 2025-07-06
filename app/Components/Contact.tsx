@@ -22,7 +22,13 @@ export default function Contact() {
   const bgColor = useColorModeValue("white", "gray.700");
 
   return (
-    <Box w="95%" mx="auto" pt={8} id="contact" scrollMarginTop="80px">
+    <Box
+      w="95%"
+      mx="auto"
+      py={{ base: 3, md: 5, lg: 6 }}
+      id="contact"
+      scrollMarginTop="80px"
+    >
       <VStack align="center" spacing={8}>
         {/* Section Header */}
         <Flex w="100%" justify="center" align="center">
@@ -78,18 +84,18 @@ export default function Contact() {
                   transition="all 0.2s"
                 >
                   <BiLogoFacebookSquare size={24} color="#1877F2" />
-                  <Text>Name: Monarch Pagcas</Text>
+                  <Text> Monarch Pagcas</Text>
                 </HStack>
               </Link>
 
               <HStack>
                 <CiMobile1 size={24} color="#1877F2" />
-                <Text>Phone: 0991 639 0527</Text>
+                <Text> 09916390527</Text>
               </HStack>
 
               <HStack>
                 <MdEmail size={24} color="#DD4B39" />
-                <Text>Email: monarchpagcas@gmail.com</Text>
+                <Text> monarchpagcas@gmail.com</Text>
               </HStack>
             </VStack>
           </Flex>

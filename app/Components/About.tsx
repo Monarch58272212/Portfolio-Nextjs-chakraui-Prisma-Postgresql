@@ -14,14 +14,20 @@ import { motion } from "framer-motion";
 export default function About() {
   const MotionBox = motion(Box);
   return (
-    <Box w="95%" mx="auto" pt={8} id="about" scrollMarginTop="80px">
-      <VStack align="center" mb={6}>
+    <Box
+      w="95%"
+      mx="auto"
+      py={{ base: 3, md: 5, lg: 6 }}
+      id="about"
+      scrollMarginTop="80px"
+    >
+      <VStack align="center">
         {/* Heading Section */}
-        <Flex justify="center" align="center" width={"100%"}>
-          <Heading size="lg" color="violet">
+        <Flex justify="center" align="center" width={"100%"} mb={6}>
+          <Divider borderColor="teal.300" flex="1" />
+          <Heading size="lg" color="violet" ml={4}>
             # About Me & My Goals
           </Heading>
-          <Divider borderColor="teal.300" flex="1" />
         </Flex>
 
         {/* Text + Image Section */}

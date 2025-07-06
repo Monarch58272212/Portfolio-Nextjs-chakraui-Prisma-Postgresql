@@ -25,7 +25,7 @@ import {
 } from "@chakra-ui/react";
 import { FaCode, FaExternalLinkAlt } from "react-icons/fa";
 import { EditIcon } from "@chakra-ui/icons";
-
+import { BsSnow2 } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
 import { DeleteButton } from "./Toggle";
@@ -63,7 +63,13 @@ export default function Projects({
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   return (
-    <Stack w="100%" spacing={8} px={{ base: 4, md: 8 }} id="project" py={10}>
+    <Stack
+      w="100%"
+      spacing={8}
+      px={{ base: 4, md: 8 }}
+      id="project"
+      py={{ base: 3, md: 5, lg: 6 }}
+    >
       <Flex direction="column" align="center" justify="center">
         {/* Header */}
         <HStack
@@ -76,6 +82,7 @@ export default function Projects({
             # Monarch&apos;s Projects
           </Heading>
           <Divider borderColor="teal.300" flex="1" />
+          <BsSnow2 size="40px" color="aqua" />
           {ShowText && (
             <LinkBox as={Link} prefetch={true} href={"/Create"}>
               <Button colorScheme="purple">Create projects →</Button>
@@ -111,7 +118,6 @@ export default function Projects({
           spacing={8}
           px={4}
           pt={8}
-          overflowX="hidden"
         >
           {posts.map((post, index) => (
             <MotionCard

@@ -56,13 +56,19 @@ export default function SkillsSection() {
   };
 
   return (
-    <Box w="95%" mx="auto" id="skills" pt={8} scrollMarginTop="80px">
+    <Box
+      w="95%"
+      mx="auto"
+      id="skills"
+      py={{ base: 3, md: 5, lg: 6 }}
+      scrollMarginTop="80px"
+    >
       <VStack spacing={6} align="start">
         <Flex w="100%" justify="center" align="center">
-          <Heading size="lg" color="violet" mr={4}>
+          <Divider borderColor="teal.300" flex="1" />
+          <Heading size="lg" color="violet" ml={4}>
             # Skills
           </Heading>
-          <Divider borderColor="teal.300" flex="1" />
         </Flex>
 
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} w="100%">
