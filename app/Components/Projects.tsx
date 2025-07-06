@@ -82,7 +82,7 @@ export default function Projects({
             # Monarch&apos;s Projects
           </Heading>
           <Divider borderColor="teal.300" flex="1" />
-          <BsSnow2 size="40px" color="aqua" />
+
           {ShowText && (
             <LinkBox as={Link} prefetch={true} href={"/Create"}>
               <Button colorScheme="purple">Create projects →</Button>
@@ -118,6 +118,7 @@ export default function Projects({
           spacing={8}
           px={4}
           pt={8}
+          overflowX="hidden"
         >
           {posts.map((post, index) => (
             <MotionCard
