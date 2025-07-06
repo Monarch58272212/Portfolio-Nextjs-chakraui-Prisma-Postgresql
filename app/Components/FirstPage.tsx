@@ -43,15 +43,31 @@ export default function FirstPage() {
         gap={4}
       >
         <Divider orientation="vertical" border={`1px dotted ${border}`} />
-        <Box fontSize={{ base: "15", md: "15", lg: "20" }}>
-          <FaGithub />
-        </Box>
-        <Box fontSize={{ base: "15", md: "15", lg: "20" }}>
+        <MotionBox
+          fontSize={{ base: "15", md: "15", lg: "20" }}
+          whileHover={{ scale: 1.2, color: "aqua" }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
+          <Link href="https://github.com/Monarch58272212">
+            <FaGithub />
+          </Link>
+        </MotionBox>
+        <MotionBox
+          fontSize={{ base: "15", md: "15", lg: "20" }}
+          whileHover={{ scale: 1.2, color: "aqua" }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
           <FaFacebookMessenger />
-        </Box>
-        <Box fontSize={{ base: "15", md: "15", lg: "20" }}>
-          <TfiEmail />
-        </Box>
+        </MotionBox>
+        <MotionBox
+          fontSize={{ base: "15", md: "15", lg: "20" }}
+          whileHover={{ scale: 1.2, color: "aqua" }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
+          <Link href="mailto:monarchpagcas@gmail.com">
+            <TfiEmail />
+          </Link>
+        </MotionBox>
       </MotionBox>
       <Flex
         direction={{ base: "column", md: "row" }}

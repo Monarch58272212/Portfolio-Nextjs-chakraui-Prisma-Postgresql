@@ -48,7 +48,6 @@ export default function SkillsSection() {
       { name: "Firebase", icon: SiFirebase, color: "#ffca28" },
       { name: "Prisma", icon: SiPrisma, color: "" },
       { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
-      { name: "Firebase DB", icon: SiFirebase, color: "#ffca28" },
     ],
     Others: [
       { name: "Git", icon: SiGit, color: "#f05032" },
