@@ -1,19 +1,21 @@
 "use client";
 
+import { DownloadIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Button,
   Divider,
   Flex,
   Heading,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Experience() {
   const bgColor = useColorModeValue("gray.50", "gray.800");
   const HeadingColor = useColorModeValue("black", "violet");
-
+  const CERTIFICATE_URL = process.env.NEXT_PUBLIC_CERTIFICATE_URL;
   return (
     <Box
       w="95%"
@@ -34,63 +36,78 @@ export default function Experience() {
         <Divider borderColor={HeadingColor} flex="1" />
       </Flex>
 
-      <Flex
-        direction={{ base: "column", md: "row" }}
-        align="center"
-        gap={8}
-        justify="center"
-        justifyItems={"center"}
-        px={{ base: 4, md: 8 }}
-      >
-        {/* 📄 Certificate Image with hover effect */}
-        <Box
-          transition="all 0.4s ease"
-          _hover={{
-            transform: "rotate(-3deg) scale(1.02)",
-            boxShadow: "lg",
-          }}
-          overflow="hidden"
-          maxW={{ base: "90%", md: "400px" }}
-        >
-          <Image
-            src="/OJTCERTIFICATE.jpg"
-            width={450}
-            height={450}
-            alt="OJT Certificate"
-            style={{
-              width: "100%",
-              height: "auto",
-            }}
-          />
-        </Box>
-        <Box height="200px" w="1px" display={{ base: "none", md: "block" }}>
-          <Divider
-            orientation="vertical"
-            borderColor="teal.300"
-            height="100%"
-          />
-        </Box>
+      <Flex flexDirection={"column"} gap={2}>
+        <Flex flexDirection={"column"}>
+          <Text>On-the-Job Training (OJT) – IT Support / System Developer</Text>
 
-        {/* 📝 Description */}
-        <Box maxW="600px" textAlign="left">
-          <Text
-            color="gray.500"
-            lineHeight="1.8"
-            textAlign={"justify"}
-            w={{ base: "100%", md: "65%", lg: "100%" }}
-          >
-            As an OJT Intern at <b>XYZ Tech</b>, I worked as a frontend
-            developer where I helped build components for a student management
-            system using <b>React</b> and <b>Chakra UI</b>. I collaborated with
-            a small team, used <b>GitHub</b> for version control, and integrated{" "}
-            <b>Firebase</b> for backend services.
-            <br />
-            <br />
-            Through this experience, I developed real-world problem-solving
-            skills, improved my coding discipline, and gained confidence in
-            building responsive and accessible web apps.
+          <Text>
+            Kidapawan City Campus of the University of Southern Mindanao (USM)
           </Text>
-        </Box>
+          <Flex align={"center"} gap={2}>
+            <Text>February 2025 – May 2025</Text>
+            <Button
+              variant="link"
+              fontSize="sm"
+              colorScheme="blue"
+              onClick={async () => {
+                try {
+                  const response = await fetch(CERTIFICATE_URL!);
+                  const blob = await response.blob();
+                  const url = window.URL.createObjectURL(blob);
+                  const link = document.createElement("a");
+                  link.href = url;
+                  link.download = "OJTCERTIFICATE.jpg";
+                  link.click();
+                } catch (error) {
+                  console.error("Download failed:", error);
+                }
+              }}
+            >
+              Download Certificate
+            </Button>
+          </Flex>
+
+          <Flex flexDirection={"column"}>
+            <Text color={"gray.500"} textAlign={"justify"}>
+              During my internship as an IT Support intern, I helped fix broken
+              laptops, printers, and other school devices. I also assisted with
+              installing fiber internet and Wi-Fi routers around the campus. I
+              regularly checked the computers to make sure they were working
+              well. I also helped students with ID processing and other
+              school-related documents. I also created a Student Profiling
+              System to make it easier to manage student records. The system
+              lets staff store and view student information like personal
+              details, academic background, and ID records. I built it using
+              HTML, CSS, JavaScript, and Firebase, and added features like
+              search, real-time updates, and secure login. This system helped
+              the school organize student data better.
+            </Text>
+          </Flex>
+        </Flex>
+
+        <Flex flexDirection={"column"}>
+          <Text fontWeight="bold">
+            Capstone Project – Library Holdings Management System
+          </Text>
+          <Text>MIST - Makilala Institute of Science and Technology</Text>
+          <Flex align={"center"} gap={2}>
+            <Text>February 2025 – May 2025</Text>
+            <Link href={"https://final-library-holding.web.app/"}>
+              <Button variant="link" fontSize="sm" colorScheme="blue">
+                {" "}
+                Visit Project
+              </Button>
+            </Link>
+          </Flex>
+          <Text color="gray.500" textAlign="justify">
+            As part of our final requirement, I developed a Library Holdings
+            Management System to help organize and monitor books and journals in
+            the school library. The system supports CRUD operations, report
+            generation, and subject-based tracking. Built using React, Firebase,
+            and Chakra UI, it improved the way collections were managed and
+            aligned with academic subjects.
+          </Text>
+        </Flex>
       </Flex>
     </Box>
   );
