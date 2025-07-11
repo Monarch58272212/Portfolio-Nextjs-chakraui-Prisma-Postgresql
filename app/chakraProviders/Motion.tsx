@@ -12,9 +12,9 @@ import {
   Grid,
   Heading,
   Image,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
-// I-wrap natin lahat ng gusto mong i-motion na Chakra components
 export const MotionBox = motion(Box);
 export const MotionButton = motion(Button);
 export const MotionText = motion(Text);

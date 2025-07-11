@@ -12,6 +12,7 @@ import Image from "next/image";
 
 export default function Experience() {
   const bgColor = useColorModeValue("gray.50", "gray.800");
+  const HeadingColor = useColorModeValue("black", "violet");
 
   return (
     <Box
@@ -27,10 +28,10 @@ export default function Experience() {
         align="center"
         pb={{ base: 5, md: 6, lg: 10 }}
       >
-        <Heading size="lg" color="violet" mr={4}>
+        <Heading size="lg" color={HeadingColor} mr={4}>
           # Experience
         </Heading>
-        <Divider borderColor="teal.300" flex="1" />
+        <Divider borderColor={HeadingColor} flex="1" />
       </Flex>
 
       <Flex

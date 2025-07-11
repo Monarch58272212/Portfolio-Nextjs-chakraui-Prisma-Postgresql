@@ -35,6 +35,7 @@ export default function SkillsSection() {
   const borderColor = useColorModeValue("gray.300", "gray.600");
   const bgColor = useColorModeValue("white", "gray.700");
   const textHoverColor = useColorModeValue("teal.600", "teal.300");
+  const HeadingColor = useColorModeValue("black", "violet");
 
   const skills = {
     Frontend: [
@@ -65,8 +66,8 @@ export default function SkillsSection() {
     >
       <VStack spacing={6} align="start">
         <Flex w="100%" justify="center" align="center">
-          <Divider borderColor="teal.300" flex="1" />
-          <Heading size="lg" color="violet" ml={4}>
+          <Divider borderColor={HeadingColor} flex="1" />
+          <Heading size="lg" color={HeadingColor} ml={4}>
             # Skills
           </Heading>
         </Flex>

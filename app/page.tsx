@@ -7,7 +7,6 @@ import {
   About,
   Contact,
   Skills,
-  Footer,
   Experience,
 } from "./Components/DynamicWrapper";
 
@@ -21,7 +20,6 @@ export default async function Home() {
       <Experience />
       <About />
       <Contact />
-      <Footer />
     </VStack>
   );
 }

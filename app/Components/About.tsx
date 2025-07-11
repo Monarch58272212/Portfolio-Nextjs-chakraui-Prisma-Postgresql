@@ -8,16 +8,11 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import {
-  MotionBox,
-  MotionHeading,
-  MotionText,
-  MotionButton,
-  MotionFlex,
-} from "../chakraProviders/Motion";
+import { MotionBox, MotionFlex } from "../chakraProviders/Motion";
 import { TbAlertSquareFilled } from "react-icons/tb";
 import { FaLightbulb } from "react-icons/fa";
 import { FaIdCard } from "react-icons/fa";
@@ -61,6 +56,7 @@ const personalInfo = [
 ];
 
 export default function About() {
+  const HeadingColor = useColorModeValue("black", "violet");
   return (
     <Box
       w="95%"
@@ -72,8 +68,8 @@ export default function About() {
       <VStack align="flex-start">
         {/* Heading Section */}
         <Flex justify="center" align="center" width="100%" mb={6}>
-          <Divider borderColor="teal.300" flex="1" />
-          <Heading size="lg" color="violet" ml={4}>
+          <Divider borderColor={HeadingColor} flex="1" />
+          <Heading size="lg" color={HeadingColor} ml={4}>
             # About Me & My Goals
           </Heading>
         </Flex>

@@ -20,7 +20,7 @@ import {
 } from "../chakraProviders/Motion";
 
 export default function FirstPage() {
-  const border = useColorModeValue("violet", "white");
+  const border = useColorModeValue("black", "violet");
   const TextHeading = useColorModeValue("pink.600", "violet");
   const textAccent = useColorModeValue("#7C3AED", "violet");
 
@@ -42,7 +42,7 @@ export default function FirstPage() {
         flexDirection={"column"}
         gap={4}
       >
-        <Divider orientation="vertical" border={`1px dotted ${border}`} />
+        <Divider orientation="vertical" border={`1px dotted `} />
         <MotionBox
           fontSize={{ base: "15", md: "15", lg: "20" }}
           whileHover={{ scale: 1.2, color: "aqua" }}

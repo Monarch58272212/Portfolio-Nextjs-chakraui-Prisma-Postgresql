@@ -22,10 +22,10 @@ import {
   PopoverContent,
   PopoverArrow,
   PopoverBody,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { FaCode, FaExternalLinkAlt } from "react-icons/fa";
 import { EditIcon } from "@chakra-ui/icons";
-import { BsSnow2 } from "react-icons/bs";
 import Image from "next/image";
 import Link from "next/link";
 import { DeleteButton } from "./Toggle";
@@ -34,7 +34,6 @@ import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import emptyAnimation from "@/public/animations/NoData.json";
 
-// ✅ Wrap Chakra UI's Card with motion
 const MotionCard = motion(Card);
 const MotionImage = motion(Box);
 interface Post {
@@ -60,6 +59,7 @@ export default function Projects({
   ShowActions?: boolean;
   ShowText?: boolean;
 }) {
+  const HeadingColor = useColorModeValue("black", "violet");
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   return (
@@ -78,10 +78,10 @@ export default function Projects({
           id="projects"
           scrollMarginTop="80px"
         >
-          <Heading color="violet" size="lg">
+          <Heading color={HeadingColor} size="lg">
             # Monarch&apos;s Projects
           </Heading>
-          <Divider borderColor="teal.300" flex="1" />
+          <Divider borderColor={HeadingColor} flex="1" />
 
           {ShowText && (
             <LinkBox as={Link} prefetch={true} href={"/Create"}>

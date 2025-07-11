@@ -5,7 +5,7 @@ import { extendTheme } from "@chakra-ui/react";
 const config = {
   initialColorMode: "dark",
   useSystemColorMode: false,
-  disableTransitionOnChange: true,
+  disableTransitionOnChange: false,
 };
 
 const fonts = {
@@ -22,9 +22,9 @@ const theme = extendTheme({
     },
     global: (props) => ({
       body: {
-        bg: props.colorMode === "dark" ? "#1A202C" : "#FFFFFF",
+        bg: props.colorMode === "dark" ? "#1A202C" : "gray.50",
         color: props.colorMode === "dark" ? "whiteAlpha.900" : "gray.800",
-        transition: "background-color 0.2s ease",
+        transition: "background-color 0.8s ease",
       },
     }),
   },
