@@ -5,14 +5,62 @@ import {
   Divider,
   Flex,
   Heading,
+  SimpleGrid,
   Stack,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import {
+  MotionBox,
+  MotionHeading,
+  MotionText,
+  MotionButton,
+  MotionFlex,
+} from "../chakraProviders/Motion";
+import { TbAlertSquareFilled } from "react-icons/tb";
+import { FaLightbulb } from "react-icons/fa";
+import { FaIdCard } from "react-icons/fa";
+import { IoIosAlert } from "react-icons/io";
+import { MdPlace } from "react-icons/md";
+import { FaPhoneSquareAlt } from "react-icons/fa";
+import { IoCalendarSharp } from "react-icons/io5";
+import { MdEmail } from "react-icons/md";
+
+const personalInfo = [
+  {
+    icon: <FaIdCard fontSize="24px" />,
+    label: "Name:",
+    value: "Monarch Jerald Pagcas",
+  },
+  {
+    icon: <MdPlace fontSize="24px" />,
+    label: "Place of Birth:",
+    value: "Kisante, Makilala, Cotabato",
+  },
+  {
+    icon: <FaPhoneSquareAlt fontSize="24px" />,
+    label: "Phone:",
+    value: "0991-639-0527",
+  },
+  {
+    icon: <IoCalendarSharp fontSize="24px" />,
+    label: "Date of Birth:",
+    value: "March-29-2000",
+  },
+  {
+    icon: <MdEmail fontSize="24px" />,
+    label: "Email:",
+    value: "monarchpagcas@gmail.com",
+  },
+  {
+    icon: <MdEmail fontSize="24px" />,
+    label: "Education:",
+    value: "Bachelor of Science and Information System",
+  },
+];
 
 export default function About() {
-  const MotionBox = motion(Box);
   return (
     <Box
       w="95%"
@@ -21,9 +69,9 @@ export default function About() {
       id="about"
       scrollMarginTop="80px"
     >
-      <VStack align="center">
+      <VStack align="flex-start">
         {/* Heading Section */}
-        <Flex justify="center" align="center" width={"100%"} mb={6}>
+        <Flex justify="center" align="center" width="100%" mb={6}>
           <Divider borderColor="teal.300" flex="1" />
           <Heading size="lg" color="violet" ml={4}>
             # About Me & My Goals
@@ -32,36 +80,120 @@ export default function About() {
 
         {/* Text + Image Section */}
         <Stack
-          direction={{ base: "column", md: "row" }}
+          direction={{ base: "column", md: "column", lg: "row" }}
           spacing={8}
           align="center"
           justify="center"
           w="100%"
           px={{ base: 4, md: 8 }}
-          boxShadow={"lg"}
+          boxShadow="lg"
         >
           {/* Text Section */}
-          <Text w={{ base: "100%", md: "65%" }} textAlign="justify">
-            Hi! Im Monarch, a passionate Front-End Developer who loves turning
-            designs into real, functional websites. I enjoy working with
-            technologies like React, Chakra UI, and Next.js. I started my
-            journey in web development in 2023 and have since been building
-            clean and responsive interfaces. My goal is to create user-friendly
-            web applications and constantly grow as a developer. When Im not
-            coding, I enjoy reading tech blogs and improving my design skills.{" "}
-            <br />
-            <br />
-            My short-term goal is to deepen my knowledge in React and
-            TypeScript, and to build more complex UI projects using Chakra UI.
-            In the long run, I aim to become a full-stack developer and
-            contribute to open-source projects. I also dream of working with a
-            collaborative tech team where I can grow, share ideas, and build
-            real-world applications that make a difference.
-          </Text>
+          <Flex flexDirection="column" w="100%">
+            <Flex
+              pb={4}
+              justify="start"
+              align="flex-start"
+              flexDirection={{ base: "column", md: "row" }}
+              gap={{ base: 5, md: 8, lg: 10 }}
+            >
+              {/* Who Am I */}
+              <MotionFlex
+                flexDirection="column"
+                gap={4}
+                w={{ base: "100%", md: "50%" }}
+                viewport={{ once: false, amount: 0.3 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
+              >
+                <Flex gap={2} align="center" fontWeight="bold">
+                  <TbAlertSquareFilled fontSize="24px" />
+                  Who Am I
+                </Flex>
+                <Text textAlign="justify" color={"gray.500"}>
+                  I’m a Front-End Developer who loves turning designs into real
+                  websites. I started in 2023 and now use tools like React,
+                  Next.js, and Chakra UI. I enjoy building clean and responsive
+                  interfaces that work well on any device.
+                </Text>
+              </MotionFlex>
 
-          {/* Image Section */}
+              {/* My Approach */}
+              <MotionFlex
+                flexDirection="column"
+                gap={4}
+                w={{ base: "100%", md: "50%" }}
+                viewport={{ once: false, amount: 0.3 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2, ease: "easeInOut" }}
+              >
+                <Flex gap={2} align="center" fontWeight="bold">
+                  <FaLightbulb fontSize="24px" />
+                  My Approach
+                </Flex>
+                <Text textAlign="justify" color={"gray.500"}>
+                  I focus on writing clean, user-friendly code and learning
+                  continuously. Right now, I’m improving my React and TypeScript
+                  skills. My goal is to become a full-stack developer and help
+                  build real-world apps with a team.
+                </Text>
+              </MotionFlex>
+            </Flex>
+
+            {/* Personal Info Section Title */}
+            <Flex
+              pb={4}
+              flexDirection={"column"}
+              border="1px solid"
+              borderColor="whiteAlpha.300"
+              borderRadius="lg"
+              px={4}
+            >
+              <MotionFlex
+                flexDirection="row"
+                py={4}
+                align="center"
+                fontWeight={"bold"}
+                gap={2}
+                viewport={{ once: false, amount: 0.3 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
+              >
+                <IoIosAlert fontSize="24px" />
+
+                <Text>Personal Info</Text>
+              </MotionFlex>
+
+              <SimpleGrid gap={4} columns={{ base: 1, md: 2, lg: 2 }}>
+                {personalInfo.map((info, index) => (
+                  <MotionFlex
+                    key={index}
+                    gap={3}
+                    align="center"
+                    viewport={{ once: false, amount: 0.3 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: 0.2 * index,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    {info.icon}
+                    <Text fontWeight="bold">{info.label}</Text>
+                    <Text color="gray.500">{info.value}</Text>
+                  </MotionFlex>
+                ))}
+              </SimpleGrid>
+            </Flex>
+          </Flex>
+
+          {/* Image Section with Animated Bubbles */}
           <Flex
-            w={{ base: "100%", md: "55%" }}
+            w={{ base: "100%", md: "25%" }}
             position="relative"
             justify="center"
             align="center"
@@ -103,7 +235,7 @@ export default function About() {
                 bottom={{ base: "20", md: "58", lg: "48" }}
                 left={{ base: "10", md: "10", lg: "8" }}
                 borderRadius="full"
-                border={"1px solid violet"}
+                border="1px solid violet"
                 boxSize={{ base: "20px", md: "20px", lg: "30px" }}
                 animate={{ y: [0, -30, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
@@ -124,7 +256,7 @@ export default function About() {
                 zIndex={0}
               />
 
-              {/* Green Bubble (Large) */}
+              {/* Large Violet Bubble */}
               <MotionBox
                 position="absolute"
                 bottom={{ base: "20", md: "30", lg: "40" }}
@@ -143,7 +275,7 @@ export default function About() {
                 bottom="38"
                 right="38"
                 borderRadius="full"
-                border={"1px solid peachpuff"}
+                border="1px solid peachpuff"
                 boxSize={{ base: "40px", md: "60px", lg: "80px" }}
                 animate={{ y: [0, -30, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}

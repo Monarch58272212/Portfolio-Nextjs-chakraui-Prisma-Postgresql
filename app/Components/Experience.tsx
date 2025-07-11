@@ -73,7 +73,7 @@ export default function Experience() {
         {/* 📝 Description */}
         <Box maxW="600px" textAlign="left">
           <Text
-            color={useColorModeValue("gray.700", "gray.200")}
+            color="gray.500"
             lineHeight="1.8"
             textAlign={"justify"}
             w={{ base: "100%", md: "65%", lg: "100%" }}

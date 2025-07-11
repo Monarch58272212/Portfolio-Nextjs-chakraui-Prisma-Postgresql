@@ -193,7 +193,7 @@ export default function Projects({
                       color="white"
                       border="1px solid green"
                     >
-                      <Text fontSize="sm" noOfLines={2}>
+                      <Text fontSize="sm" noOfLines={2} color={"gray.400"}>
                         {post.description}
                       </Text>
                     </Tooltip>

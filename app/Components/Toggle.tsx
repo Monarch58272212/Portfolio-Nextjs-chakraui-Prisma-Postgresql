@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { MdDeleteOutline } from "react-icons/md";
 import { useTransition } from "react";
 import { deletePost } from "../api/action";
+import { useEffect, useState } from "react";
 
 type SubmitbuttonProps = {
   isLoading?: boolean;
@@ -45,19 +46,26 @@ export default function ThemeToggleButton() {
   );
 }
 
-export function Submitbutton({ isLoading = false }: SubmitbuttonProps) {
+export function Submitbutton() {
   const { pending } = useFormStatus();
+  const [isLocked, setIsLocked] = useState(false);
+
+  useEffect(() => {
+    if (pending) {
+      setIsLocked(true); // lock immediately
+    }
+  }, [pending]);
 
   return (
     <Button
       type="submit"
       size="sm"
       colorScheme="teal"
-      isLoading={pending || isLoading}
+      isLoading={isLocked}
       loadingText="Submitting"
-      isDisabled={pending} // 🔒 Important: disables while submitting
+      isDisabled={isLocked}
     >
-      {pending ? "Submitting..." : "Submit"}
+      {isLocked ? "Submitting..." : "Submit"}
     </Button>
   );
 }

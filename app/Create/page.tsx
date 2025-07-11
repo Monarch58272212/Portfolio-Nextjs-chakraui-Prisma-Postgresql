@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { handleSubmission } from "@/app/api/action";
-import { Submitbutton } from "@/app/Components/Toggle";
+import { Submitbutton } from "../Components/Toggle";
 
 export default function Create() {
   return (
