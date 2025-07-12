@@ -14,7 +14,6 @@ import {
 
 import { Submitbutton } from "../Components/Toggle";
 import Lottie from "lottie-react";
-import CONTACT from "@/public/animations/Contact.json";
 
 export default function Contact() {
   const toast = useToast();
@@ -83,10 +82,6 @@ export default function Contact() {
       py={{ base: 10, md: 16 }}
       gap={10}
     >
-      <Box maxW={350}>
-        <Lottie animationData={CONTACT} loop style={{ width: "100%" }} />
-      </Box>
-
       <Box
         bg={bgColor}
         p={{ base: 6, md: 10 }}

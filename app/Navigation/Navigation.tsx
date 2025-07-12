@@ -161,14 +161,11 @@ export function Navigation() {
             gap={2}
           >
             <Button
-              colorScheme="blue"
               size={{ base: "sm", md: "md", lg: "sm" }}
               py={1.5}
+              borderRadius={"none"}
             >
-              <LoginLink>Sign in</LoginLink>
-            </Button>
-            <Button colorScheme="teal" variant="outline" size="sm" py={1.5}>
-              <RegisterLink>Sign up</RegisterLink>
+              <LoginLink>Monarch Secure Page</LoginLink>
             </Button>
           </Box>
         )}
