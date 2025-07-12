@@ -24,6 +24,22 @@ export default function FirstPage() {
   const TextHeading = useColorModeValue("pink.600", "violet");
   const textAccent = useColorModeValue("#7C3AED", "violet");
 
+  const CERTIFICATE_URL = process.env.NEXT_PUBLIC_RESUME_URL;
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(CERTIFICATE_URL!);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "RESUME.pdf";
+      link.click();
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
+  };
+
   return (
     <VStack w="100%" position={"relative"}>
       <MotionBox
@@ -118,28 +134,34 @@ export default function FirstPage() {
             He crafts responsive websites where technologies meet creativity
           </MotionText>
           <HStack justify={{ base: "center", md: "start" }} spacing={4} pt={4}>
-            <Link href="/Contact" passHref>
-              <MotionButton
-                viewport={{ once: false, amount: 0.3 }}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
-                colorScheme="purple"
-                size="sm"
-              >
-                Contact me!
-              </MotionButton>
-            </Link>
+            <MotionButton
+              viewport={{ once: false, amount: 0.3 }}
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              whileHover={{ boxShadow: "0px 0px 8px rgba(128, 90, 213, 0.6)" }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
+              colorScheme="purple"
+              size="sm"
+              onClick={handleDownload}
+              borderRadius="none"
+            >
+              Download CV
+            </MotionButton>
+
             <Link href="#projects" passHref>
               <MotionButton
                 viewport={{ once: false, amount: 0.3 }}
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
+                whileHover={{
+                  boxShadow: "0px 0px 8px rgba(128, 90, 213, 0.6)",
+                }}
                 transition={{ duration: 0.7, delay: 0.2, ease: "easeInOut" }}
                 variant="outline"
                 borderColor={textAccent}
                 color={textAccent}
                 size="sm"
+                borderRadius="none"
               >
                 See my Projects
               </MotionButton>

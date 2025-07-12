@@ -181,14 +181,14 @@ export function Navigation() {
             <Box display="flex" alignItems="center">
               <Button
                 onClick={() => setActiveNav("home")}
-                color={activeNav === "home" ? "purple.500" : ""}
+                color={activeNav === "home" ? "violet" : ""}
                 variant="ghost"
                 fontSize="sm"
                 gap={2}
                 _hover={{
                   transform: "translateY(-6px)",
                   transition: "all 0.3s ease-in-out",
-                  color: "purple.400",
+                  color: "violet",
                 }}
               >
                 <FaHome />
@@ -201,14 +201,14 @@ export function Navigation() {
             <Box display="flex" alignItems="center">
               <Button
                 onClick={() => setActiveNav("skills")}
-                color={activeNav === "skills" ? "purple.500" : ""}
+                color={activeNav === "skills" ? "violet" : ""}
                 variant="ghost"
                 fontSize="sm"
                 gap={2}
                 _hover={{
                   transform: "translateY(-6px)",
                   transition: "all 0.3s ease-in-out",
-                  color: "purple.400",
+                  color: "violet",
                 }}
               >
                 <FaLaptopCode />
@@ -221,14 +221,14 @@ export function Navigation() {
             <Box display="flex" alignItems="center">
               <Button
                 onClick={() => setActiveNav("experience")}
-                color={activeNav === "experience" ? "purple.500" : ""}
+                color={activeNav === "experience" ? "violet" : ""}
                 variant="ghost"
                 fontSize="sm"
                 gap={2}
                 _hover={{
                   transform: "translateY(-6px)",
                   transition: "all 0.3s ease-in-out",
-                  color: "purple.400",
+                  color: "violet",
                 }}
               >
                 <MdWorkOutline />
@@ -241,14 +241,14 @@ export function Navigation() {
             <Box display="flex" alignItems="center">
               <Button
                 onClick={() => setActiveNav("about")}
-                color={activeNav === "about" ? "purple.500" : ""}
+                color={activeNav === "about" ? "violet" : ""}
                 variant="ghost"
                 fontSize="sm"
                 gap={2}
                 _hover={{
                   transform: "translateY(-6px)",
                   transition: "all 0.3s ease-in-out",
-                  color: "purple.400",
+                  color: "violet",
                 }}
               >
                 <IoPersonCircleOutline />
@@ -261,13 +261,13 @@ export function Navigation() {
             <Box display="flex" alignItems="center">
               <Button
                 onClick={() => setActiveNav("contact")}
-                color={activeNav === "contact" ? "purple.500" : ""}
+                color={activeNav === "contact" ? "violet" : ""}
                 variant="ghost"
                 fontSize="sm"
                 _hover={{
                   transform: "translateY(-6px)",
                   transition: "all 0.3s ease-in-out",
-                  color: "purple.400",
+                  color: "violet",
                 }}
                 gap={2}
               >

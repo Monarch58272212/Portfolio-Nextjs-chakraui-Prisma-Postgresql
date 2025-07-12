@@ -13,6 +13,13 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 
+import {
+  MotionBox,
+  MotionButton,
+  MotionFlex,
+  MotionText,
+} from "../chakraProviders/Motion";
+
 export default function Experience() {
   const bgColor = useColorModeValue("gray.50", "gray.800");
   const textColor = useColorModeValue("gray.700", "gray.300");
@@ -56,27 +63,55 @@ export default function Experience() {
           p={6}
           bg={useColorModeValue("white", "gray.900")}
         >
-          <Text fontWeight="bold" fontSize="lg" mb={1}>
+          <MotionText
+            viewport={{ once: false, amount: 0.3 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
+            fontWeight="bold"
+            fontSize="lg"
+            mb={1}
+          >
             On-the-Job Training – IT Support / System Developer
-          </Text>
-          <Text fontSize="sm" color="gray.400">
+          </MotionText>
+          <MotionText
+            viewport={{ once: false, amount: 0.3 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeInOut" }}
+            fontSize="sm"
+            color="gray.400"
+          >
             Kidapawan City Campus of the University of Southern Mindanao (USM) |
             Feb 2025 – May 2025
-          </Text>
-          <Text mt={4} color={textColor} textAlign="justify" fontSize="sm">
+          </MotionText>
+          <MotionText
+            viewport={{ once: false, amount: 0.3 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
+            mt={4}
+            color={textColor}
+            textAlign="justify"
+            fontSize="sm"
+          >
             I helped fix school laptops, printers, and other devices. I assisted
             in setting up fiber internet and Wi-Fi, maintained computer labs,
             and helped students with ID processing. I also developed a Student
             Profiling System to manage student data like personal, academic, and
             ID details using HTML, CSS, JavaScript, and Firebase with search,
             real-time updates, and secure login.
-          </Text>
+          </MotionText>
           <Flex
             mt={4}
             gap={3}
             flexDirection={{ base: "column", md: "row", lg: "row" }}
           >
-            <Button
+            <MotionButton
+              viewport={{ once: false, amount: 0.3 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: "easeInOut" }}
               variant="outline"
               size="sm"
               leftIcon={<DownloadIcon />}
@@ -84,19 +119,23 @@ export default function Experience() {
               onClick={handleDownload}
             >
               Download Certificate
-            </Button>
+            </MotionButton>
             <Link
               href="https://student-profiling-43f5c.web.app/"
               target="_blank"
             >
-              <Button
+              <MotionButton
+                viewport={{ once: false, amount: 0.3 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.2, ease: "easeInOut" }}
                 variant="outline"
                 size="sm"
                 colorScheme="teal"
                 leftIcon={<ExternalLinkIcon />}
               >
                 Visit Student Profiling
-              </Button>
+              </MotionButton>
             </Link>
           </Flex>
         </Box>
@@ -108,20 +147,48 @@ export default function Experience() {
           p={6}
           bg={useColorModeValue("white", "gray.900")}
         >
-          <Text fontWeight="bold" fontSize="lg" mb={1}>
+          <MotionText
+            viewport={{ once: false, amount: 0.3 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
+            fontWeight="bold"
+            fontSize="lg"
+            mb={1}
+          >
             Capstone Project – Library Holdings Management System
-          </Text>
-          <Text fontSize="sm" color="gray.400">
+          </MotionText>
+          <MotionText
+            viewport={{ once: false, amount: 0.3 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeInOut" }}
+            fontSize="sm"
+            color="gray.400"
+          >
             Makilala Institute of Science and Technology | December 2024
-          </Text>
-          <Text mt={4} color={textColor} textAlign="justify" fontSize="sm">
+          </MotionText>
+          <MotionText
+            viewport={{ once: false, amount: 0.3 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
+            mt={4}
+            color={textColor}
+            textAlign="justify"
+            fontSize="sm"
+          >
             A system built to help manage and track library collections,
             including books and journals. It supports CRUD operations, report
             generation, and subject-based monitoring. Built using HTML, CSS,
             JavaScript, and Firebase.
-          </Text>
+          </MotionText>
           <Link href="https://final-library-holding.web.app/" target="_blank">
-            <Button
+            <MotionButton
+              viewport={{ once: false, amount: 0.3 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: "easeInOut" }}
               variant="outline"
               size="sm"
               mt={3}
@@ -129,7 +196,7 @@ export default function Experience() {
               leftIcon={<ExternalLinkIcon />}
             >
               Visit Project
-            </Button>
+            </MotionButton>
           </Link>
         </Box>
       </Stack>

@@ -11,7 +11,6 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 import { MotionBox, MotionFlex } from "../chakraProviders/Motion";
 import { TbAlertSquareFilled } from "react-icons/tb";
 import { FaLightbulb } from "react-icons/fa";
@@ -21,6 +20,7 @@ import { MdPlace } from "react-icons/md";
 import { FaPhoneSquareAlt } from "react-icons/fa";
 import { IoCalendarSharp } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
+import { FaGraduationCap } from "react-icons/fa6";
 
 const personalInfo = [
   {
@@ -49,7 +49,7 @@ const personalInfo = [
     value: "monarchpagcas@gmail.com",
   },
   {
-    icon: <MdEmail fontSize="24px" />,
+    icon: <FaGraduationCap fontSize="24px" />,
     label: "Education:",
     value: "Bachelor of Science and Information System",
   },
