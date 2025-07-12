@@ -1,12 +1,13 @@
 "use client";
 
-import { DownloadIcon } from "@chakra-ui/icons";
+import { DownloadIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
   Divider,
   Flex,
   Heading,
+  Stack,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -14,101 +15,124 @@ import Link from "next/link";
 
 export default function Experience() {
   const bgColor = useColorModeValue("gray.50", "gray.800");
+  const textColor = useColorModeValue("gray.700", "gray.300");
   const HeadingColor = useColorModeValue("black", "violet");
   const CERTIFICATE_URL = process.env.NEXT_PUBLIC_CERTIFICATE_URL;
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(CERTIFICATE_URL!);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "OJTCERTIFICATE.jpg";
+      link.click();
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
+  };
+
   return (
     <Box
       w="95%"
-      py={{ base: 3, md: 5, lg: 6 }}
+      py={{ base: 4, md: 8 }}
       bg={bgColor}
       id="experience"
       scrollMarginTop="80px"
     >
-      <Flex
-        w="100%"
-        justify="center"
-        align="center"
-        pb={{ base: 5, md: 6, lg: 10 }}
-      >
+      <Flex justify="center" align="center" pb={8}>
         <Heading size="lg" color={HeadingColor} mr={4}>
           # Experience
         </Heading>
         <Divider borderColor={HeadingColor} flex="1" />
       </Flex>
 
-      <Flex flexDirection={"column"} gap={2}>
-        <Flex flexDirection={"column"}>
-          <Text>On-the-Job Training (OJT) – IT Support / System Developer</Text>
-
-          <Text>
-            Kidapawan City Campus of the University of Southern Mindanao (USM)
+      <Stack spacing={8}>
+        {/* OJT Experience */}
+        <Box
+          borderWidth="1px"
+          rounded="2xl"
+          p={6}
+          bg={useColorModeValue("white", "gray.900")}
+        >
+          <Text fontWeight="bold" fontSize="lg" mb={1}>
+            On-the-Job Training – IT Support / System Developer
           </Text>
-          <Flex align={"center"} gap={2}>
-            <Text>February 2025 – May 2025</Text>
+          <Text fontSize="sm" color="gray.400">
+            Kidapawan City Campus of the University of Southern Mindanao (USM) |
+            Feb 2025 – May 2025
+          </Text>
+          <Text mt={4} color={textColor} textAlign="justify" fontSize="sm">
+            I helped fix school laptops, printers, and other devices. I assisted
+            in setting up fiber internet and Wi-Fi, maintained computer labs,
+            and helped students with ID processing. I also developed a Student
+            Profiling System to manage student data like personal, academic, and
+            ID details using HTML, CSS, JavaScript, and Firebase with search,
+            real-time updates, and secure login.
+          </Text>
+          <Flex
+            mt={4}
+            gap={3}
+            flexDirection={{ base: "column", md: "row", lg: "row" }}
+          >
             <Button
-              variant="link"
-              fontSize="sm"
+              variant="outline"
+              size="sm"
+              leftIcon={<DownloadIcon />}
               colorScheme="blue"
-              onClick={async () => {
-                try {
-                  const response = await fetch(CERTIFICATE_URL!);
-                  const blob = await response.blob();
-                  const url = window.URL.createObjectURL(blob);
-                  const link = document.createElement("a");
-                  link.href = url;
-                  link.download = "OJTCERTIFICATE.jpg";
-                  link.click();
-                } catch (error) {
-                  console.error("Download failed:", error);
-                }
-              }}
+              onClick={handleDownload}
             >
               Download Certificate
             </Button>
-          </Flex>
-
-          <Flex flexDirection={"column"}>
-            <Text color={"gray.500"} textAlign={"justify"}>
-              During my internship as an IT Support intern, I helped fix broken
-              laptops, printers, and other school devices. I also assisted with
-              installing fiber internet and Wi-Fi routers around the campus. I
-              regularly checked the computers to make sure they were working
-              well. I also helped students with ID processing and other
-              school-related documents. I also created a Student Profiling
-              System to make it easier to manage student records. The system
-              lets staff store and view student information like personal
-              details, academic background, and ID records. I built it using
-              HTML, CSS, JavaScript, and Firebase, and added features like
-              search, real-time updates, and secure login. This system helped
-              the school organize student data better.
-            </Text>
-          </Flex>
-        </Flex>
-
-        <Flex flexDirection={"column"}>
-          <Text fontWeight="bold">
-            Capstone Project – Library Holdings Management System
-          </Text>
-          <Text>MIST - Makilala Institute of Science and Technology</Text>
-          <Flex align={"center"} gap={2}>
-            <Text>February 2025 – May 2025</Text>
-            <Link href={"https://final-library-holding.web.app/"}>
-              <Button variant="link" fontSize="sm" colorScheme="blue">
-                {" "}
-                Visit Project
+            <Link
+              href="https://student-profiling-43f5c.web.app/"
+              target="_blank"
+            >
+              <Button
+                variant="outline"
+                size="sm"
+                colorScheme="teal"
+                leftIcon={<ExternalLinkIcon />}
+              >
+                Visit Student Profiling
               </Button>
             </Link>
           </Flex>
-          <Text color="gray.500" textAlign="justify">
-            As part of our final requirement, I developed a Library Holdings
-            Management System to help organize and monitor books and journals in
-            the school library. The system supports CRUD operations, report
-            generation, and subject-based tracking. Built using React, Firebase,
-            and Chakra UI, it improved the way collections were managed and
-            aligned with academic subjects.
+        </Box>
+
+        {/* Capstone Project */}
+        <Box
+          borderWidth="1px"
+          rounded="2xl"
+          p={6}
+          bg={useColorModeValue("white", "gray.900")}
+        >
+          <Text fontWeight="bold" fontSize="lg" mb={1}>
+            Capstone Project – Library Holdings Management System
           </Text>
-        </Flex>
-      </Flex>
+          <Text fontSize="sm" color="gray.400">
+            Makilala Institute of Science and Technology | December 2024
+          </Text>
+          <Text mt={4} color={textColor} textAlign="justify" fontSize="sm">
+            A system built to help manage and track library collections,
+            including books and journals. It supports CRUD operations, report
+            generation, and subject-based monitoring. Built using HTML, CSS,
+            JavaScript, and Firebase.
+          </Text>
+          <Link href="https://final-library-holding.web.app/" target="_blank">
+            <Button
+              variant="outline"
+              size="sm"
+              mt={3}
+              colorScheme="teal"
+              leftIcon={<ExternalLinkIcon />}
+            >
+              Visit Project
+            </Button>
+          </Link>
+        </Box>
+      </Stack>
     </Box>
   );
 }

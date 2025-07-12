@@ -140,35 +140,41 @@ export default function About() {
 
             {/* Personal Info Section Title */}
             <Flex
-              pb={4}
-              flexDirection={"column"}
-              border="1px solid"
-              borderColor="whiteAlpha.300"
+              pb={{ base: 4, md: 6 }}
+              px={{ base: 3, md: 5, lg: 6 }}
+              flexDirection="column"
+              borderWidth="1px"
+              rounded="2xl"
               borderRadius="lg"
-              px={4}
+              bg={useColorModeValue("white", "gray.900")}
             >
+              {/* Section Header */}
               <MotionFlex
                 flexDirection="row"
-                py={4}
                 align="center"
-                fontWeight={"bold"}
+                fontWeight="bold"
                 gap={2}
+                py={{ base: 3, md: 4 }}
                 viewport={{ once: false, amount: 0.3 }}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
               >
                 <IoIosAlert fontSize="24px" />
-
-                <Text>Personal Info</Text>
+                <Text fontSize={{ base: "md", md: "lg" }}>Personal Info</Text>
               </MotionFlex>
 
-              <SimpleGrid gap={4} columns={{ base: 1, md: 2, lg: 2 }}>
+              {/* Personal Info Grid */}
+              <SimpleGrid
+                columns={{ base: 1, sm: 1, md: 2 }}
+                spacing={{ base: 3, md: 4 }}
+              >
                 {personalInfo.map((info, index) => (
                   <MotionFlex
                     key={index}
-                    gap={3}
+                    gap={2}
                     align="center"
+                    wrap="wrap"
                     viewport={{ once: false, amount: 0.3 }}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -179,8 +185,15 @@ export default function About() {
                     }}
                   >
                     {info.icon}
-                    <Text fontWeight="bold">{info.label}</Text>
-                    <Text color="gray.500">{info.value}</Text>
+                    <Text
+                      fontWeight="semibold"
+                      fontSize={{ base: "sm", md: "md" }}
+                    >
+                      {info.label}:
+                    </Text>
+                    <Text color="gray.500" fontSize={{ base: "sm", md: "md" }}>
+                      {info.value}
+                    </Text>
                   </MotionFlex>
                 ))}
               </SimpleGrid>

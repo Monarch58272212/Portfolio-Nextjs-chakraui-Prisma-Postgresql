@@ -117,7 +117,6 @@ export default function Projects({
           py={4}
           columns={{ base: 1, sm: 1, md: 2, lg: 3 }}
           spacing={8}
-          px={4}
           overflowX="hidden"
         >
           {posts.map((post, index) => (
