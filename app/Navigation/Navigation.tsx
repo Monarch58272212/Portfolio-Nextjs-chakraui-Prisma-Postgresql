@@ -55,7 +55,14 @@ export function Navigation() {
   }, [currentScreen, isOpen, onClose]);
 
   useEffect(() => {
-    const sections = ["home", "skills", "experience", "about", "contact"];
+    const sections = [
+      "home",
+      "skills",
+      "projects",
+      "experience",
+      "about",
+      "contact",
+    ];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -144,13 +151,23 @@ export function Navigation() {
             </Box>
 
             <LogoutLink>
-              <Button variant="outline" size="sm" py={1.5}>
+              <Button
+                variant="outline"
+                borderRadius={"none"}
+                size="sm"
+                py={1.5}
+              >
                 LogOut
               </Button>
             </LogoutLink>
 
             <Link href="/Projects">
-              <Button colorScheme="purple" size="sm" variant="outline">
+              <Button
+                colorScheme="purple"
+                size="sm"
+                borderRadius={"none"}
+                variant="outline"
+              >
                 Projects
               </Button>
             </Link>
@@ -333,6 +350,7 @@ export function Navigation() {
                         variant="outline"
                         size="xs"
                         p={0.5}
+                        borderRadius={"none"}
                         fontSize={{ base: "xs", md: "xm" }}
                       >
                         LogOut
@@ -345,6 +363,7 @@ export function Navigation() {
                         variant="outline"
                         fontSize={{ base: "xs", md: "xm" }}
                         size="xs"
+                        borderRadius={"none"}
                         p={0.5}
                       >
                         Projects
@@ -361,16 +380,12 @@ export function Navigation() {
                     }}
                     gap={2}
                   >
-                    <Button colorScheme="blue" size="sm" py={1.5}>
-                      <LoginLink>Sign in</LoginLink>
-                    </Button>
                     <Button
-                      colorScheme="teal"
-                      variant="outline"
-                      size="sm"
+                      size={{ base: "sm", md: "md", lg: "sm" }}
                       py={1.5}
+                      borderRadius={"none"}
                     >
-                      <RegisterLink>Sign up</RegisterLink>
+                      <LoginLink>Monarch Secure Page</LoginLink>
                     </Button>
                   </Box>
                 )}

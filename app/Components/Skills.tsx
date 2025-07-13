@@ -28,14 +28,14 @@ import {
   SiGithub,
   SiPrisma,
 } from "react-icons/si";
-
-const MotionBox = motion(Box);
+import { MotionBox } from "../chakraProviders/Motion";
 
 export default function SkillsSection() {
-  const borderColor = useColorModeValue("gray.300", "gray.600");
-  const bgColor = useColorModeValue("white", "gray.700");
+  const borderColor = useColorModeValue("gray.200", "gray.600");
+  const bgColor = useColorModeValue("whiteAlpha.700", "whiteAlpha.100");
   const textHoverColor = useColorModeValue("teal.600", "teal.300");
-  const HeadingColor = useColorModeValue("black", "violet");
+
+  const headingColor = useColorModeValue("black", "violet");
 
   const skills = {
     Frontend: [
@@ -61,13 +61,13 @@ export default function SkillsSection() {
       w="95%"
       mx="auto"
       id="skills"
-      py={{ base: 3, md: 5, lg: 6 }}
+      py={{ base: 4, md: 6, lg: 8 }}
       scrollMarginTop="80px"
     >
-      <VStack spacing={6} align="start">
+      <VStack spacing={8} align="start">
         <Flex w="100%" justify="center" align="center">
-          <Divider borderColor={HeadingColor} flex="1" />
-          <Heading size="lg" color={HeadingColor} ml={4}>
+          <Divider borderColor={headingColor} flex="1" />
+          <Heading size="lg" color={headingColor} ml={4}>
             # Skills
           </Heading>
         </Flex>
@@ -76,35 +76,54 @@ export default function SkillsSection() {
           {Object.entries(skills).map(([category, items], index) => (
             <MotionBox
               key={category}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
               viewport={{ once: false, amount: 0.5 }}
-              border={`1px solid ${borderColor}`}
-              borderRadius="lg"
-              p={5}
-              boxShadow="md"
-              w="full"
+              borderRadius="2xl"
+              p={6}
+              boxShadow="dark-lg"
               bg={bgColor}
+              border={`1px solid ${borderColor}`}
+              _hover={{
+                transform: "translateY(-5px)",
+                boxShadow: "xl",
+                transition: "all 0.3s ease-in-out",
+              }}
+              backdropFilter="blur(10px)"
               textAlign="center"
             >
-              <Heading size="md" mb={4} color="teal.400">
+              <Heading
+                size="md"
+                mb={4}
+                color="teal.300"
+                letterSpacing="wide"
+                fontWeight="bold"
+              >
                 {category}
               </Heading>
-              <List spacing={3} textAlign="center">
-                {items.map((item) => (
-                  <ListItem key={item.name}>
-                    <HStack spacing={3} justify="center">
-                      <Icon as={item.icon} boxSize={5} color={item.color} />
-                      <Text
-                        color="gray.500"
-                        _hover={{ color: textHoverColor }}
-                        transition="0.2s"
-                      >
-                        {item.name}
-                      </Text>
-                    </HStack>
-                  </ListItem>
+
+              <List spacing={4}>
+                {items.map((item, i) => (
+                  <MotionBox
+                    key={item.name}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3, delay: i * 0.05 }}
+                  >
+                    <ListItem>
+                      <HStack spacing={3} justify="center">
+                        <Icon as={item.icon} boxSize={6} color={item.color} />
+                        <Text
+                          fontWeight="medium"
+                          color="gray.500"
+                          _hover={{ color: textHoverColor }}
+                          transition="0.2s"
+                        >
+                          {item.name}
+                        </Text>
+                      </HStack>
+                    </ListItem>
+                  </MotionBox>
                 ))}
               </List>
             </MotionBox>

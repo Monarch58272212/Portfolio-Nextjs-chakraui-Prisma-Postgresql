@@ -10,8 +10,6 @@ import {
 } from "@chakra-ui/react";
 
 export default function ModernSkeleton() {
-  // Light/Dark mode colors
-  //const cardBg = useColorModeValue("white", "gray.300");
   const cardShadow = useColorModeValue("md", "dark-lg");
 
   return (
@@ -21,16 +19,16 @@ export default function ModernSkeleton() {
       p={6}
       maxW="100%"
     >
-      {[...Array(3)].map((_, idx) => (
+      {[...Array(3)].map((_, index) => (
         <Box
-          key={idx}
+          key={index}
           padding={6}
           boxShadow={cardShadow}
           borderRadius="2xl"
           display="flex"
           flexDirection="column"
           justifyContent="space-between"
-          minH="70vh" // fixed minimum height for consistency
+          minH="70vh"
         >
           <Flex gap={4} alignItems="center" mb={4}>
             <SkeletonCircle size="12" />
