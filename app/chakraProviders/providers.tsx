@@ -1,7 +1,7 @@
-"use client"; // ✅ Dapat client ito
+"use client";
 
 import { ChakraProvider } from "@chakra-ui/react";
-import theme from "./theme"; // adjust path kung nasa ibang folder
+import theme from "./theme";
 
 export default function ChakraProviderWrapper({
   children,

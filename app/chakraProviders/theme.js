@@ -9,8 +9,8 @@ const config = {
 };
 
 const fonts = {
-  heading: `Fira Code`,
-  body: `Fira Code`,
+  heading: `poppins`,
+  body: `poppins`,
 };
 
 const theme = extendTheme({
