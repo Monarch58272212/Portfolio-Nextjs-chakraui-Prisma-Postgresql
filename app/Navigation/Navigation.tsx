@@ -113,6 +113,7 @@ export function Navigation() {
       justify="space-between"
       align="center"
       px={{ base: 4, md: 5 }}
+      py={{ base: 2, md: 3 }}
       mx={{ base: 1, md: 3, lg: 10 }}
       backdropFilter="blur(10px)"
     >
@@ -124,7 +125,7 @@ export function Navigation() {
       >
         <Link href="/" prefetch={true}>
           <Image
-            src="/always.png"
+            src="/logo.png"
             alt="My Logo"
             width={80}
             height={80}
