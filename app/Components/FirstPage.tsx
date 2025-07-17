@@ -6,6 +6,7 @@ import {
   HStack,
   Text,
   useColorModeValue,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import Image from "next/image";
@@ -20,6 +21,7 @@ import {
 } from "../chakraProviders/Motion";
 
 export default function FirstPage() {
+  const toast = useToast();
   const border = useColorModeValue("black", "violet");
   const TextHeading = useColorModeValue("pink.600", "violet");
   const textAccent = useColorModeValue("#7C3AED", "violet");
@@ -27,8 +29,19 @@ export default function FirstPage() {
   const CERTIFICATE_URL = process.env.NEXT_PUBLIC_RESUME_URL;
 
   const handleDownload = async () => {
+    if (!CERTIFICATE_URL) {
+      toast({
+        title: "Missing file URL",
+        description: "Resume download link is not configured.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
     try {
-      const response = await fetch(CERTIFICATE_URL!);
+      const response = await fetch(CERTIFICATE_URL);
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
@@ -36,7 +49,13 @@ export default function FirstPage() {
       link.download = "RESUME.pdf";
       link.click();
     } catch (error) {
-      console.error("Download failed:", error);
+      toast({
+        title: "Download failed",
+        description: "Something went wrong while downloading your resume.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
     }
   };
 
@@ -273,7 +292,7 @@ export default function FirstPage() {
             border={`1px solid ${border}`}
             px={10}
           >
-            Currently working on Portfolio!{" "}
+            Portfolio now live, Let's work together!
           </MotionText>
         </VStack>
       </Flex>
@@ -286,12 +305,7 @@ export default function FirstPage() {
         marginTop={{ base: "20px", md: "40px", lg: "70px" }}
       >
         <Box position={"relative"}>
-          <Text
-            fontFamily={"Poppins"}
-            fontSize={"2xl"}
-            border={`0.2px solid ${border}`}
-            p={5}
-          >
+          <Text fontSize={"2xl"} border={`0.2px solid ${border}`} p={5}>
             &quot; Your first 100 designs will suck. Just keep designing. &quot;
           </Text>
 
