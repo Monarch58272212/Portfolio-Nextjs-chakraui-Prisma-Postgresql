@@ -79,7 +79,7 @@ export default function Projects({
           scrollMarginTop="80px"
         >
           <Heading color={HeadingColor} size="lg">
-            # Monarch&apos;s Projects
+            # Projects
           </Heading>
           <Divider borderColor={HeadingColor} flex="1" />
 

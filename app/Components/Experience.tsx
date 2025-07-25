@@ -25,8 +25,9 @@ export default function Experience() {
   const textColor = useColorModeValue("gray.700", "gray.300");
   const HeadingColor = useColorModeValue("black", "violet");
   const CERTIFICATE_URL = process.env.NEXT_PUBLIC_CERTIFICATE_URL;
+  const DOCUMENT_URL = process.env.NEXT_PUBLIC_DOCUMENT_URL;
 
-  const handleDownload = async () => {
+  const handleOJTDownload = async () => {
     try {
       const response = await fetch(CERTIFICATE_URL!);
       const blob = await response.blob();
@@ -34,6 +35,20 @@ export default function Experience() {
       const link = document.createElement("a");
       link.href = url;
       link.download = "OJTCERTIFICATE.jpg";
+      link.click();
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
+  };
+
+  const handleDocumentsDownload = async () => {
+    try {
+      const response = await fetch(DOCUMENT_URL!);
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "DOCUMENT.pdf";
       link.click();
     } catch (error) {
       console.error("Download failed:", error);
@@ -116,7 +131,7 @@ export default function Experience() {
               size="sm"
               leftIcon={<DownloadIcon />}
               colorScheme="blue"
-              onClick={handleDownload}
+              onClick={handleOJTDownload}
             >
               Download Certificate
             </MotionButton>
@@ -183,7 +198,13 @@ export default function Experience() {
             generation, and subject-based monitoring. Built using HTML, CSS,
             JavaScript, and Firebase.
           </MotionText>
-          <Link href="https://final-library-holding.web.app/" target="_blank">
+
+          <Flex
+            mt={4}
+            gap={3}
+            flexDirection={{ base: "column", md: "row", lg: "row" }}
+            align={"left"}
+          >
             <MotionButton
               viewport={{ once: false, amount: 0.3 }}
               initial={{ opacity: 0, x: -20 }}
@@ -191,13 +212,27 @@ export default function Experience() {
               transition={{ duration: 0.9, delay: 0.2, ease: "easeInOut" }}
               variant="outline"
               size="sm"
-              mt={3}
-              colorScheme="teal"
-              leftIcon={<ExternalLinkIcon />}
+              leftIcon={<DownloadIcon />}
+              colorScheme="blue"
+              onClick={handleDocumentsDownload}
             >
-              Visit Project
+              Download Document
             </MotionButton>
-          </Link>
+            <Link href="https://final-library-holding.web.app/" target="_blank">
+              <MotionButton
+                viewport={{ once: false, amount: 0.3 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.9, delay: 0.2, ease: "easeInOut" }}
+                variant="outline"
+                size="sm"
+                colorScheme="teal"
+                leftIcon={<ExternalLinkIcon />}
+              >
+                Visit Project
+              </MotionButton>
+            </Link>
+          </Flex>
         </Box>
       </Stack>
     </Box>
