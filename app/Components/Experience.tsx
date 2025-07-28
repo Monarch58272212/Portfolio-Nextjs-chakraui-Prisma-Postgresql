@@ -181,7 +181,8 @@ export default function Experience() {
             fontSize="sm"
             color="gray.400"
           >
-            Makilala Institute of Science and Technology | December 2024
+            Makilala Institute of Science and Technology | May 2024 – January
+            2025
           </MotionText>
           <MotionText
             viewport={{ once: false, amount: 0.3 }}
