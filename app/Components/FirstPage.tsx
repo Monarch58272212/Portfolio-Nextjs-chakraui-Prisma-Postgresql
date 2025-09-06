@@ -149,6 +149,7 @@ export default function FirstPage() {
             fontFamily={"fira Code"}
             fontSize={{ base: "md", md: "lg" }}
             w="full"
+             bg="gray.700"
           >
             He crafts responsive websites where technologies meet creativity
           </MotionText>
